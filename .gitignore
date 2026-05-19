@@ -1,0 +1,32 @@
+# POS Inventario - Git Ignore
+
+# Sistema
+Thumbs.db
+*.log
+php_error_log
+
+# IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Config local
+.env
+.DS_Store
+
+# Directorios de respaldo/lecciones (no son parte del proyecto activo)
+/01.AdminLTE-MVC/
+/02.Gestor-Usuarios/
+/03.Gestor-Categorias/
+/04.Gestor-Productos/
+/05.Gestor-Clientes/
+/06.Gestor-Ventas/
+/07.Facturas-Reportes/
+/08.Hardware-y-Factura-Electronica/
+
+# Printer (copia extra de escpos-php)
+pos/printer/extensions/vendor/
+
+# Pruebas
+/pruebas/
