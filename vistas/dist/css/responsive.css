@@ -1,0 +1,301 @@
+/*=============================================
+  RESPONSIVE OVERRIDES
+  =============================================*/
+
+/* Small devices (phones, <768px) */
+@media (max-width: 767px) {
+
+  /* --- Login --- */
+  .login-box {
+    width: 92% !important;
+    margin: 8% auto !important;
+  }
+  .login-box-body {
+    padding: 20px 16px !important;
+  }
+  .login-logo h1 {
+    font-size: 26px !important;
+  }
+  .login-box-msg {
+    font-size: 14px !important;
+    margin-bottom: 20px !important;
+  }
+  .login-page .form-control {
+    height: 42px;
+    font-size: 15px;
+    padding: 10px 16px 10px 40px !important;
+  }
+  .login-box-body .glyphicon {
+    font-size: 16px !important;
+    left: 14px !important;
+  }
+  .checkbox label {
+    font-size: 13px;
+  }
+
+  /* --- Dashboard cards --- */
+  .small-box {
+    margin-bottom: 12px;
+  }
+  .small-box h3 {
+    font-size: 20px;
+  }
+  .small-box p {
+    font-size: 13px;
+  }
+  .small-box .icon {
+    font-size: 50px;
+    top: 5px;
+  }
+  .small-box-footer {
+    font-size: 11px;
+    padding: 5px 0;
+  }
+
+  /* --- Charts --- */
+  .chart {
+    height: 200px !important;
+  }
+
+  /* --- Tables --- */
+  .table-responsive-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 15px;
+  }
+  .table > thead > tr > th,
+  .table > tbody > tr > td {
+    padding: 6px 4px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  .table .btn-group .btn {
+    padding: 3px 6px;
+    font-size: 11px;
+  }
+  .table .btn-group .btn i {
+    font-size: 12px;
+  }
+
+  /* --- Content area --- */
+  .content-header h1 {
+    font-size: 20px;
+  }
+  .content-header h1 small {
+    font-size: 14px;
+    display: block;
+    margin-top: 4px;
+  }
+  .content {
+    padding: 10px 8px;
+  }
+  .box {
+    margin-bottom: 12px;
+  }
+  .box-header {
+    padding: 8px 12px;
+  }
+  .box-body {
+    padding: 10px 8px;
+  }
+
+  /* --- Buttons --- */
+  .btn {
+    padding: 8px 14px;
+    font-size: 13px;
+    border-radius: 4px;
+  }
+  .btn-group .btn {
+    padding: 5px 10px;
+  }
+
+  /* --- Forms --- */
+  .form-control {
+    height: 40px;
+    font-size: 15px;
+  }
+  .input-group-addon {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+  .input-group .form-control {
+    height: 40px;
+  }
+
+  /* --- Modals --- */
+  .modal-dialog {
+    margin: 10px;
+    width: auto !important;
+  }
+  .modal-content {
+    border-radius: 8px;
+  }
+  .modal-body {
+    padding: 12px;
+  }
+  .modal-header {
+    padding: 10px 12px;
+  }
+  .modal-header .modal-title {
+    font-size: 16px;
+  }
+  .modal-footer {
+    padding: 8px 12px;
+  }
+
+  /* --- Breadcrumb --- */
+  .breadcrumb {
+    padding: 6px 10px;
+    font-size: 12px;
+    margin-bottom: 8px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  /* --- Nav --- */
+  .navbar-custom-menu .nav > li > a {
+    padding: 10px 12px;
+  }
+  .user-menu .user-image {
+    width: 24px;
+    height: 24px;
+    margin-top: -2px;
+  }
+  .user-menu > a > span {
+    font-size: 13px;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  /* --- Morris chart --- */
+  .morris-hover {
+    font-size: 11px !important;
+    padding: 3px 6px !important;
+  }
+
+  /* --- Info boxes --- */
+  .info-box {
+    min-height: 70px;
+    margin-bottom: 10px;
+  }
+  .info-box-icon {
+    height: 70px;
+    line-height: 70px;
+    width: 60px;
+    font-size: 24px;
+  }
+  .info-box-content {
+    margin-left: 60px;
+    padding: 6px 8px;
+  }
+  .info-box-text {
+    font-size: 12px;
+  }
+  .info-box-number {
+    font-size: 16px;
+  }
+
+  /* --- Create sale page --- */
+  .nuevoProducto .input-group {
+    flex-wrap: wrap;
+  }
+  .nuevoProducto .input-group .form-control {
+    margin-bottom: 5px;
+  }
+
+  /* --- Date range button --- */
+  #daterange-btn,
+  #daterange-btn2 {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 8px;
+  }
+  #daterange-btn span,
+  #daterange-btn2 span {
+    font-size: 12px;
+  }
+
+  /* --- Box tools --- */
+  .box-tools.pull-right {
+    float: none !important;
+    display: block;
+    margin-top: 8px;
+  }
+
+  /* --- Footer --- */
+  .main-footer {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  /* --- Sidebar mini fixes --- */
+  .sidebar-mini.sidebar-collapse .main-sidebar {
+    transform: translateX(-230px);
+  }
+  .sidebar-mini.sidebar-collapse.sidebar-open .main-sidebar {
+    transform: translateX(0);
+  }
+
+}
+
+/* Medium devices (tablets, 768px-991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+
+  .login-box {
+    width: 400px !important;
+  }
+
+  .content {
+    padding: 10px;
+  }
+
+  .small-box h3 {
+    font-size: 22px;
+  }
+
+  .modal-dialog {
+    width: 90% !important;
+    max-width: 600px;
+  }
+
+}
+
+/* Fix for very small screens (<400px) */
+@media (max-width: 400px) {
+
+  .login-box {
+    width: 96% !important;
+    margin: 5% auto !important;
+  }
+  .login-logo h1 {
+    font-size: 22px !important;
+  }
+  .login-box-body {
+    padding: 15px 12px !important;
+  }
+
+  .small-box {
+    margin-bottom: 8px;
+  }
+  .small-box h3 {
+    font-size: 16px;
+  }
+  .small-box p {
+    font-size: 11px;
+  }
+
+  .table > thead > tr > th,
+  .table > tbody > tr > td {
+    padding: 4px 3px;
+    font-size: 11px;
+  }
+
+  .modal-dialog {
+    margin: 5px;
+  }
+
+}

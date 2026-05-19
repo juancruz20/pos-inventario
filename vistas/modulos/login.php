@@ -91,6 +91,36 @@
   .login-logo {
     margin-bottom: 15px;
   }
+
+  @media (max-width: 767px) {
+    .login-box {
+      width: 92% !important;
+      margin: 10% auto !important;
+    }
+    .login-box-body {
+      padding: 20px 16px !important;
+    }
+    .login-logo h1 {
+      font-size: 26px !important;
+    }
+    .login-box-msg {
+      font-size: 14px !important;
+    }
+    .login-page .form-control {
+      height: 42px;
+      font-size: 15px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .login-box {
+      width: 96% !important;
+      margin: 5% auto !important;
+    }
+    .login-logo h1 {
+      font-size: 22px !important;
+    }
+  }
 </style>
 
 <script>

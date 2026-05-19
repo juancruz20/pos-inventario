@@ -7,9 +7,10 @@ class Conexion{
     static public function conectar(){
 
         if(self::$link === null){
-            self::$link = new PDO("mysql:host=localhost;dbname=pos",
-                                  "root",
-                                  "");
+            require_once __DIR__ . "/../config.php";
+            self::$link = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME,
+                                  DB_USER,
+                                  DB_PASS);
 
             self::$link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             self::$link->exec("set names utf8");
