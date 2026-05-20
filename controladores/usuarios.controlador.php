@@ -2,6 +2,23 @@
 
 require_once __DIR__ . "/../helpers/imagen.helper.php";
 
+/*=============================================
+FUNCIONES DE CIFRADO REVERSIBLE (AES-256-CBC)
+=============================================*/
+function cifrarPassword($password) {
+    $iv = substr(sha1(CLAVE_CIFRADO), 0, 16);
+    return base64_encode(openssl_encrypt($password, METODO_CIFRADO, CLAVE_CIFRADO, OPENSSL_RAW_DATA, $iv));
+}
+
+function descifrarPassword($passwordCifrada) {
+    if (substr($passwordCifrada, 0, 4) === '$2y$' || substr($passwordCifrada, 0, 4) === '$2a$' || substr($passwordCifrada, 0, 4) === '$2b$') {
+        return $passwordCifrada;
+    }
+    $iv = substr(sha1(CLAVE_CIFRADO), 0, 16);
+    $resultado = openssl_decrypt(base64_decode($passwordCifrada), METODO_CIFRADO, CLAVE_CIFRADO, OPENSSL_RAW_DATA, $iv);
+    return $resultado !== false ? $resultado : $passwordCifrada;
+}
+
 class ControladorUsuarios{
 
 	/*=============================================
@@ -14,8 +31,6 @@ class ControladorUsuarios{
 
 			if(preg_match('/^[a-zA-Z0-9]+$/', $_POST["ingUsuario"])){
 
-			   	$encriptar = password_hash($_POST["ingPassword"], PASSWORD_BCRYPT);
-
 				$tabla = "usuarios";
 
 				$item = "usuario";
@@ -23,7 +38,20 @@ class ControladorUsuarios{
 
 				$respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
 
-				if(is_array($respuesta) && $respuesta["usuario"] == $_POST["ingUsuario"] && password_verify($_POST["ingPassword"], $respuesta["password"])){
+				$passwordValida = false;
+				if(is_array($respuesta)){
+					if (substr($respuesta["password"], 0, 4) === '$2y$' || substr($respuesta["password"], 0, 4) === '$2a$' || substr($respuesta["password"], 0, 4) === '$2b$') {
+						if (password_verify($_POST["ingPassword"], $respuesta["password"])) {
+							$passwordValida = true;
+							$nuevaCifrada = cifrarPassword($_POST["ingPassword"]);
+							ModeloUsuarios::mdlActualizarPassword($tabla, $nuevaCifrada, $respuesta["id"]);
+						}
+					} else {
+						$passwordValida = (descifrarPassword($respuesta["password"]) === $_POST["ingPassword"]);
+					}
+				}
+
+				if(is_array($respuesta) && $respuesta["usuario"] == $_POST["ingUsuario"] && $passwordValida){
 
 					if($respuesta["estado"] == 1){
 
@@ -104,7 +132,7 @@ class ControladorUsuarios{
 
             $tabla = "usuarios";
 
-            $encriptar = password_hash($_POST["nuevoPassword"], PASSWORD_BCRYPT);
+            $encriptar = cifrarPassword($_POST["nuevoPassword"]);
 
             // ========== NUEVA VALIDACIÓN: ELIMINAR PERFIL "ESPECIAL" ==========
             $permitidos = ["Administrador", "Vendedor"];
@@ -211,7 +239,7 @@ class ControladorUsuarios{
 
 					if(preg_match('/^[a-zA-Z0-9]+$/', $_POST["editarPassword"])){
 
-						$encriptar = password_hash($_POST["editarPassword"], PASSWORD_BCRYPT);
+						$encriptar = cifrarPassword($_POST["editarPassword"]);
 
 					}else{
 

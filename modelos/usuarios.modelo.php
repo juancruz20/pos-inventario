@@ -113,6 +113,21 @@ class ModeloUsuarios{
 	}
 
 	/*=============================================
+	ACTUALIZAR SOLO PASSWORD
+	=============================================*/
+
+	static public function mdlActualizarPassword($tabla, $password, $id){
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET password = :password WHERE id = :id");
+		$stmt -> bindParam(":password", $password, PDO::PARAM_STR);
+		$stmt -> bindParam(":id", $id, PDO::PARAM_INT);
+		if($stmt -> execute()){
+			return "ok";
+		}else{
+			return "error";
+		}
+	}
+
+	/*=============================================
 	BORRAR USUARIO
 	=============================================*/
 

@@ -1,6 +1,5 @@
 $(".btnEditarUsuario").on("click", function () {
   var idUsuario = $(this).attr("idUsuario");
-
   $.ajax({
     url: "ajax/usuarios.ajax.php",
     type: "POST",
@@ -9,48 +8,23 @@ $(".btnEditarUsuario").on("click", function () {
     success: function (respuesta) {
       $("#editarNombre").val(respuesta["nombre"]);
       $("#editarUsuario").val(respuesta["usuario"]);
-      $("#editarPassword").val("");
+      $("#editarPassword").val("").data("password-real", respuesta["password_real"]);
       $("#passwordActual").val(respuesta["password"]);
-      $("#editarPassword").attr("type", "password");
-      $("#togglePassword i").removeClass("fa-eye").addClass("fa-eye-slash");
       $("#editarPerfil").val(respuesta["perfil"]);
-      $("#fotoActual").val(respuesta["foto"]);
-
-      if (respuesta["foto"] != "") {
-        $(".previsualizarEditar").attr("src", respuesta["foto"]);
-      } else {
-        $(".previsualizarEditar").attr("src", "vistas/img/usuarios/default/anonymous.png");
+      $("#idUsuario").val(respuesta["id"]);
+      $("#imagenActual").val(respuesta["imagen"]);
+      if (respuesta["imagen"] != "") {
+        $(".previsualizar").attr("src", respuesta["imagen"]);
       }
     },
   });
 });
 
-$(document).on("click", "#togglePassword", function () {
-  var input = $("#editarPassword");
-  var icon = $(this).find("i");
-  var mostrarPassword = input.attr("type") === "password";
-
-  input.attr("type", mostrarPassword ? "text" : "password");
-  icon.toggleClass("fa-eye", mostrarPassword);
-  icon.toggleClass("fa-eye-slash", !mostrarPassword);
-});
-
-$(".nuevaFoto").on("change", function () {
+$(".nuevaImagen").on("change", function () {
   var reader = new FileReader();
-  var archivo = this.files[0];
-  var $input = $(this);
-
-  if (!archivo) {
-    return;
-  }
-
-  reader.readAsDataURL(archivo);
+  reader.readAsDataURL(this.files[0]);
   reader.onload = function (e) {
-    if ($input.attr("name") === "editarFoto") {
-      $(".previsualizarEditar").attr("src", e.target.result);
-    } else {
-      $(".previsualizar").attr("src", e.target.result);
-    }
+    $(".previsualizar").attr("src", e.target.result);
   };
 });
 
@@ -63,13 +37,29 @@ $("#modalEditarUsuario").on("hidden.bs.modal", function () {
   $(this).find("form")[0].reset();
   $("#editarPassword").attr("type", "password");
   $("#togglePassword i").removeClass("fa-eye").addClass("fa-eye-slash");
-  $(".previsualizarEditar").attr("src", "vistas/img/usuarios/default/anonymous.png");
+  $(".previsualizar").attr("src", "vistas/img/usuarios/default/anonymous.png");
+});
+
+$(document).on("click", "#togglePassword", function () {
+  var input = $("#editarPassword");
+  var icon = $(this).find("i");
+  var mostrarPassword = input.attr("type") === "password";
+
+  if (mostrarPassword && input.val() === "") {
+    var realPass = input.data("password-real");
+    if (realPass && realPass !== "") {
+      input.val(realPass);
+    }
+  }
+
+  input.attr("type", mostrarPassword ? "text" : "password");
+  icon.toggleClass("fa-eye", mostrarPassword);
+  icon.toggleClass("fa-eye-slash", !mostrarPassword);
 });
 
 $(".btnEliminarUsuario").on("click", function () {
   var idUsuario = $(this).attr("idUsuario");
   var imagen = $(this).attr("imagen");
-
   swal({
     title: "¿Está seguro de eliminar?",
     text: "¡El usuario no podrá ser recuperado!",
