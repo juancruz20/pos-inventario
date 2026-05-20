@@ -1,4 +1,11 @@
 -- =============================================
+-- MIGRACIONES DE BASE DE DATOS
+-- =============================================
+
+ALTER TABLE productos ADD detalle_compra TEXT NOT NULL AFTER precio_venta;
+ALTER TABLE clientes ADD tipo_comprobante VARCHAR(1) NOT NULL DEFAULT 'B' AFTER fecha_nacimiento;
+
+-- =============================================
 -- ÍNDICES FALTANTES PARA MEJORAR RENDIMIENTO
 -- =============================================
 

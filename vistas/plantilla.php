@@ -40,6 +40,9 @@
   <!-- Responsive overrides -->
   <link rel="stylesheet" href="vistas/dist/css/responsive.css">
 
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="vistas/dist/css/estilos.css">
+
    <!-- DataTables -->
   <link rel="stylesheet" href="vistas/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <link rel="stylesheet" href="vistas/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css">
