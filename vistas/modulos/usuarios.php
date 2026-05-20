@@ -346,7 +346,11 @@ MODAL EDITAR USUARIO (SIN ESPECIAL)
               
                 <span class="input-group-addon"><i class="fa fa-lock"></i></span> 
 
-                <input type="password" class="form-control input-lg" name="editarPassword" placeholder="Escriba la nueva contraseña">
+                <input type="password" class="form-control input-lg" id="editarPassword" name="editarPassword" placeholder="Escriba la nueva contraseña">
+
+                <span class="input-group-addon" id="togglePassword" style="cursor:pointer; background:#fff;">
+                  <i class="fa fa-eye-slash"></i>
+                </span>
 
                 <input type="hidden" id="passwordActual" name="passwordActual">
 

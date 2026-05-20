@@ -1,5 +1,6 @@
 <?php
-
+$basePath = rtrim(str_replace("\\", "/", dirname($_SERVER["SCRIPT_NAME"])), "/");
+$baseHref = ($basePath === "" ? "/" : $basePath."/");
 ?>
 
 <!DOCTYPE html>
@@ -8,6 +9,7 @@
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <base href="<?php echo $baseHref; ?>">
 
   <title>Bienvenido</title>
 
@@ -21,18 +23,18 @@
   ======================================-->
 
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="vistas/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="vistas/bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="vistas/bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
   <!-- Theme style -->
-  <link rel="stylesheet" href="vistas/dist/css/AdminLTE.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.18/css/AdminLTE.min.css">
   
   <!-- AdminLTE Skins -->
-  <link rel="stylesheet" href="vistas/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.18/css/skins/_all-skins.min.css">
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -44,66 +46,64 @@
   <link rel="stylesheet" href="vistas/dist/css/estilos.css">
 
    <!-- DataTables -->
-  <link rel="stylesheet" href="vistas/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-  <link rel="stylesheet" href="vistas/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
 
   <!-- iCheck for checkboxes and radio inputs -->
-  <link rel="stylesheet" href="vistas/plugins/iCheck/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/all.css">
 
    <!-- Daterange picker -->
-  <link rel="stylesheet" href="vistas/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.css">
 
   <!-- Morris chart -->
-  <link rel="stylesheet" href="vistas/bower_components/morris.js/morris.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 
   <!--=====================================
   PLUGINS DE JAVASCRIPT
   ======================================-->
 
   <!-- jQuery 3 -->
-  <script src="vistas/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   
   <!-- Bootstrap 3.3.7 -->
-  <script src="vistas/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <!-- FastClick -->
-  <script src="vistas/bower_components/fastclick/lib/fastclick.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
   
   <!-- AdminLTE App -->
-  <script src="vistas/dist/js/adminlte.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.18/js/adminlte.min.js"></script>
 
   <!-- DataTables -->
-  <script src="vistas/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-  <script src="vistas/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-  <script src="vistas/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
-  <script src="vistas/bower_components/datatables.net-bs/js/responsive.bootstrap.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
 
   <!-- SweetAlert 2 -->
-  <script src="vistas/plugins/sweetalert2/sweetalert2.all.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.28.11/dist/sweetalert2.all.min.js"></script>
    <!-- By default SweetAlert2 doesn't support IE. To enable IE 11 support, include Promise polyfill:-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 
   <!-- iCheck 1.0.1 -->
-  <script src="vistas/plugins/iCheck/icheck.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
 
   <!-- InputMask -->
-  <script src="vistas/plugins/input-mask/jquery.inputmask.js"></script>
-  <script src="vistas/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-  <script src="vistas/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
 
   <!-- jQuery Number -->
-  <script src="vistas/plugins/jqueryNumber/jquerynumber.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-number/2.1.6/jquery.number.min.js"></script>
 
   <!-- daterangepicker http://www.daterangepicker.com/-->
-  <script src="vistas/bower_components/moment/min/moment.min.js"></script>
-  <script src="vistas/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.min.js"></script>
 
   <!-- Morris.js charts http://morrisjs.github.io/morris.js/-->
-  <script src="vistas/bower_components/raphael/raphael.min.js"></script>
-  <script src="vistas/bower_components/morris.js/morris.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
   <!-- ChartJS http://www.chartjs.org/-->
-  <script src="vistas/bower_components/Chart.js/Chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 
 
 
