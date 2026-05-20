@@ -44,15 +44,14 @@
          
          <tr>
            
-           <th style="width:10px">#</th>
-           <th>Código factura</th>
-           <th>Cliente</th>
-           <th>Vendedor</th>
-           <th>Forma de pago</th>
-           <th>Neto</th>
-           <th>Total</th> 
-           <th>Fecha</th>
-           <th>Acciones</th>
+            <th style="width:10px">#</th>
+            <th>Código factura</th>
+            <th>Cliente</th>
+            <th>Vendedor</th>
+            <th>Forma de pago</th>
+            <th>Total</th> 
+            <th>Fecha</th>
+            <th>Acciones</th>
 
          </tr> 
 

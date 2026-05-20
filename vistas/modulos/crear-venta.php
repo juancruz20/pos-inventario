@@ -42,7 +42,7 @@ if($_SESSION["perfil"] == "Especial"){
       EL FORMULARIO
       ======================================-->
       
-      <div class="col-lg-5 col-xs-12">
+      <div class="col-lg-6 col-md-6 col-xs-12">
         
         <div class="box box-success">
           
@@ -126,20 +126,25 @@ if($_SESSION["perfil"] == "Especial"){
                     
                     <select class="form-control" id="seleccionarCliente" name="seleccionarCliente" required>
 
-                    <option value="">Seleccionar cliente</option>
-
                     <?php
 
                       $item = null;
                       $valor = null;
 
-                      $categorias = ControladorClientes::ctrMostrarClientes($item, $valor);
+                      $clientes = ControladorClientes::ctrMostrarClientes($item, $valor);
 
-                       foreach ($categorias as $key => $value) {
+                      $idVentaRapida = null;
+                      foreach ($clientes as $c) {
+                        if ($c["nombre"] == "Venta Rápida") {
+                          $idVentaRapida = $c["id"];
+                          break;
+                        }
+                      }
 
-                         echo '<option value="'.$value["id"].'">'.$value["nombre"].'</option>';
-
-                       }
+                      foreach ($clientes as $key => $value) {
+                        $selected = ($value["id"] == $idVentaRapida) ? ' selected' : '';
+                        echo '<option value="'.$value["id"].'"'.$selected.'>'.$value["nombre"].'</option>';
+                      }
 
                     ?>
 
@@ -150,16 +155,25 @@ if($_SESSION["perfil"] == "Especial"){
                   </div>
                 
                 </div>
-                
-                <div class="form-group">
-                  <div class="checkbox">
+
+                <!--=====================================
+                ROPA PREDETERMINADA
+                ======================================-->
+
+                <div class="form-group" id="ropaPredeterminada" style="margin-bottom:8px;">
+
+                  <div class="checkbox" style="margin-top:0; margin-bottom:4px;">
                     <label>
-                      <input type="checkbox" id="habilitarVentaSinStock" name="habilitarVentaSinStock" value="1">
-                      Permitir productos sin stock y editar precio manualmente
+                      <input type="checkbox" id="checkRopaPredeterminada"> Ropa
                     </label>
                   </div>
-                </div>
+                  <div class="input-group" id="ropaPrecioGroup" style="display:none; max-width:240px;">
+                    <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
+                    <input type="number" class="form-control" id="ropaPrecio" placeholder="Precio" step="any" min="0" value="0">
+                  </div>
 
+                </div>
+                
                 <!--=====================================
                 ENTRADA PARA AGREGAR PRODUCTO
                 ======================================--> 
@@ -176,68 +190,15 @@ if($_SESSION["perfil"] == "Especial"){
                 BOTÓN PARA AGREGAR PRODUCTO
                 ======================================-->
 
-                <button type="button" class="btn btn-default hidden-lg btnAgregarProducto">Agregar producto</button>
-
-                <hr>
-
-                <div class="row">
-
-                  <!--=====================================
-                  ENTRADA IMPUESTOS Y TOTAL
-                  ======================================-->
-                  
-                  <div class="col-xs-8 pull-right">
-                    
-                    <table class="table">
-
-                      <thead>
-
-                        <tr>
-                          <th>Total</th>      
-                        </tr>
-
-                      </thead>
-
-                      <tbody>
-                      
-                        <tr>
-                          
-                          <td style="width: 100%">
-                            
-                            <div class="input-group">
-                           
-                              <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
-
-                              <input type="text" class="form-control input-lg" id="nuevoTotalVenta" name="nuevoTotalVenta" total="" placeholder="00000" readonly required>
-                              <input type="hidden" name="nuevoPrecioImpuesto" id="nuevoPrecioImpuesto" value="0" required>
-                              <input type="hidden" name="nuevoPrecioNeto" id="nuevoPrecioNeto" value="0" required>
-
-                              <input type="hidden" name="totalVenta" id="totalVenta">
-                              
-                        
-                            </div>
-
-                          </td>
-
-                        </tr>
-
-                      </tbody>
-
-                    </table>
-
-                  </div>
-
-                </div>
-
-                <hr>
+                <button type="button" class="btn btn-primary btn-block visible-xs btnAgregarProducto">Agregar producto</button>
 
                 <!--=====================================
-                ENTRADA MÉTODO DE PAGO
+                MÉTODO DE PAGO Y TOTAL
                 ======================================-->
 
-                <div class="form-group row">
+                <div class="form-group row payment-row">
                   
-                  <div class="col-xs-6" style="padding-right:0px">
+                  <div class="col-xs-6 objetoMetodoPago" style="padding-right:0px">
                     
                      <div class="input-group">
                   
@@ -252,21 +213,34 @@ if($_SESSION["perfil"] == "Especial"){
 
                   </div>
 
+                  <div class="col-xs-6 objetoTotalVenta" style="padding-left:0px">
+
+                    <div class="input-group">
+
+                      <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
+
+                      <input type="text" class="form-control" id="nuevoTotalVenta" name="nuevoTotalVenta" total="" placeholder="00000" maxlength="7" readonly required>
+
+                    </div>
+
+                  </div>
+
                   <div class="cajasMetodoPago"></div>
 
                   <input type="hidden" id="listaMetodoPago" name="listaMetodoPago">
+                  <input type="hidden" name="nuevoPrecioImpuesto" id="nuevoPrecioImpuesto" value="0" required>
+                  <input type="hidden" name="nuevoPrecioNeto" id="nuevoPrecioNeto" value="0" required>
+                  <input type="hidden" name="totalVenta" id="totalVenta">
 
                 </div>
 
-                <br>
-      
               </div>
 
-          </div>
+            </div>
 
           <div class="box-footer">
 
-            <div class="pull-right">
+            <div class="accionesVentaDerecha">
 
               <div class="checkbox">
                 <label><input type="checkbox" value="1" name="impresion">Imprimir Ticket</label>
@@ -295,16 +269,20 @@ if($_SESSION["perfil"] == "Especial"){
       LA TABLA DE PRODUCTOS
       ======================================-->
 
-      <div class="col-lg-7 col-xs-12">
+      <div class="col-lg-6 col-md-6 col-xs-12 product-table-mobile">
         
         <div class="box box-warning">
 
-          <div class="box-header with-border"></div>
+          <div class="box-header with-border">
+            <button type="button" class="btn btn-primary btn-block visible-xs" data-toggle="collapse" data-target="#productTableCollapse">
+              <i class="fa fa-table"></i> Productos disponibles
+            </button>
+          </div>
 
-          <div class="box-body">
+          <div class="box-body collapse in" id="productTableCollapse">
             
             <table class="table table-bordered table-striped dt-responsive tablaVentas">
-              
+               
                <thead>
 
                  <tr>

@@ -38,52 +38,35 @@
       	
       	</a>
 
-		<!-- perfil de usuario -->
+		<!-- Bienvenida central con foto -->
+
+		<div class="navbar-welcome">
+
+			<div class="nav-avatar">
+				<?php
+				if($_SESSION["foto"] != ""){
+					echo '<img src="'.$_SESSION["foto"].'" class="user-image">';
+				}else{
+					echo '<img src="vistas/img/usuarios/default/anonymous.png" class="user-image">';
+				}
+				?>
+			</div>
+
+			<span>Bienvenid@ <?php echo $_SESSION["nombre"]; ?></span>
+
+		</div>
+
+		<!-- menú derecho -->
 
 		<div class="navbar-custom-menu">
 				
 			<ul class="nav navbar-nav">
 				
-				<li class="dropdown user user-menu">
-					
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-					<?php
-
-					if($_SESSION["foto"] != ""){
-
-						echo '<img src="'.$_SESSION["foto"].'" class="user-image">';
-
-					}else{
-
-
-						echo '<img src="vistas/img/usuarios/default/anonymous.png" class="user-image">';
-
-					}
-
-
-					?>
-						
-						<span class="hidden-xs"><?php  echo $_SESSION["nombre"]; ?></span>
-
+				<li>
+					<a href="salir" class="btn-salir-nav">
+						<i class="fa fa-sign-out"></i>
+						<span class="hidden-xs">Salir</span>
 					</a>
-
-					<!-- Dropdown-toggle -->
-
-					<ul class="dropdown-menu">
-						
-						<li class="user-body">
-							
-							<div class="pull-right">
-								
-								<a href="salir" class="btn btn-default btn-flat">Salir</a>
-
-							</div>
-
-						</li>
-
-					</ul>
-
 				</li>
 
 			</ul>

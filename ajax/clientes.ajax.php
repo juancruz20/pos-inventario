@@ -2,6 +2,8 @@
 
 require_once "../controladores/clientes.controlador.php";
 require_once "../modelos/clientes.modelo.php";
+require_once "../controladores/ventas.controlador.php";
+require_once "../modelos/ventas.modelo.php";
 
 class AjaxClientes{
 
@@ -17,6 +19,10 @@ class AjaxClientes{
 		$valor = $this->idCliente;
 
 		$respuesta = ControladorClientes::ctrMostrarClientes($item, $valor);
+
+		$totalVentas = ControladorVentas::ctrTotalVentasCliente($valor);
+
+		$respuesta["total_ventas"] = $totalVentas["total"] ? $totalVentas["total"] : 0;
 
 		echo json_encode($respuesta);
 

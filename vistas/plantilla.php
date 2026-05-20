@@ -12,7 +12,7 @@
   <title>Bienvenido</title>
 
   <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 
   <link rel="icon" href="vistas/img/plantilla/icono-inventario.png">
 

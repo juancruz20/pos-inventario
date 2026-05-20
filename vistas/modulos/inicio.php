@@ -26,7 +26,7 @@
       
     <?php
 
-    if($_SESSION["perfil"] =="Administrador"){
+    if($_SESSION["perfil"] =="Administrador" || $_SESSION["perfil"] =="Vendedor"){
 
       include "inicio/cajas-superiores.php";
 
@@ -43,8 +43,22 @@
           <?php
 
           if($_SESSION["perfil"] =="Administrador"){
-          
+
            include "reportes/grafico-ventas.php";
+
+          }
+
+          ?>
+
+        </div>
+
+        <div class="col-lg-12">
+
+          <?php
+
+          if($_SESSION["perfil"] =="Administrador" || $_SESSION["perfil"] =="Vendedor"){
+
+            include "inicio/productos-stock-bajo.php";
 
           }
 
@@ -80,27 +94,7 @@
 
         </div>
 
-         <div class="col-lg-12">
-           
-          <?php
 
-          if($_SESSION["perfil"] =="Especial" || $_SESSION["perfil"] =="Vendedor"){
-
-             echo '<div class="box box-success">
-
-             <div class="box-header">
-
-             <h1>Bienvenid@ ' .$_SESSION["nombre"].'</h1>
-
-             </div>
-
-             </div>';
-
-          }
-
-          ?>
-
-         </div>
 
      </div>
 

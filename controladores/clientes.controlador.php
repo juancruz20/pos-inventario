@@ -23,7 +23,8 @@ class ControladorClientes{
 					           "email"=>$_POST["nuevoEmail"],
 					           "telefono"=>$_POST["nuevoTelefono"],
 					           "direccion"=>$_POST["nuevaDireccion"],
-					           "fecha_nacimiento"=>$_POST["nuevaFechaNacimiento"]);
+					           "fecha_nacimiento"=>$_POST["nuevaFechaNacimiento"],
+					           "tipo_comprobante"=>$_POST["nuevoTipoComprobante"]);
 
 			   	$respuesta = ModeloClientes::mdlIngresarCliente($tabla, $datos);
 
@@ -111,7 +112,8 @@ class ControladorClientes{
 					           "email"=>$_POST["editarEmail"],
 					           "telefono"=>$_POST["editarTelefono"],
 					           "direccion"=>$_POST["editarDireccion"],
-					           "fecha_nacimiento"=>$_POST["editarFechaNacimiento"]);
+					           "fecha_nacimiento"=>$_POST["editarFechaNacimiento"],
+					           "tipo_comprobante"=>$_POST["editarTipoComprobante"]);
 
 			   	$respuesta = ModeloClientes::mdlEditarCliente($tabla, $datos);
 

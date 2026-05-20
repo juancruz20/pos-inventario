@@ -19,6 +19,20 @@ class ControladorProductos{
 	}
 
 	/*=============================================
+	PRODUCTOS CON STOCK BAJO
+	=============================================*/
+
+	static public function ctrMostrarProductosBajoStock(){
+
+		$tabla = "productos";
+
+		$respuesta = ModeloProductos::mdlMostrarProductosBajoStock($tabla);
+
+		return $respuesta;
+
+	}
+
+	/*=============================================
 	CREAR PRODUCTO (MODIFICADO: VALIDACIÓN DE IMAGEN)
 	=============================================*/
 
@@ -28,8 +42,10 @@ class ControladorProductos{
 
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaDescripcion"]) &&
 			   preg_match('/^[0-9]+$/', $_POST["nuevoStock"]) &&	
-			   preg_match('/^[0-9.]+$/', $_POST["nuevoPrecioCompra"]) &&
 			   preg_match('/^[0-9.]+$/', $_POST["nuevoPrecioVenta"])){
+
+				$detalleCompra = isset($_POST["nuevoDetalleCompra"]) ? $_POST["nuevoDetalleCompra"] : "";
+				$precioCompra = isset($_POST["nuevoPrecioCompra"]) ? $_POST["nuevoPrecioCompra"] : 0;
 
 		   		$ruta = "vistas/img/productos/default/anonymous.png";
 
@@ -44,9 +60,10 @@ class ControladorProductos{
 							   "codigo" => $_POST["nuevoCodigo"],
 							   "descripcion" => $_POST["nuevaDescripcion"],
 							   "stock" => $_POST["nuevoStock"],
-							   "precio_compra" => $_POST["nuevoPrecioCompra"],
+							   "precio_compra" => $precioCompra,
 							   "precio_venta" => $_POST["nuevoPrecioVenta"],
-							   "imagen" => $ruta);
+							   "imagen" => $ruta,
+							   "detalle_compra" => $detalleCompra);
 
 				$respuesta = ModeloProductos::mdlIngresarProducto($tabla, $datos);
 
@@ -105,8 +122,10 @@ class ControladorProductos{
 
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarDescripcion"]) &&
 			   preg_match('/^[0-9]+$/', $_POST["editarStock"]) &&	
-			   preg_match('/^[0-9.]+$/', $_POST["editarPrecioCompra"]) &&
 			   preg_match('/^[0-9.]+$/', $_POST["editarPrecioVenta"])){
+
+				$detalleCompra = isset($_POST["editarDetalleCompra"]) ? $_POST["editarDetalleCompra"] : "";
+				$precioCompra = isset($_POST["editarPrecioCompra"]) ? $_POST["editarPrecioCompra"] : 0;
 
 		   		$ruta = $_POST["imagenActual"];
 
@@ -129,9 +148,10 @@ class ControladorProductos{
 							   "codigo" => $_POST["editarCodigo"],
 							   "descripcion" => $_POST["editarDescripcion"],
 							   "stock" => $_POST["editarStock"],
-							   "precio_compra" => $_POST["editarPrecioCompra"],
+							   "precio_compra" => $precioCompra,
 							   "precio_venta" => $_POST["editarPrecioVenta"],
-							   "imagen" => $ruta);
+							   "imagen" => $ruta,
+							   "detalle_compra" => $detalleCompra);
 
 				$respuesta = ModeloProductos::mdlEditarProducto($tabla, $datos);
 
@@ -219,6 +239,46 @@ class ControladorProductos{
 			}		
 		}
 
+
+	}
+
+	/*=============================================
+	ACTUALIZAR STOCK (ajuste positivo/negativo)
+	=============================================*/
+
+	static public function ctrActualizarStock(){
+
+		if(isset($_POST["idProducto"]) && isset($_POST["cantidad"])){
+
+			$tabla = "productos";
+			$id = $_POST["idProducto"];
+			$cantidad = (int) $_POST["cantidad"];
+
+			if($cantidad === 0){
+				return "error";
+			}
+
+			$item = "id";
+			$valor = $id;
+			$orden = "id";
+
+			$traerProducto = ModeloProductos::mdlMostrarProductos($tabla, $item, $valor, $orden);
+
+			if(!$traerProducto){
+				return "error";
+			}
+
+			$nuevoStock = (int) $traerProducto["stock"] + $cantidad;
+
+			if($nuevoStock < 0){
+				return "stock_negativo";
+			}
+
+			$respuesta = ModeloProductos::mdlActualizarProducto($tabla, "stock", $nuevoStock, $id);
+
+			return $respuesta;
+
+		}
 
 	}
 

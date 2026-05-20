@@ -9,6 +9,10 @@ $productos = ControladorProductos::ctrMostrarProductos($item, $valor, $orden);
 $colores = array("red","green","yellow","aqua","purple","blue","cyan","magenta","orange","gold");
 
 $totalVentas = ControladorProductos::ctrMostrarSumaVentas();
+$cantidadProductos = is_array($productos) ? count($productos) : 0;
+$limiteGrafico = min(10, $cantidadProductos);
+$limiteListado = min(5, $cantidadProductos);
+$sumaVentas = (isset($totalVentas["total"]) && $totalVentas["total"] > 0) ? $totalVentas["total"] : 0;
 
 
 ?>
@@ -45,7 +49,7 @@ PRODUCTOS MÁS VENDIDOS
 
 		  	 	<?php
 
-					for($i = 0; $i < 10; $i++){
+					for($i = 0; $i < $limiteGrafico; $i++){
 
 					echo ' <li><i class="fa fa-circle-o text-'.$colores[$i].'"></i> '.$productos[$i]["descripcion"].'</li>';
 
@@ -69,17 +73,20 @@ PRODUCTOS MÁS VENDIDOS
 			
 			 <?php
 
-          	for($i = 0; $i <5; $i++){
+          	for($i = 0; $i < $limiteListado; $i++){
+
+              $porcentajeVentas = ($sumaVentas > 0) ? ceil($productos[$i]["ventas"] * 100 / $sumaVentas) : 0;
+              $imagenProducto = !empty($productos[$i]["imagen"]) ? $productos[$i]["imagen"] : "vistas/img/productos/default/anonymous.png";
 			
           		echo '<li>
 						 
 						 <a>
 
-						 <img src="'.$productos[$i]["imagen"].'" class="img-thumbnail" width="60px" style="margin-right:10px"> 
+						 <img src="'.$imagenProducto.'" class="img-thumbnail" width="60px" style="margin-right:10px"> 
 						 '.$productos[$i]["descripcion"].'
 
 						 <span class="pull-right text-'.$colores[$i].'">   
-						 '.ceil($productos[$i]["ventas"]*100/$totalVentas["total"]).'%
+						 '.$porcentajeVentas.'%
 						 </span>
 							
 						 </a>
@@ -110,7 +117,7 @@ PRODUCTOS MÁS VENDIDOS
 
   <?php
 
-  for($i = 0; $i < 10; $i++){
+  for($i = 0; $i < $limiteGrafico; $i++){
 
   	echo "{
       value    : ".$productos[$i]["ventas"].",

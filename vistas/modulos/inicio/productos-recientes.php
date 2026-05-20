@@ -5,6 +5,8 @@ $valor = null;
 $orden = "id";
 
 $productos = ControladorProductos::ctrMostrarProductos($item, $valor, $orden);
+$cantidadProductos = is_array($productos) ? count($productos) : 0;
+$limiteProductos = min(10, $cantidadProductos);
 
  ?>
 
@@ -39,13 +41,15 @@ $productos = ControladorProductos::ctrMostrarProductos($item, $valor, $orden);
 
     <?php
 
-    for($i = 0; $i < 10; $i++){
+    for($i = 0; $i < $limiteProductos; $i++){
+
+      $imagenProducto = !empty($productos[$i]["imagen"]) ? $productos[$i]["imagen"] : "vistas/img/productos/default/anonymous.png";
 
       echo '<li class="item">
 
         <div class="product-img">
 
-          <img src="'.$productos[$i]["imagen"].'" alt="Product Image">
+          <img src="'.$imagenProducto.'" alt="Product Image">
 
         </div>
 

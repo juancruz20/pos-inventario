@@ -21,16 +21,14 @@
         <input type="password" class="form-control" placeholder="Contraseña" name="ingPassword" required style="background: rgba(255,255,255,0.9); border: none; border-radius: 30px; padding: 12px 20px 12px 42px; height: 45px;">
       </div>
 
-      <div class="row" style="margin-top: 25px;">
-        <div class="col-xs-6">
-          <div class="checkbox" style="color: white;">
-            <label>
-              <input type="checkbox" style="margin-top: 2px;"> Recordarme
-            </label>
-          </div>
+      <div class="row" style="margin: 20px 0 10px; display: flex; align-items: center;">
+        <div style="flex: 1;">
+          <label style="color: #fff; font-weight: 400; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+            <input type="checkbox" style="width: 16px; height: 16px; cursor: pointer; accent-color: #3c8dbc;"> Recordarme
+          </label>
         </div>
-        <div class="col-xs-6 text-right">
-          <a href="#" id="btnRecuperar" style="color: #fff; text-decoration: underline;">¿Olvidaste tu contraseña?</a>
+        <div>
+          <a href="#" id="btnRecuperar" style="color: rgba(255,255,255,0.85); font-size: 13px; text-decoration: underline; white-space: nowrap;">¿Olvidaste tu contraseña?</a>
         </div>
       </div>
 

@@ -62,8 +62,9 @@ if($_SESSION["perfil"] == "Especial"){
            <th>Email</th>
            <th>Teléfono</th>
            <th>Dirección</th>
-           <th>Fecha nacimiento</th> 
-           <th>Total compras</th>
+            <th>Fecha nacimiento</th>
+            <th>Tipo comprobante</th> 
+            <th>Total compras</th>
            <th>Última compra</th>
            <th>Ingreso al sistema</th>
            <th>Acciones</th>
@@ -98,7 +99,9 @@ if($_SESSION["perfil"] == "Especial"){
 
                     <td>'.$value["direccion"].'</td>
 
-                    <td>'.$value["fecha_nacimiento"].'</td>             
+                    <td>'.$value["fecha_nacimiento"].'</td>
+
+                    <td>'.$value["tipo_comprobante"].'</td>
 
                     <td>'.$value["compras"].'</td>
 
@@ -245,14 +248,50 @@ MODAL AGREGAR CLIENTE
              <!-- ENTRADA PARA LA FECHA DE NACIMIENTO -->
             
             <div class="form-group">
-              
+               
               <div class="input-group">
-              
+               
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevaFechaNacimiento" placeholder="Ingresar fecha nacimiento" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask required>
+                <input type="text" class="form-control input-lg" name="nuevoFechaNacimiento" placeholder="Ingresar fecha nacimiento" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask required>
 
               </div>
+
+            </div>
+
+             <!-- TIPO DE COMPROBANTE -->
+
+            <div class="form-group nuevo-tipo-comprobante">
+
+              <label style="display:block; margin-bottom:8px; font-weight:bold;">Tipo de comprobante</label>
+
+              <div class="row" style="margin:0">
+
+                <div class="col-xs-4" style="padding:0 3px;">
+                  <div class="tipo-comprobante seleccionar-tipo" data-tipo="A" style="background:#27ae60; color:#fff; text-align:center; padding:12px 0; border-radius:4px; cursor:pointer; font-size:18px; font-weight:bold; border:3px solid transparent;">
+                    A
+                  </div>
+                </div>
+
+                <div class="col-xs-4" style="padding:0 3px;">
+                  <div class="tipo-comprobante seleccionar-tipo" data-tipo="B" style="background:#f39c12; color:#fff; text-align:center; padding:12px 0; border-radius:4px; cursor:pointer; font-size:18px; font-weight:bold; border:3px solid transparent;">
+                    B
+                  </div>
+                </div>
+
+                <div class="col-xs-4" style="padding:0 3px;">
+                  <div class="tipo-comprobante seleccionar-tipo" data-tipo="C" style="background:#e74c3c; color:#fff; text-align:center; padding:12px 0; border-radius:4px; cursor:pointer; font-size:18px; font-weight:bold; border:3px solid transparent;">
+                    C
+                  </div>
+                </div>
+
+              </div>
+
+              <input type="hidden" name="nuevoTipoComprobante" id="nuevoTipoComprobante" value="B">
+
+            </div>
+  
+          </div>
 
             </div>
   
@@ -392,14 +431,46 @@ MODAL EDITAR CLIENTE
              <!-- ENTRADA PARA LA FECHA DE NACIMIENTO -->
             
             <div class="form-group">
-              
+               
               <div class="input-group">
-              
+               
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span> 
 
                 <input type="text" class="form-control input-lg" name="editarFechaNacimiento" id="editarFechaNacimiento"  data-inputmask="'alias': 'yyyy/mm/dd'" data-mask required>
 
               </div>
+
+            </div>
+
+             <!-- TIPO DE COMPROBANTE -->
+
+            <div class="form-group editar-tipo-comprobante">
+
+              <label style="display:block; margin-bottom:8px; font-weight:bold;">Tipo de comprobante</label>
+
+              <div class="row" style="margin:0">
+
+                <div class="col-xs-4" style="padding:0 3px;">
+                  <div class="tipo-comprobante seleccionar-tipo" data-tipo="A" style="background:#27ae60; color:#fff; text-align:center; padding:12px 0; border-radius:4px; cursor:pointer; font-size:18px; font-weight:bold; border:3px solid transparent;">
+                    A
+                  </div>
+                </div>
+
+                <div class="col-xs-4" style="padding:0 3px;">
+                  <div class="tipo-comprobante seleccionar-tipo" data-tipo="B" style="background:#f39c12; color:#fff; text-align:center; padding:12px 0; border-radius:4px; cursor:pointer; font-size:18px; font-weight:bold; border:3px solid transparent;">
+                    B
+                  </div>
+                </div>
+
+                <div class="col-xs-4" style="padding:0 3px;">
+                  <div class="tipo-comprobante seleccionar-tipo" data-tipo="C" style="background:#e74c3c; color:#fff; text-align:center; padding:12px 0; border-radius:4px; cursor:pointer; font-size:18px; font-weight:bold; border:3px solid transparent;">
+                    C
+                  </div>
+                </div>
+
+              </div>
+
+              <input type="hidden" name="editarTipoComprobante" id="editarTipoComprobante" value="B">
 
             </div>
   

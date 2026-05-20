@@ -1,6 +1,140 @@
 /*=============================================
-  RESPONSIVE OVERRIDES
+  RESPONSIVE OVERRIDES - Enhanced Mobile Support
   =============================================*/
+
+/* --- Navbar welcome + avatar --- */
+.main-header .navbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.main-header .navbar .sidebar-toggle {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  padding: 10px 15px;
+}
+.navbar-welcome {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+.navbar-welcome span {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+.navbar-custom-menu {
+  margin-left: auto;
+  flex-shrink: 0;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+/* --- User avatar in nav --- */
+.nav-avatar .user-image {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.8);
+  display: block;
+}
+
+/* --- Logout button --- */
+.btn-salir-nav {
+  display: flex !important;
+  align-items: center;
+  gap: 5px;
+  color: #fff !important;
+  padding: 15px 12px !important;
+  font-size: 14px;
+  line-height: 20px;
+}
+.btn-salir-nav:hover {
+  background: rgba(255,255,255,0.1);
+}
+.btn-salir-nav i {
+  font-size: 16px;
+}
+
+/* --- Create sale desktop alignment --- */
+.formularioVenta {
+  --ancho-objeto-derecha: 220px;
+}
+.payment-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.payment-row .objetoMetodoPago {
+  width: 135px;
+  float: none;
+}
+.payment-row .objetoTotalVenta {
+  width: var(--ancho-objeto-derecha);
+  float: none;
+}
+.payment-row .objetoTotalVenta .input-group {
+  width: 100%;
+}
+.payment-row .cajasMetodoPago {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+}
+.payment-row .cajasMetodoPago > .col-xs-4,
+.payment-row .cajasMetodoPago > .col-xs-6 {
+  float: none;
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 0;
+}
+.payment-row .cajasMetodoPago .input-group {
+  width: 100%;
+}
+.accionesVentaDerecha {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: var(--ancho-objeto-derecha);
+  margin-left: auto;
+}
+.accionesVentaDerecha .btn {
+  width: 100%;
+}
+.accionesVentaDerecha .checkbox {
+  margin-top: 0;
+  margin-bottom: 8px;
+  text-align: right;
+}
+
+/* --- Dashboard: productos con stock bajo --- */
+.tablaStockBajoInicio {
+  width: auto !important;
+  table-layout: fixed;
+}
+.tablaStockBajoInicio th,
+.tablaStockBajoInicio td {
+  width: 170px;
+}
+.tablaStockBajoInicio td:first-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 /* Small devices (phones, <768px) */
 @media (max-width: 767px) {
@@ -53,8 +187,14 @@
   }
 
   /* --- Charts --- */
-  .chart {
+  .chart,
+  #line-chart-ventas,
+  #bar-chart1,
+  #bar-chart2 {
     height: 200px !important;
+  }
+  .chart-responsive {
+    overflow: hidden;
   }
 
   /* --- Tables --- */
@@ -75,6 +215,51 @@
   }
   .table .btn-group .btn i {
     font-size: 12px;
+  }
+
+  /* DataTables responsive: make search/length/filter stack */
+  .dataTables_wrapper .dataTables_filter {
+    float: none !important;
+    text-align: left !important;
+    margin-bottom: 8px;
+  }
+  .dataTables_wrapper .dataTables_filter input {
+    width: 100% !important;
+    max-width: 100%;
+  }
+  .dataTables_wrapper .dataTables_length {
+    float: none !important;
+    margin-bottom: 8px;
+  }
+  .dataTables_wrapper .dataTables_info {
+    float: none !important;
+    text-align: left;
+    font-size: 12px;
+    padding: 6px 0;
+  }
+  .dataTables_wrapper .dataTables_paginate {
+    float: none !important;
+    text-align: center;
+    padding: 6px 0;
+  }
+  .dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 3px 8px;
+    font-size: 12px;
+    margin: 0 1px;
+  }
+  table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before,
+  table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control:before {
+    left: 4px;
+  }
+  table.dataTable > tbody > tr.child ul.dtr-details {
+    padding-left: 0;
+  }
+  table.dataTable > tbody > tr.child ul.dtr-details > li {
+    padding: 4px 0;
+    font-size: 12px;
+  }
+  table.dataTable > tbody > tr.child ul.dtr-details > li:first-child {
+    padding-top: 0;
   }
 
   /* --- Content area --- */
@@ -108,6 +293,11 @@
   .btn-group .btn {
     padding: 5px 10px;
   }
+  .btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
 
   /* --- Forms --- */
   .form-control {
@@ -120,6 +310,16 @@
   }
   .input-group .form-control {
     height: 40px;
+  }
+  .input-group {
+    width: 100%;
+  }
+  .input-group .form-control:not(:first-child):not(:last-child),
+  .input-group-addon:not(:first-child):not(:last-child) {
+    border-radius: 0;
+  }
+  .form-group {
+    margin-bottom: 10px;
   }
 
   /* --- Modals --- */
@@ -142,6 +342,19 @@
   .modal-footer {
     padding: 8px 12px;
   }
+  .modal .input-lg,
+  .modal .form-control.input-lg {
+    height: 36px;
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+  .modal .input-group-lg > .input-group-addon {
+    padding: 5px 10px;
+    font-size: 13px;
+  }
+  .modal .input-group-addon i {
+    font-size: 14px;
+  }
 
   /* --- Breadcrumb --- */
   .breadcrumb {
@@ -156,11 +369,6 @@
   .navbar-custom-menu .nav > li > a {
     padding: 10px 12px;
   }
-  .user-menu .user-image {
-    width: 24px;
-    height: 24px;
-    margin-top: -2px;
-  }
   .user-menu > a > span {
     font-size: 13px;
     max-width: 100px;
@@ -169,6 +377,14 @@
     white-space: nowrap;
     display: inline-block;
     vertical-align: middle;
+  }
+  .user-menu .dropdown-menu {
+    min-width: 120px;
+    right: 0;
+    left: auto;
+  }
+  .navbar-welcome span {
+    font-size: 13px;
   }
 
   /* --- Morris chart --- */
@@ -200,11 +416,57 @@
   }
 
   /* --- Create sale page --- */
+  .nuevoProducto > .row {
+    padding: 5px 8px !important;
+    margin: 0 -8px;
+  }
   .nuevoProducto .input-group {
     flex-wrap: wrap;
   }
   .nuevoProducto .input-group .form-control {
     margin-bottom: 5px;
+  }
+  .nuevoProducto .col-xs-6,
+  .nuevoProducto .col-xs-3 {
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+  .nuevoProducto .input-group-addon {
+    padding: 4px 6px;
+  }
+  .nuevoProducto .input-group-addon .btn-xs {
+    padding: 2px 5px;
+    font-size: 11px;
+  }
+  .nuevoProducto .form-control {
+    height: 34px;
+    font-size: 13px;
+  }
+  .ingresoPrecio .input-group-addon {
+    padding: 4px 6px;
+    font-size: 11px;
+  }
+
+  /* Product selector table (crear-venta, editar-venta) */
+  .product-table-mobile .box-body {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  .product-table-mobile table {
+    font-size: 12px;
+  }
+  .product-table-mobile table th,
+  .product-table-mobile table td {
+    padding: 4px 3px !important;
+  }
+  .product-table-mobile .btn {
+    padding: 3px 6px;
+    font-size: 11px;
+  }
+  .product-table-toggle {
+    display: block !important;
+    width: 100%;
+    margin-bottom: 10px;
   }
 
   /* --- Date range button --- */
@@ -225,6 +487,9 @@
     display: block;
     margin-top: 8px;
   }
+  .box-tools.pull-right .btn {
+    width: 100%;
+  }
 
   /* --- Footer --- */
   .main-footer {
@@ -240,6 +505,147 @@
     transform: translateX(0);
   }
 
+  /* Fix treeview-menu overlapping on mobile when sidebar is open */
+  .sidebar-mini.sidebar-collapse.sidebar-open .sidebar-menu > li.treeview > .treeview-menu {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+  }
+  .sidebar-mini.sidebar-collapse.sidebar-open .sidebar-menu > li > a > span {
+    display: inline !important;
+  }
+  .sidebar-mini.sidebar-collapse.sidebar-open .sidebar-menu > li > a > .pull-right-container {
+    position: absolute !important;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    left: auto !important;
+    width: auto !important;
+  }
+  .sidebar-mini.sidebar-collapse.sidebar-open .sidebar-menu > li {
+    overflow: visible;
+  }
+  .sidebar-mini.sidebar-collapse.sidebar-open .sidebar-menu > li:hover > a > span:not(.pull-right) {
+    display: inline !important;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: auto !important;
+    background: none !important;
+  }
+
+  /* --- Sale header --- */
+  .sales-header h1 {
+    font-size: 18px;
+  }
+
+  /* --- Total table in create sale --- */
+  .col-xs-8.pull-right {
+    width: 100% !important;
+    float: none !important;
+    margin-bottom: 10px;
+  }
+
+  /* --- Payment method row --- */
+  .payment-row .col-xs-6,
+  .payment-row .col-xs-4 {
+    padding-left: 3px;
+    padding-right: 3px;
+    width: 100% !important;
+    margin-bottom: 6px;
+  }
+  .tablaStockBajoInicio {
+    width: 100% !important;
+  }
+  .tablaStockBajoInicio th,
+  .tablaStockBajoInicio td {
+    width: auto;
+  }
+
+  /* --- Reports page --- */
+  .report-filters .input-group {
+    width: 100%;
+  }
+  .report-filters .box-tools {
+    margin-top: 0;
+  }
+
+  /* --- Prevent horizontal scroll on body --- */
+  .wrapper {
+    overflow-x: hidden;
+  }
+
+  /* --- Sidebar toggle button --- */
+  .sidebar-toggle {
+    padding: 8px 10px;
+  }
+
+  /* --- SweetAlert2 --- */
+  .swal2-popup {
+    font-size: 14px !important;
+    width: auto !important;
+    max-width: 90vw !important;
+    margin: 10px !important;
+  }
+
+  /* --- iCheck --- */
+  .checkbox label,
+  .radio label {
+    font-size: 13px;
+    padding-left: 0;
+  }
+  .icheckbox_minimal-blue,
+  .iradio_minimal-blue {
+    margin-right: 4px;
+  }
+
+  /* --- Pull right helpers --- */
+  .pull-right {
+    float: none !important;
+  }
+  .text-right {
+    text-align: left !important;
+  }
+  .pull-left {
+    float: left !important;
+  }
+
+  /* --- Box footer --- */
+  .box-footer .pull-right {
+    float: right !important;
+  }
+  .box-footer .checkbox {
+    margin-bottom: 8px;
+    display: block;
+  }
+  .box-footer .btn {
+    width: 100%;
+  }
+  .accionesVentaDerecha {
+    align-items: stretch;
+  }
+  .accionesVentaDerecha .checkbox {
+    text-align: left;
+  }
+
+  /* --- Skin sidebar --- */
+  .skin-blue .main-header .navbar .dropdown-menu li a {
+    font-size: 13px;
+  }
+
+  /* --- Stack columns in small screens --- */
+  [class*="col-"] {
+    margin-bottom: 6px;
+  }
+  .row [class*="col-"] {
+    margin-bottom: 6px;
+  }
+
+  /* --- Box header button + tools --- */
+  .box-header .btn {
+    margin-bottom: 4px;
+  }
 }
 
 /* Medium devices (tablets, 768px-991px) */
@@ -262,6 +668,13 @@
     max-width: 600px;
   }
 
+  /* DataTables filter on tablet */
+  .dataTables_wrapper .dataTables_filter {
+    float: right !important;
+  }
+  .dataTables_wrapper .dataTables_length {
+    float: left !important;
+  }
 }
 
 /* Fix for very small screens (<400px) */
@@ -298,4 +711,13 @@
     margin: 5px;
   }
 
+  .nuevoProducto .col-xs-6 {
+    width: 100% !important;
+    padding: 0 !important;
+    margin-bottom: 4px;
+  }
+  .nuevoProducto .col-xs-3 {
+    width: 50% !important;
+    padding: 0 2px !important;
+  }
 }

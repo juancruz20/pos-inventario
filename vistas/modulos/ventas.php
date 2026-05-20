@@ -93,15 +93,15 @@ if($xml){
          
          <tr>
            
-           <th style="width:10px">#</th>
-           <th>Código factura</th>
-           <th>Cliente</th>
-           <th>Vendedor</th>
-           <th>Forma de pago</th>
-           <th>Neto</th>
-           <th>Total</th> 
-           <th>Fecha</th>
-           <th>Acciones</th>
+            <th style="width:10px">#</th>
+            <th>Código factura</th>
+            <th>Cliente</th>
+            <th>Vendedor</th>
+            <th>Forma de pago</th>
+            <th>Total</th> 
+            <th>Fecha</th>
+            <th>Detalle compra</th>
+            <th>Acciones</th>
 
          </tr> 
 
@@ -149,17 +149,29 @@ if($xml){
 
                   <td>'.$value["metodo_pago"].'</td>
 
-                  <td>$ '.number_format($value["neto"],2).'</td>
-
                   <td>$ '.number_format($value["total"],2).'</td>
 
                   <td>'.$value["fecha"].'</td>
+
+                  <td style="font-size:12px;">';
+
+                    $productosVenta = json_decode($value["productos"], true);
+
+                    if(is_array($productosVenta)){
+                      foreach ($productosVenta as $p) {
+                        echo $p["descripcion"]." (x".$p["cantidad"].")<br>";
+                      }
+                    }
+
+                  echo '</td>
 
                   <td>
 
                     <div class="btn-group">
 
-                      <a class="btn btn-success" href="index.php?ruta=ventas&xml='.$value["codigo"].'">xml</a>
+                      <a class="btn btn-success" href="vistas/modulos/descargar-reporte.php?reporte=ventas">
+                        <i class="fa fa-file-excel-o"></i>
+                      </a>
                         
                       <button class="btn btn-info btnImprimirFactura" codigoVenta="'.$value["codigo"].'">
 

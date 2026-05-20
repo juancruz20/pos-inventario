@@ -293,7 +293,7 @@ $pdf->writeHTML($bloque5, false, false, false, false, '');
 //SALIDA DEL ARCHIVO 
 
 //$pdf->Output('factura.pdf', 'D');
-$pdf->Output('factura.pdf');
+$pdf->Output('factura.pdf', 'I');
 
 }
 

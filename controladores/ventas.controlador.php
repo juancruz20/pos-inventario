@@ -67,6 +67,8 @@ class ControladorVentas{
 			foreach ($listaProductos as $key => $value) {
 
 			   array_push($totalProductosComprados, $value["cantidad"]);
+
+			   if($value["id"] == 0) continue;
 				
 			   $tablaProductos = "productos";
 
@@ -297,6 +299,7 @@ class ControladorVentas{
 				foreach ($productos as $key => $value) {
 
 					array_push($totalProductosComprados, $value["cantidad"]);
+					if($value["id"] == 0) continue;
 					
 					$tablaProductos = "productos";
 
@@ -305,7 +308,6 @@ class ControladorVentas{
 					$orden = "id";
 
 					$traerProducto = ModeloProductos::mdlMostrarProductos($tablaProductos, $item, $valor, $orden);
-
 					$item1a = "ventas";
 					$valor1a = $traerProducto["ventas"] - $value["cantidad"];
 
@@ -341,6 +343,7 @@ class ControladorVentas{
 				foreach ($listaProductos_2 as $key => $value) {
 
 					array_push($totalProductosComprados_2, $value["cantidad"]);
+					if($value["id"] == 0) continue;
 					
 					$tablaProductos_2 = "productos";
 
@@ -523,6 +526,7 @@ class ControladorVentas{
 			foreach ($productos as $key => $value) {
 
 				array_push($totalProductosComprados, $value["cantidad"]);
+				if($value["id"] == 0) continue;
 				
 				$tablaProductos = "productos";
 
@@ -707,6 +711,20 @@ class ControladorVentas{
 
 	}
 
+
+	/*=============================================
+	TOTAL VENTAS POR CLIENTE
+	=============================================*/
+
+	static public function ctrTotalVentasCliente($idCliente){
+
+		$tabla = "ventas";
+
+		$respuesta = ModeloVentas::mdlTotalVentasCliente($tabla, $idCliente);
+
+		return $respuesta;
+
+	}
 
 	/*=============================================
 	SUMA TOTAL VENTAS

@@ -40,7 +40,7 @@ class TablaProductos{
 		  	$imagen = "<img src='".$productos[$i]["imagen"]."' width='40px'>";
 
 		  	/*=============================================
- 	 		TRAEMOS LA CATEGORÍA
+ 	 		TRAEMOS LA CATEGORIA
   			=============================================*/ 
 
 		  	$item = "id";
@@ -88,6 +88,7 @@ class TablaProductos{
 			      "'.$productos[$i]["descripcion"].'",
 			      "'.$categorias["categoria"].'",
 			      "'.$stock.'",
+			      "<div class=\'input-group input-group-sm\' style=\'width:140px\'><input type=\'number\' class=\'form-control input-actualizar-stock\' data-id=\''.$productos[$i]["id"].'\' placeholder=\'+/- cantidad\' step=\'1\' style=\'height:28px;font-size:12px;\'><span class=\'input-group-btn\'><button class=\'btn btn-success btn-actualizar-stock\' data-id=\''.$productos[$i]["id"].'\' type=\'button\'><i class=\'fa fa-plus\'></i></button></span></div>",
 			      "'.$productos[$i]["precio_compra"].'",
 			      "'.$productos[$i]["precio_venta"].'",
 			      "'.$productos[$i]["fecha"].'",
@@ -116,4 +117,5 @@ ACTIVAR TABLA DE PRODUCTOS
 =============================================*/ 
 $activarProductos = new TablaProductos();
 $activarProductos -> mostrarTablaProductos();
+
 

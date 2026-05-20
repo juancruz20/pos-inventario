@@ -197,7 +197,7 @@
                 BOTÓN PARA AGREGAR PRODUCTO
                 ======================================-->
 
-                <button type="button" class="btn btn-default hidden-lg btnAgregarProducto">Agregar producto</button>
+                <button type="button" class="btn btn-primary btn-block visible-xs btnAgregarProducto">Agregar producto</button>
 
                 <hr>
 
@@ -323,13 +323,17 @@
       LA TABLA DE PRODUCTOS
       ======================================-->
 
-      <div class="col-lg-7 hidden-md hidden-sm hidden-xs">
+      <div class="col-lg-7 product-table-mobile hidden-print">
         
         <div class="box box-warning">
 
-          <div class="box-header with-border"></div>
+          <div class="box-header with-border">
+            <button type="button" class="btn btn-primary btn-block visible-xs" data-toggle="collapse" data-target="#productTableCollapse">
+              <i class="fa fa-table"></i> Productos disponibles
+            </button>
+          </div>
 
-          <div class="box-body">
+          <div class="box-body collapse in" id="productTableCollapse">
             
             <table class="table table-bordered table-striped dt-responsive tablaVentas">
               
