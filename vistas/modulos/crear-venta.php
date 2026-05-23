@@ -389,9 +389,40 @@ MODAL AGREGAR CLIENTE
 </div>
 
 <style>
-  .extra-toggle {
-    margin-bottom: 8px;
+  /* ============================================
+     LAYOUT: GRID
+     ============================================ */
+  .create-venta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    align-items: start;
   }
+
+  .create-venta-table {
+    position: sticky;
+    top: 10px;
+  }
+  .create-venta-table .box-body { padding: 0; }
+  .create-venta-table .table { margin-bottom: 0; }
+
+  .tablaProductosVenta td:last-child {
+    height: 36px;
+    vertical-align: middle;
+  }
+  .tablaProductosVenta .agregarProducto {
+    min-width: 74px;
+    font-weight: 600;
+    height: 34px;
+    line-height: 32px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  /* ============================================
+     CONCEPTO EXTRA TOGGLE
+     ============================================ */
+  .extra-toggle { margin-bottom: 8px; }
 
   .extra-toggle-label {
     display: inline-flex;
@@ -399,10 +430,7 @@ MODAL AGREGAR CLIENTE
     cursor: pointer;
     user-select: none;
   }
-
-  .extra-toggle-label input[type="checkbox"] {
-    display: none;
-  }
+  .extra-toggle-label input[type="checkbox"] { display: none; }
 
   .extra-toggle-ui {
     display: inline-flex;
@@ -416,11 +444,7 @@ MODAL AGREGAR CLIENTE
     transition: all 0.2s;
     background: #fafafa;
   }
-
-  .extra-toggle-ui i {
-    color: #f39c12;
-    font-size: 15px;
-  }
+  .extra-toggle-ui i { color: #f39c12; font-size: 15px; }
 
   .extra-toggle-label input:checked + .extra-toggle-ui {
     border-color: #f39c12;
@@ -428,21 +452,14 @@ MODAL AGREGAR CLIENTE
     color: #f39c12;
     font-weight: 600;
   }
-
-  .extra-toggle-label input:checked + .extra-toggle-ui i {
-    color: #e67e22;
-  }
+  .extra-toggle-label input:checked + .extra-toggle-ui i { color: #e67e22; }
 
   .concepto-extra-row {
     display: flex;
     gap: 4px;
     align-items: center;
   }
-
-  .concepto-extra-row .form-control {
-    flex: 1;
-    min-width: 0;
-  }
+  .concepto-extra-row .form-control { flex: 1; min-width: 0; }
 
   .concepto-extra-price {
     width: 140px;
@@ -457,31 +474,83 @@ MODAL AGREGAR CLIENTE
     border: 1px solid #eee;
   }
 
-  @media (max-width: 767px) {
-    .concepto-extra-price {
-      width: 120px;
-    }
-    .formularioVenta {
-      --venta-control-height: 40px;
-    }
+  /* ============================================
+     PRODUCTOS AGREGADOS
+     ============================================ */
+  .nuevoProducto { display: none; margin-top: 8px; }
 
+  .nuevoProducto .producto-item-venta {
+    margin: 0 0 10px 0;
+    padding: 0;
+  }
+  .nuevoProducto .producto-item-venta .input-group-addon.producto-descripcion-caja {
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background: #f4f4f4;
+    color: #555;
+    border: 1px solid #d2d6de;
+  }
+  .nuevoProducto .producto-item-venta .form-control {
+    background: #f9f9f9;
+    border-color: #d2d6de;
+  }
+  .nuevoProducto .producto-item-venta .quitarProducto {
+    margin-top: 0;
+    padding: 6px 10px;
+  }
+  .nuevoProducto .producto-item-venta .ingresoCantidad {
+    border-color: #3c8dbc;
+    color: #1f4e79;
+    background: #f7fbff;
+  }
+  .nuevoProducto .producto-item-venta .ingresoCantidad:focus {
+    border-color: #2b7cb8;
+    box-shadow: 0 0 0 2px rgba(60,141,188,0.16);
+  }
+
+  /* ============================================
+     PAYMENT ROW
+     ============================================ */
+  .payment-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .payment-row .objetoMetodoPago {
+    flex: 1 1 140px;
+    max-width: 200px;
+  }
+  .payment-row .objetoTotalVenta {
+    flex: 1 1 160px;
+    max-width: var(--ancho-objeto-derecha, 220px);
+  }
+  .payment-row .objetoTotalVenta .input-group { width: 100%; }
+
+  /* ============================================
+     MOBILE (<= 767px)
+     ============================================ */
+  @media (max-width: 767px) {
+    .formularioVenta { --venta-control-height: 40px; }
+
+    /* Input group sizing */
     .formularioVenta .input-group > .form-control,
     .formularioVenta .input-group > .input-group-addon,
     .formularioVenta .cliente-boton-agregar {
       height: var(--venta-control-height);
     }
-
     .formularioVenta .input-group > .input-group-addon {
       padding-top: 0;
       padding-bottom: 0;
       vertical-align: middle;
     }
-
     .formularioVenta .cliente-addon-boton {
       padding: 0;
       width: 90px;
     }
-
     .formularioVenta .cliente-boton-agregar {
       border-radius: 0;
       width: 100%;
@@ -495,63 +564,62 @@ MODAL AGREGAR CLIENTE
     .formularioVenta .input-group-addon {
       box-shadow: 0 1px 3px rgba(0,0,0,0.06);
     }
-
     .formularioVenta .form-control:focus {
       box-shadow: 0 0 0 2px rgba(60,141,188,0.12);
       border-color: #8ab8d6;
     }
-
     .formularioVenta select.form-control {
       box-shadow: 0 1px 3px rgba(60,141,188,0.08);
     }
-
     .formularioVenta input[type="number"].form-control {
       box-shadow: 0 1px 3px rgba(39,174,96,0.08);
     }
 
-    #ropaDescripcion {
-      box-shadow: 0 1px 3px rgba(243,156,18,0.08);
+    #ropaDescripcion { box-shadow: 0 1px 3px rgba(243,156,18,0.08); }
+    .concepto-extra-price { width: 120px; }
+
+    /* Payment row: stack on mobile */
+    .payment-row .objetoMetodoPago,
+    .payment-row .objetoTotalVenta {
+      flex: 1 1 100%;
+      max-width: 100%;
+      padding-left: 0;
+      padding-right: 0;
     }
 
+    /* Product items row */
     .nuevoProducto .producto-item-venta {
       display: flex;
       align-items: center;
       gap: 4px;
       margin-bottom: 8px !important;
     }
-
     .nuevoProducto .producto-item-venta [class*="col-xs-"] {
       float: none;
       margin-bottom: 0 !important;
       padding: 0 !important;
     }
-
     .nuevoProducto .producto-item-venta .col-xs-7 {
       flex: 1 1 auto;
       min-width: 0;
     }
-
     .nuevoProducto .producto-item-venta .col-xs-3 {
       flex: 0 0 78px;
       max-width: 78px;
       width: 78px !important;
     }
-
     .nuevoProducto .producto-item-venta .col-xs-2 {
       flex: 0 0 40px;
       max-width: 40px;
       width: 40px !important;
     }
-
     .nuevoProducto .producto-item-venta .input-group {
       width: 100%;
       flex-wrap: nowrap !important;
     }
-
     .nuevoProducto .producto-item-venta .input-group .form-control {
       margin-bottom: 0 !important;
     }
-
     .nuevoProducto .producto-item-venta .input-group-addon.producto-descripcion-caja {
       max-width: 110px !important;
       padding: 6px 8px;
@@ -560,13 +628,11 @@ MODAL AGREGAR CLIENTE
       display: inline-flex;
       align-items: center;
     }
-
     .nuevoProducto .producto-item-venta .form-control {
       height: var(--venta-control-height);
       padding: 6px 8px;
       font-size: 13px;
     }
-
     .nuevoProducto .producto-item-venta .quitarProducto {
       width: 40px;
       height: var(--venta-control-height);
@@ -583,96 +649,15 @@ MODAL AGREGAR CLIENTE
       max-width: 72px;
       width: 72px !important;
     }
-
     .nuevoProducto .producto-item-venta .input-group-addon.producto-descripcion-caja {
       max-width: 95px !important;
       font-size: 11px;
     }
   }
 
-  .create-venta-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    align-items: start;
-  }
-
-  .nuevoProducto {
-    display: none;
-    margin-top: 8px;
-  }
-
-  .nuevoProducto .producto-item-venta {
-    margin: 0 0 10px 0;
-    padding: 0;
-  }
-
-  .nuevoProducto .producto-item-venta .input-group-addon.producto-descripcion-caja {
-    max-width: 160px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    background: #f4f4f4;
-    color: #555;
-    border: 1px solid #d2d6de;
-  }
-
-  .nuevoProducto .producto-item-venta .form-control {
-    background: #f9f9f9;
-    border-color: #d2d6de;
-  }
-
-  .nuevoProducto .producto-item-venta .quitarProducto {
-    margin-top: 0;
-    padding: 6px 10px;
-  }
-
-  .create-venta-table {
-    position: sticky;
-    top: 10px;
-  }
-
-  .create-venta-table .box-body {
-    padding: 0;
-  }
-
-  .create-venta-table .table {
-    margin-bottom: 0;
-  }
-
-  .tablaProductosVenta td:last-child {
-    height: 36px;
-    vertical-align: middle;
-  }
-  .tablaProductosVenta .agregarProducto {
-    min-width: 74px;
-    font-weight: 600;
-    height: 34px;
-    line-height: 32px;
-    padding: 0 10px;
-    font-size: 12px;
-  }
-
-  .nuevoProducto .producto-item-venta .ingresoCantidad {
-    border-color: #3c8dbc;
-    color: #1f4e79;
-    background: #f7fbff;
-  }
-
-  .nuevoProducto .producto-item-venta .ingresoCantidad:focus {
-    border-color: #2b7cb8;
-    box-shadow: 0 0 0 2px rgba(60,141,188,0.16);
-  }
-
   @media (max-width: 991px) {
-    .create-venta-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .create-venta-table {
-      position: static;
-      margin-top: 0;
-    }
+    .create-venta-grid { grid-template-columns: 1fr; }
+    .create-venta-table { position: static; margin-top: 0; }
   }
 </style>
 

@@ -52,7 +52,8 @@ if($_SESSION["perfil"] == "Especial"){
 
       foreach ($clientes as $key => $value) {
 
-        $badgeColor = $value["tipo_comprobante"] == "A" ? "#27ae60" : ($value["tipo_comprobante"] == "B" ? "#f39c12" : "#e74c3c");
+        $tc = $value["tipo_comprobante"] ?? "B";
+$badgeColor = $tc == "A" ? "#27ae60" : ($tc == "B" ? "#f39c12" : "#e74c3c");
 
         echo '<div class="cliente-card">
           <div class="cliente-card-header">
@@ -89,7 +90,7 @@ if($_SESSION["perfil"] == "Especial"){
             </div>
             <div class="cliente-card-row">
               <span class="cliente-card-label"><i class="fa fa-file-text"></i> Comprobante</span>
-              <span class="cliente-card-value"><span class="badge-tipo" style="background:'.$badgeColor.'">'.$value["tipo_comprobante"].'</span></span>
+              <span class="cliente-card-value"><span class="badge-tipo" style="background:'.$badgeColor.'">'.$tc.'</span></span>
             </div>
             <div class="cliente-card-row">
               <span class="cliente-card-label"><i class="fa fa-shopping-cart"></i> Compras</span>

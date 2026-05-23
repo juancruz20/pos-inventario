@@ -49,10 +49,10 @@ if($_SESSION["perfil"] == "Especial" || $_SESSION["perfil"] == "Vendedor"){
 
       <div class="box-body">
         
-       <table class="table table-bordered table-striped dt-responsive tablas" width="100%">
-         
+       <table class="table table-bordered table-striped tablas usuarios-table" width="100%">
+          
         <thead>
-         
+          
           <tr>
            
            <th style="width:10px">#</th>
@@ -78,36 +78,36 @@ if($_SESSION["perfil"] == "Especial" || $_SESSION["perfil"] == "Vendedor"){
         $usuarios = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
 
        foreach ($usuarios as $key => $value){
-         
+          
           echo '  <tr>
-                   <td>'.($key+1).'</td>
-                   <td>'.$value["nombre"].'</td>
-                   <td>'.$value["usuario"].'</td>';
+                   <td data-label="#">'.($key+1).'</td>
+                   <td data-label="Nombre">'.$value["nombre"].'</td>
+                   <td data-label="Usuario">'.$value["usuario"].'</td>';
 
                   if($value["foto"] != ""){
 
-                    echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
+                    echo '<td data-label="Foto"><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
 
                   }else{
 
-                    echo '<td><img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
+                    echo '<td data-label="Foto"><img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
 
                   }
 
-                  echo '<td>'.$value["perfil"].'</td>';
+                  echo '<td data-label="Perfil">'.$value["perfil"].'</td>';
 
                   if($value["estado"] != 0){
 
-                    echo '<td><button class="btn btn-success btn-xs btnActivar" idUsuario="'.$value["id"].'" estadoUsuario="0">Activado</button></td>';
+                    echo '<td data-label="Estado"><button class="btn btn-success btn-xs btnActivar" idUsuario="'.$value["id"].'" estadoUsuario="0">Activado</button></td>';
 
                   }else{
 
-                    echo '<td><button class="btn btn-danger btn-xs btnActivar" idUsuario="'.$value["id"].'" estadoUsuario="1">Desactivado</button></td>';
+                    echo '<td data-label="Estado"><button class="btn btn-danger btn-xs btnActivar" idUsuario="'.$value["id"].'" estadoUsuario="1">Desactivado</button></td>';
 
                   }             
 
-                  echo '<td>'.$value["ultimo_login"].'</td>
-                   <td>
+                  echo '<td data-label="Último login">'.$value["ultimo_login"].'</td>
+                   <td data-label="Acciones">
 
                     <div class="btn-group">
                         
@@ -426,6 +426,85 @@ MODAL EDITAR USUARIO (SIN ESPECIAL)
   </div>
 
 </div>
+
+<style>
+  .usuarios-table th:last-child,
+  .usuarios-table td:last-child {
+    white-space: nowrap;
+  }
+  .usuarios-table td[data-label="Foto"] {
+    text-align: center;
+  }
+
+  @media (max-width: 767px) {
+    .usuarios-table thead {
+      display: none;
+    }
+    .usuarios-table,
+    .usuarios-table tbody,
+    .usuarios-table tr,
+    .usuarios-table td {
+      display: block;
+      width: 100%;
+    }
+    .usuarios-table tr {
+      background: #fff;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      padding: 10px 12px;
+      border: 1px solid #d2d6de;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      position: relative;
+    }
+    .usuarios-table tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+    .usuarios-table td {
+      border: none !important;
+      padding: 5px 0 5px 110px !important;
+      position: relative;
+      font-size: 14px;
+      min-height: 28px;
+    }
+    .usuarios-table td:before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      top: 5px;
+      font-weight: 600;
+      font-size: 12px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .usuarios-table td[data-label="Foto"] {
+      padding-left: 0 !important;
+      text-align: left;
+    }
+    .usuarios-table td[data-label="Foto"]:before {
+      display: none;
+    }
+    .usuarios-table td[data-label="Acciones"] {
+      padding-left: 0 !important;
+      margin-top: 6px;
+    }
+    .usuarios-table td[data-label="Acciones"]:before {
+      display: none;
+    }
+    .usuarios-table td[data-label="#"] {
+      display: none;
+    }
+    .usuarios-table .btn-group {
+      display: flex;
+      gap: 6px;
+    }
+    .usuarios-table .btn-group .btn {
+      flex: 1;
+      padding: 8px 12px;
+      font-size: 13px;
+    }
+  }
+</style>
 
 <?php
 

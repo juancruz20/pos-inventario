@@ -45,7 +45,7 @@
 		</div>
 
 		<!-- marca centrada (móvil) -->
-		<div class="mobile-brand">Inventario</div>
+		<a href="inicio" class="mobile-brand">Inventario</a>
 
 		<!-- Bienvenida central con foto -->
 		<div class="navbar-welcome">
