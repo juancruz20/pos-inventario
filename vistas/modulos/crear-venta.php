@@ -36,202 +36,142 @@ if($_SESSION["perfil"] == "Especial"){
 
   <section class="content">
 
-    <div class="row">
+    <div class="create-venta-grid">
 
       <!--=====================================
-      EL FORMULARIO
+      FORMULARIO
       ======================================-->
       
-      <div class="col-lg-6 col-md-6 col-xs-12">
+      <div class="create-venta-form">
         
         <div class="box box-success">
           
-          <div class="box-header with-border"></div>
+          <div class="box-header with-border">
+            <h3 class="box-title"><i class="fa fa-shopping-cart"></i> Nueva Venta</h3>
+          </div>
 
           <form role="form" method="post" class="formularioVenta">
 
             <div class="box-body">
-  
-              <div class="box">
 
-                <!--=====================================
-                ENTRADA DEL VENDEDOR
-                ======================================-->
-            
-                <div class="form-group">
-                
-                  <div class="input-group">
-                    
-                    <span class="input-group-addon"><i class="fa fa-user"></i></span> 
-
-                    <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $_SESSION["nombre"]; ?>" readonly>
-
-                    <input type="hidden" name="idVendedor" value="<?php echo $_SESSION["id"]; ?>">
-
+              <!-- VENDEDOR Y CÓDIGO -->
+              
+              <div class="row">
+                <div class="col-xs-7">
+                  <div class="form-group">
+                    <label>Vendedor</label>
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-user"></i></span> 
+                      <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $_SESSION["nombre"]; ?>" readonly>
+                      <input type="hidden" name="idVendedor" value="<?php echo $_SESSION["id"]; ?>">
+                    </div>
                   </div>
-
-                </div> 
-
-                <!--=====================================
-                ENTRADA DEL CÓDIGO
-                ======================================--> 
-
-                <div class="form-group">
-                  
-                  <div class="input-group">
-                    
-                    <span class="input-group-addon"><i class="fa fa-key"></i></span>
-
-                    <?php
-
-                    $item = null;
-                    $valor = null;
-
-                    $ventas = ControladorVentas::ctrMostrarVentas($item, $valor);
-
-                    if(!$ventas){
-
-                      echo '<input type="text" class="form-control" id="nuevaVenta" name="nuevaVenta" value="10001" readonly>';
-                  
-
-                    }else{
-
-                      $value = end($ventas);
-
-                      $codigo = $value["codigo"] + 1;
-
-
-
-                      echo '<input type="text" class="form-control" id="nuevaVenta" name="nuevaVenta" value="'.$codigo.'" readonly>';
-                  
-
-                    }
-
-                    ?>
-                    
-                    
-                  </div>
-                
                 </div>
-
-                <!--=====================================
-                ENTRADA DEL CLIENTE
-                ======================================--> 
-
-                <div class="form-group">
-                  
-                  <div class="input-group">
-                    
-                    <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                    
-                    <select class="form-control" id="seleccionarCliente" name="seleccionarCliente" required>
-
-                    <?php
-
+                <div class="col-xs-5">
+                  <div class="form-group">
+                    <label>Código</label>
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                      <?php
                       $item = null;
                       $valor = null;
-
-                      $clientes = ControladorClientes::ctrMostrarClientes($item, $valor);
-
-                      $idVentaRapida = null;
-                      foreach ($clientes as $c) {
-                        if ($c["nombre"] == "Venta Rápida") {
-                          $idVentaRapida = $c["id"];
-                          break;
-                        }
+                      $ventas = ControladorVentas::ctrMostrarVentas($item, $valor);
+                      if(!$ventas){
+                        echo '<input type="text" class="form-control" id="nuevaVenta" name="nuevaVenta" value="10001" readonly>';
+                      }else{
+                        $value = end($ventas);
+                        $codigo = $value["codigo"] + 1;
+                        echo '<input type="text" class="form-control" id="nuevaVenta" name="nuevaVenta" value="'.$codigo.'" readonly>';
                       }
+                      ?>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-                      foreach ($clientes as $key => $value) {
-                        $selected = ($value["id"] == $idVentaRapida) ? ' selected' : '';
-                        echo '<option value="'.$value["id"].'"'.$selected.'>'.$value["nombre"].'</option>';
+              <!-- CLIENTE -->
+
+              <div class="form-group">
+                <label>Cliente</label>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                  <select class="form-control" id="seleccionarCliente" name="seleccionarCliente" required>
+                  <?php
+                    $item = null;
+                    $valor = null;
+                    $clientes = ControladorClientes::ctrMostrarClientes($item, $valor);
+                    $idVentaRapida = null;
+                    foreach ($clientes as $c) {
+                      if ($c["nombre"] == "Venta Rápida") {
+                        $idVentaRapida = $c["id"];
+                        break;
                       }
-
-                    ?>
-
-                    </select>
-                    
-                    <span class="input-group-addon"><button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modalAgregarCliente" data-dismiss="modal">Agregar cliente</button></span>
-                  
-                  </div>
-                
+                    }
+                    foreach ($clientes as $key => $value) {
+                      $selected = ($value["id"] == $idVentaRapida) ? ' selected' : '';
+                      echo '<option value="'.$value["id"].'"'.$selected.'>'.$value["nombre"].'</option>';
+                    }
+                  ?>
+                  </select>
+                  <span class="input-group-addon cliente-addon-boton"><button type="button" class="btn btn-default cliente-boton-agregar" data-toggle="modal" data-target="#modalAgregarCliente" data-dismiss="modal">Agregar</button></span>
                 </div>
+              </div>
 
-                <!--=====================================
-                ROPA PREDETERMINADA
-                ======================================-->
+              <!-- CONCEPTO EXTRA -->
 
-                <div class="form-group" id="ropaPredeterminada" style="margin-bottom:8px;">
-
-                  <div class="checkbox" style="margin-top:0; margin-bottom:4px;">
-                    <label>
-                      <input type="checkbox" id="checkRopaPredeterminada"> Ropa
-                    </label>
-                  </div>
-                  <div class="input-group" id="ropaPrecioGroup" style="display:none; max-width:240px;">
-                    <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
-                    <input type="number" class="form-control" id="ropaPrecio" placeholder="Precio" step="any" min="0" value="0">
-                  </div>
-
+              <div class="form-group" id="ropaPredeterminada" style="margin-bottom:8px;">
+                <div class="extra-toggle">
+                  <label class="extra-toggle-label">
+                    <input type="checkbox" id="checkRopaPredeterminada">
+                    <span class="extra-toggle-ui">
+                      <i class="fa fa-plus-circle"></i>
+                      <span>Agregar concepto extra</span>
+                    </span>
+                  </label>
                 </div>
-                
-                <!--=====================================
-                ENTRADA PARA AGREGAR PRODUCTO
-                ======================================--> 
-
-                <div class="form-group row nuevoProducto">
-
-                
-
-                </div>
-
-                <input type="hidden" id="listaProductos" name="listaProductos">
-
-                <!--=====================================
-                BOTÓN PARA AGREGAR PRODUCTO
-                ======================================-->
-
-                <button type="button" class="btn btn-primary btn-block visible-xs btnAgregarProducto">Agregar producto</button>
-
-                <!--=====================================
-                MÉTODO DE PAGO Y TOTAL
-                ======================================-->
-
-                <div class="form-group row payment-row">
-                  
-                  <div class="col-xs-6 objetoMetodoPago" style="padding-right:0px">
-                    
-                     <div class="input-group">
-                  
-                      <select class="form-control" id="nuevoMetodoPago" name="nuevoMetodoPago" required>
-                        <option value="Efectivo" selected>Efectivo</option>
-                        <option value="TR">Transferencia</option>
-                        <option value="TC">Tarjeta Crédito</option>
-                        <option value="TD">Tarjeta Débito</option>                  
-                      </select>    
-
+                <div class="concepto-extra-inputs" id="ropaPrecioGroup" style="display:none;">
+                  <div class="concepto-extra-row">
+                    <input type="text" class="form-control" id="ropaDescripcion" placeholder="Ej: Ropa" maxlength="60">
+                    <div class="input-group concepto-extra-price">
+                      <span class="input-group-addon" style="background:#f4f4f4;color:#999;font-weight:600;">$</span>
+                      <input type="number" class="form-control" id="ropaPrecio" placeholder="0" step="any" min="0">
                     </div>
-
                   </div>
+                </div>
+              </div>
+              
+              <div class="nuevoProducto"></div>
+              <input type="hidden" id="listaProductos" name="listaProductos">
 
-                  <div class="col-xs-6 objetoTotalVenta" style="padding-left:0px">
+              <!-- MÉTODO DE PAGO Y TOTAL -->
 
-                    <div class="input-group">
+              <hr>
 
-                      <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
-
-                      <input type="text" class="form-control" id="nuevoTotalVenta" name="nuevoTotalVenta" total="" placeholder="00000" maxlength="7" readonly required>
-
-                    </div>
-
+              <div class="form-group row payment-row">
+                
+                <div class="col-xs-6 objetoMetodoPago" style="padding-right:0px">
+                  <label>Método de pago</label>
+                   <div class="input-group">
+                    <select class="form-control" id="nuevoMetodoPago" name="nuevoMetodoPago" required>
+                      <option value="Efectivo" selected>Efectivo</option>
+                      <option value="TR">Transferencia</option>
+                      <option value="TC">Tarjeta Crédito</option>
+                      <option value="TD">Tarjeta Débito</option>                  
+                    </select>    
                   </div>
-
                   <div class="cajasMetodoPago"></div>
-
                   <input type="hidden" id="listaMetodoPago" name="listaMetodoPago">
+                </div>
+
+                <div class="col-xs-6 objetoTotalVenta" style="padding-left:0px">
+                  <label>Total</label>
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
+                    <input type="text" class="form-control" id="nuevoTotalVenta" name="nuevoTotalVenta" total="" placeholder="00000" maxlength="7" readonly required>
+                  </div>
                   <input type="hidden" name="nuevoPrecioImpuesto" id="nuevoPrecioImpuesto" value="0" required>
                   <input type="hidden" name="nuevoPrecioNeto" id="nuevoPrecioNeto" value="0" required>
                   <input type="hidden" name="totalVenta" id="totalVenta">
-
                 </div>
 
               </div>
@@ -239,26 +179,19 @@ if($_SESSION["perfil"] == "Especial"){
             </div>
 
           <div class="box-footer">
-
             <div class="accionesVentaDerecha">
-
               <div class="checkbox">
-                <label><input type="checkbox" value="1" name="impresion">Imprimir Ticket</label>
+                <label><input type="checkbox" value="1" name="impresion"><i class="fa fa-print"></i> Imprimir Ticket</label>
               </div>
-
-              <button type="submit" class="btn btn-primary pull-right">Guardar venta</button>
-
+              <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check"></i> Guardar venta</button>
             </div>
-
           </div>
 
         </form>
 
         <?php
-
           $guardarVenta = new ControladorVentas();
           $guardarVenta -> ctrCrearVenta();
-          
         ?>
 
         </div>
@@ -266,22 +199,20 @@ if($_SESSION["perfil"] == "Especial"){
       </div>
 
       <!--=====================================
-      LA TABLA DE PRODUCTOS
+      TABLA DE PRODUCTOS
       ======================================-->
 
-      <div class="col-lg-6 col-md-6 col-xs-12 product-table-mobile">
+      <div class="create-venta-table">
         
         <div class="box box-warning">
 
           <div class="box-header with-border">
-            <button type="button" class="btn btn-primary btn-block visible-xs" data-toggle="collapse" data-target="#productTableCollapse">
-              <i class="fa fa-table"></i> Productos disponibles
-            </button>
+            <h3 class="box-title"><i class="fa fa-cubes"></i> Productos disponibles</h3>
           </div>
 
-          <div class="box-body collapse in" id="productTableCollapse">
+          <div class="box-body">
             
-            <table class="table table-bordered table-striped dt-responsive tablaVentas">
+            <table class="table table-bordered table-striped dt-responsive tablaProductosVenta" width="100%">
                
                <thead>
 
@@ -301,7 +232,6 @@ if($_SESSION["perfil"] == "Especial"){
           </div>
 
         </div>
-
 
       </div>
 
@@ -457,3 +387,328 @@ MODAL AGREGAR CLIENTE
   </div>
 
 </div>
+
+<style>
+  .extra-toggle {
+    margin-bottom: 8px;
+  }
+
+  .extra-toggle-label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .extra-toggle-label input[type="checkbox"] {
+    display: none;
+  }
+
+  .extra-toggle-ui {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border: 1px dashed #ccc;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #888;
+    transition: all 0.2s;
+    background: #fafafa;
+  }
+
+  .extra-toggle-ui i {
+    color: #f39c12;
+    font-size: 15px;
+  }
+
+  .extra-toggle-label input:checked + .extra-toggle-ui {
+    border-color: #f39c12;
+    background: #fff8e6;
+    color: #f39c12;
+    font-weight: 600;
+  }
+
+  .extra-toggle-label input:checked + .extra-toggle-ui i {
+    color: #e67e22;
+  }
+
+  .concepto-extra-row {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .concepto-extra-row .form-control {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .concepto-extra-price {
+    width: 140px;
+    flex-shrink: 0;
+  }
+
+  .concepto-extra-inputs {
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    border-radius: 4px;
+    padding: 8px;
+    background: #fcfcfc;
+    border: 1px solid #eee;
+  }
+
+  @media (max-width: 767px) {
+    .concepto-extra-price {
+      width: 120px;
+    }
+    .formularioVenta {
+      --venta-control-height: 40px;
+    }
+
+    .formularioVenta .input-group > .form-control,
+    .formularioVenta .input-group > .input-group-addon,
+    .formularioVenta .cliente-boton-agregar {
+      height: var(--venta-control-height);
+    }
+
+    .formularioVenta .input-group > .input-group-addon {
+      padding-top: 0;
+      padding-bottom: 0;
+      vertical-align: middle;
+    }
+
+    .formularioVenta .cliente-addon-boton {
+      padding: 0;
+      width: 90px;
+    }
+
+    .formularioVenta .cliente-boton-agregar {
+      border-radius: 0;
+      width: 100%;
+      padding: 0 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+    .formularioVenta .form-control,
+    .formularioVenta .input-group-addon {
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+
+    .formularioVenta .form-control:focus {
+      box-shadow: 0 0 0 2px rgba(60,141,188,0.12);
+      border-color: #8ab8d6;
+    }
+
+    .formularioVenta select.form-control {
+      box-shadow: 0 1px 3px rgba(60,141,188,0.08);
+    }
+
+    .formularioVenta input[type="number"].form-control {
+      box-shadow: 0 1px 3px rgba(39,174,96,0.08);
+    }
+
+    #ropaDescripcion {
+      box-shadow: 0 1px 3px rgba(243,156,18,0.08);
+    }
+
+    .nuevoProducto .producto-item-venta {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 8px !important;
+    }
+
+    .nuevoProducto .producto-item-venta [class*="col-xs-"] {
+      float: none;
+      margin-bottom: 0 !important;
+      padding: 0 !important;
+    }
+
+    .nuevoProducto .producto-item-venta .col-xs-7 {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .nuevoProducto .producto-item-venta .col-xs-3 {
+      flex: 0 0 78px;
+      max-width: 78px;
+      width: 78px !important;
+    }
+
+    .nuevoProducto .producto-item-venta .col-xs-2 {
+      flex: 0 0 40px;
+      max-width: 40px;
+      width: 40px !important;
+    }
+
+    .nuevoProducto .producto-item-venta .input-group {
+      width: 100%;
+      flex-wrap: nowrap !important;
+    }
+
+    .nuevoProducto .producto-item-venta .input-group .form-control {
+      margin-bottom: 0 !important;
+    }
+
+    .nuevoProducto .producto-item-venta .input-group-addon.producto-descripcion-caja {
+      max-width: 110px !important;
+      padding: 6px 8px;
+      font-size: 12px;
+      height: var(--venta-control-height);
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .nuevoProducto .producto-item-venta .form-control {
+      height: var(--venta-control-height);
+      padding: 6px 8px;
+      font-size: 13px;
+    }
+
+    .nuevoProducto .producto-item-venta .quitarProducto {
+      width: 40px;
+      height: var(--venta-control-height);
+      padding: 0 !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .nuevoProducto .producto-item-venta .col-xs-3 {
+      flex-basis: 72px;
+      max-width: 72px;
+      width: 72px !important;
+    }
+
+    .nuevoProducto .producto-item-venta .input-group-addon.producto-descripcion-caja {
+      max-width: 95px !important;
+      font-size: 11px;
+    }
+  }
+
+  .create-venta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    align-items: start;
+  }
+
+  .nuevoProducto {
+    display: none;
+    margin-top: 8px;
+  }
+
+  .nuevoProducto .producto-item-venta {
+    margin: 0 0 10px 0;
+    padding: 0;
+  }
+
+  .nuevoProducto .producto-item-venta .input-group-addon.producto-descripcion-caja {
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background: #f4f4f4;
+    color: #555;
+    border: 1px solid #d2d6de;
+  }
+
+  .nuevoProducto .producto-item-venta .form-control {
+    background: #f9f9f9;
+    border-color: #d2d6de;
+  }
+
+  .nuevoProducto .producto-item-venta .quitarProducto {
+    margin-top: 0;
+    padding: 6px 10px;
+  }
+
+  .create-venta-table {
+    position: sticky;
+    top: 10px;
+  }
+
+  .create-venta-table .box-body {
+    padding: 0;
+  }
+
+  .create-venta-table .table {
+    margin-bottom: 0;
+  }
+
+  .tablaProductosVenta td:last-child {
+    height: 36px;
+    vertical-align: middle;
+  }
+  .tablaProductosVenta .agregarProducto {
+    min-width: 74px;
+    font-weight: 600;
+    height: 34px;
+    line-height: 32px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .nuevoProducto .producto-item-venta .ingresoCantidad {
+    border-color: #3c8dbc;
+    color: #1f4e79;
+    background: #f7fbff;
+  }
+
+  .nuevoProducto .producto-item-venta .ingresoCantidad:focus {
+    border-color: #2b7cb8;
+    box-shadow: 0 0 0 2px rgba(60,141,188,0.16);
+  }
+
+  @media (max-width: 991px) {
+    .create-venta-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .create-venta-table {
+      position: static;
+      margin-top: 0;
+    }
+  }
+</style>
+
+<script>
+if ($(".tablaProductosVenta").length) {
+  $(".tablaProductosVenta").DataTable({
+    processing: true,
+    ajax: "ajax/datatable-productos.ajax.php",
+    columns: [
+      { data: 0 },
+      { data: 1 },
+      { data: 2 },
+      { data: 3 },
+      { data: 5 },
+      {
+        data: 10,
+        render: function (data, type, row) {
+          var htmlBotones = typeof data === "string" ? data : "";
+          var match = htmlBotones.match(/idProducto=['\"](\d+)['\"]/);
+          if (!match && row && row[6]) {
+            match = String(row[6]).match(/data-id=['\"](\d+)['\"]/);
+          }
+          var id = match ? match[1] : "";
+          if (!id) {
+            return "";
+          }
+          return '<button class="btn btn-primary btn-xs agregarProducto" idProducto="' + id + '">Agregar</button>';
+        }
+      }
+    ],
+    order: [[0, "asc"]],
+    responsive: true,
+    autoWidth: false,
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
+    },
+  });
+}
+</script>

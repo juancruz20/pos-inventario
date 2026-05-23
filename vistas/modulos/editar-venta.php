@@ -40,10 +40,20 @@
 
                 <?php
 
+                    if(!isset($_GET["idVenta"])){
+                        echo '<script>window.location="ventas";</script>';
+                        return;
+                    }
+
                     $item = "id";
                     $valor = $_GET["idVenta"];
 
                     $venta = ControladorVentas::ctrMostrarVentas($item, $valor);
+
+                    if(!$venta){
+                        echo '<script>window.location="ventas";</script>';
+                        return;
+                    }
 
                     $itemUsuario = "id";
                     $valorUsuario = $venta["id_vendedor"];
@@ -55,7 +65,7 @@
 
                     $cliente = ControladorClientes::ctrMostrarClientes($itemCliente, $valorCliente);
 
-                    $porcentajeImpuesto = $venta["impuesto"] * 100 / $venta["neto"];
+                    $porcentajeImpuesto = ($venta["neto"] > 0) ? $venta["impuesto"] * 100 / $venta["neto"] : 0;
 
 
                 ?>
@@ -148,6 +158,8 @@
                   $orden = "id";
 
                   $respuesta = ControladorProductos::ctrMostrarProductos($item, $valor, $orden);
+
+                  if(!$respuesta) continue;
 
                   $stockAntiguo = $respuesta["stock"] + $value["cantidad"];
                   

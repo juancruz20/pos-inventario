@@ -11,7 +11,7 @@ class ModeloUsuarios{
 	static public function mdlMostrarUsuarios($tabla, $item, $valor){
 
 		if($item != null){
-
+			Conexion::validarColumna($item, $tabla);
 			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
 
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
@@ -95,6 +95,8 @@ class ModeloUsuarios{
 
 	static public function mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2){
 
+		Conexion::validarColumna($item1, $tabla);
+		Conexion::validarColumna($item2, $tabla);
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE $item2 = :$item2");
 
 		$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);

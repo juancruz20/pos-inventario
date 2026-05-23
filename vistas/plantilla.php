@@ -114,7 +114,7 @@ $baseHref = ($basePath === "" ? "/" : $basePath."/");
 CUERPO DOCUMENTO
 ======================================-->
 
-<body class="hold-transition skin-blue sidebar-collapse sidebar-mini login-page">
+<body class="hold-transition skin-blue login-page">
  
   <?php
 
@@ -182,6 +182,36 @@ CUERPO DOCUMENTO
   ?>
 
 
+<script>
+  function ajustarSidebar() {
+    var movil = window.innerWidth < 768;
+    var params = new URLSearchParams(window.location.search);
+    var ruta = params.get("ruta");
+    // En desktop, no colapsar si estamos en una sub-pagina de treeview
+    var enSubPagina = !movil && ["ventas","crear-venta","editar-venta","reportes"].indexOf(ruta) !== -1;
+    document.body.classList.toggle("sidebar-mini", !movil);
+    document.body.classList.toggle("sidebar-collapse", !enSubPagina);
+  }
+  ajustarSidebar();
+  window.addEventListener("resize", ajustarSidebar);
+
+  // En desktop: al hacer click en un treeview, expande el sidebar y abre el submenu
+  // En mobile: toggle del submenu del treeview
+  $(document).on("click", ".sidebar-menu li.treeview > a", function(e){
+    var $li = $(this).parent();
+    var $menu = $(this).next(".treeview-menu");
+    if (window.innerWidth >= 768 && document.body.classList.contains("sidebar-collapse")) {
+      document.body.classList.remove("sidebar-collapse");
+      $li.addClass("active").addClass("menu-open");
+      $menu.slideDown();
+      e.preventDefault();
+    } else if (window.innerWidth < 768) {
+      $li.toggleClass("menu-open");
+      $menu.slideToggle();
+      e.preventDefault();
+    }
+  });
+</script>
 <script src="vistas/js/plantilla.js"></script>
 <script src="vistas/js/usuarios.js"></script>
 <script src="vistas/js/categorias.js"></script>

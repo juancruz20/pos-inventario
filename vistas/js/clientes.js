@@ -49,3 +49,21 @@ $("#modalAgregarCliente").on("hidden.bs.modal", function () {
   $('.nuevo-tipo-comprobante .tipo-comprobante[data-tipo="B"]').css("border-color", "#333");
   $("#nuevoTipoComprobante").val("B");
 });
+
+$(".btnEliminarCliente").on("click", function () {
+  var idCliente = $(this).attr("idCliente");
+  swal({
+    title: "¿Está seguro de eliminar el cliente?",
+    text: "¡El cliente no podrá ser recuperado!",
+    type: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sí, eliminar",
+    cancelButtonText: "Cancelar",
+  }).then(function (result) {
+    if (result.value) {
+      window.location = "clientes&idCliente=" + idCliente;
+    }
+  });
+});

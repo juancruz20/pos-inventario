@@ -22,7 +22,7 @@ class AjaxClientes{
 
 		$totalVentas = ControladorVentas::ctrTotalVentasCliente($valor);
 
-		$respuesta["total_ventas"] = $totalVentas["total"] ? $totalVentas["total"] : 0;
+		$respuesta["total_ventas"] = (is_array($totalVentas) && $totalVentas["total"]) ? $totalVentas["total"] : 0;
 
 		echo json_encode($respuesta);
 

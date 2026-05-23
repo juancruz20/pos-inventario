@@ -138,14 +138,14 @@ if($xml){
 
                   $respuestaCliente = ControladorClientes::ctrMostrarClientes($itemCliente, $valorCliente);
 
-                  echo '<td>'.$respuestaCliente["nombre"].'</td>';
+                  echo '<td>'.($respuestaCliente ? $respuestaCliente["nombre"] : "Eliminado").'</td>';
 
                   $itemUsuario = "id";
                   $valorUsuario = $value["id_vendedor"];
 
                   $respuestaUsuario = ControladorUsuarios::ctrMostrarUsuarios($itemUsuario, $valorUsuario);
 
-                  echo '<td>'.$respuestaUsuario["nombre"].'</td>
+                  echo '<td>'.($respuestaUsuario ? $respuestaUsuario["nombre"] : "Eliminado").'</td>
 
                   <td>'.$value["metodo_pago"].'</td>
 

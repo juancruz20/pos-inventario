@@ -19,12 +19,7 @@ class AjaxUsuarios{
 		$respuesta = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
 
 		if(is_array($respuesta)){
-			$passDescifrada = descifrarPassword($respuesta["password"]);
-			if (substr($passDescifrada, 0, 4) === '$2y$' || substr($passDescifrada, 0, 4) === '$2a$' || substr($passDescifrada, 0, 4) === '$2b$' || $passDescifrada === $respuesta["password"]) {
-				$respuesta["password_real"] = "";
-			} else {
-				$respuesta["password_real"] = $passDescifrada;
-			}
+			$respuesta["password"] = "********";
 		}
 
 		echo json_encode($respuesta);

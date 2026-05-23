@@ -40,6 +40,18 @@
   align-items: center;
 }
 
+/* --- Mobile brand & icon (hidden on desktop) --- */
+.mobile-brand,
+.mobile-logo-icon {
+  display: none;
+}
+.navbar-left-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
 /* --- User avatar in nav --- */
 .nav-avatar .user-image {
   width: 34px;
@@ -165,6 +177,68 @@
   }
   .checkbox label {
     font-size: 13px;
+  }
+
+  /* --- Mobile header: brand + icon --- */
+  .main-header .logo {
+    display: none;
+  }
+  .main-header .navbar {
+    height: 50px;
+    min-height: 50px;
+    display: flex;
+    align-items: stretch;
+  }
+  .navbar-left-group {
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    gap: 0;
+    padding-bottom: 0;
+  }
+  .main-header .navbar .sidebar-toggle {
+    height: 30px;
+    padding: 6px 10px 2px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mobile-logo-icon {
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1px 6px;
+    height: 18px;
+    z-index: 5;
+  }
+  .mobile-logo-icon img {
+    width: 16px;
+    height: 16px;
+    filter: brightness(0) invert(1);
+    display: block;
+  }
+  .mobile-brand {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    z-index: 2;
+  }
+  .navbar-welcome {
+    display: none;
   }
 
   /* --- Dashboard cards --- */
@@ -497,25 +571,25 @@
     padding: 10px;
   }
 
-  /* --- Sidebar mini fixes --- */
-  .sidebar-mini.sidebar-collapse .main-sidebar {
+  /* --- Sidebar mobile fixes --- */
+  .sidebar-collapse .main-sidebar {
     transform: translateX(-230px);
   }
-  .sidebar-mini.sidebar-collapse.sidebar-open .main-sidebar {
+  .sidebar-collapse.sidebar-open .main-sidebar {
     transform: translateX(0);
   }
 
-  /* Fix treeview-menu overlapping on mobile when sidebar is open */
-  .sidebar-mini.sidebar-collapse.sidebar-open .sidebar-menu > li.treeview > .treeview-menu {
+  /* Fix treeview-menu on mobile when sidebar is open */
+  .sidebar-collapse.sidebar-open .sidebar-menu > li.treeview > .treeview-menu {
     position: relative !important;
     left: auto !important;
     top: auto !important;
     width: 100% !important;
   }
-  .sidebar-mini.sidebar-collapse.sidebar-open .sidebar-menu > li > a > span {
+  .sidebar-collapse.sidebar-open .sidebar-menu > li > a > span {
     display: inline !important;
   }
-  .sidebar-mini.sidebar-collapse.sidebar-open .sidebar-menu > li > a > .pull-right-container {
+  .sidebar-collapse.sidebar-open .sidebar-menu > li > a > .pull-right-container {
     position: absolute !important;
     right: 10px;
     top: 50%;
@@ -523,16 +597,8 @@
     left: auto !important;
     width: auto !important;
   }
-  .sidebar-mini.sidebar-collapse.sidebar-open .sidebar-menu > li {
+  .sidebar-collapse.sidebar-open .sidebar-menu > li {
     overflow: visible;
-  }
-  .sidebar-mini.sidebar-collapse.sidebar-open .sidebar-menu > li:hover > a > span:not(.pull-right) {
-    display: inline !important;
-    position: relative !important;
-    left: auto !important;
-    top: auto !important;
-    width: auto !important;
-    background: none !important;
   }
 
   /* --- Sale header --- */
@@ -600,9 +666,12 @@
     margin-right: 4px;
   }
 
-  /* --- Pull right helpers --- */
+  /* --- Pull right helpers (exclude sidebar) --- */
   .pull-right {
     float: none !important;
+  }
+  .sidebar-menu .pull-right {
+    float: right !important;
   }
   .text-right {
     text-align: left !important;

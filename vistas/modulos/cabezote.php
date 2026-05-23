@@ -16,9 +16,9 @@
 
 		<span class="logo-lg">
 			
-			<span style="display:flex; align-items:center; justify-content:center; gap:8px; height:50px; padding:0 10px;">
-				<img src="vistas/img/plantilla/icono-inventario.png" alt="Inventario" style="width:28px; height:28px; filter:brightness(0) invert(1);">
-				<span style="color:#fff; font-size:24px; font-weight:700; letter-spacing:0.5px; line-height:1;">Inventario</span>
+			<span style="display:flex; align-items:center; gap:8px; height:50px; padding:0 10px;">
+				<img src="vistas/img/plantilla/icono-inventario.png" alt="Inventario" style="width:28px; height:28px; filter:brightness(0) invert(1); flex-shrink:0;">
+				<span style="color:#fff; font-size:24px; font-weight:700; letter-spacing:0.5px; line-height:1; white-space:nowrap;">Inventario</span>
 			</span>
 
 		</span>
@@ -29,17 +29,25 @@
 	BARRA DE NAVEGACIÓN
 	======================================-->
 	<nav class="navbar navbar-static-top" role="navigation">
-		
-		<!-- Botón de navegación -->
 
-	 	<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        	
-        	<span class="sr-only">Toggle navigation</span>
-      	
-      	</a>
+		<div class="navbar-left-group">
+
+			<!-- icono inventario (móvil) -->
+			<div class="mobile-logo-icon">
+				<img src="vistas/img/plantilla/icono-inventario.png" alt="Inventario">
+			</div>
+
+			<!-- Botón de navegación -->
+		 	<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+	        	<span class="sr-only">Toggle navigation</span>
+	      	</a>
+
+		</div>
+
+		<!-- marca centrada (móvil) -->
+		<div class="mobile-brand">Inventario</div>
 
 		<!-- Bienvenida central con foto -->
-
 		<div class="navbar-welcome">
 
 			<div class="nav-avatar">
@@ -57,7 +65,6 @@
 		</div>
 
 		<!-- menú derecho -->
-
 		<div class="navbar-custom-menu">
 				
 			<ul class="nav navbar-nav">

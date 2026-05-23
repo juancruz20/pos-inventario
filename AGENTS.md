@@ -7,6 +7,15 @@
 
 ## Completed Changes
 
+### Fix: Inventario sincronización con ventas (CRÍTICO)
+- `controladores/ventas.controlador.php`:
+  - **ctrCrearVenta()**: Stock se calcula SIEMPRE desde DB (`stock_actual - cantidad`), no desde frontend. Validación de stock negativo con throw Exception. `array_push(totalProductosComprados)` movido DESPUÉS del `if(id==0) continue` para no inflar `compras` del cliente.
+  - **ctrEditarVenta()**: Ambos loops (revert + apply) con `array_push` después de `if(id==0) continue`. Validación de stock negativo en loop de aplicar. Excepciones si producto no existe en DB.
+  - **ctrEliminarVenta()**: `array_push` después de `if(id==0) continue`. Excepción si producto no existe.
+- Concepto extra (id=0) nunca toca inventario ni ventas de productos.
+- Transacciones con rollback automático en errores.
+- `ventas.js`: No requiere cambios — ya envía id=0 correctamente para concepto extra.
+
 ### Venta Rápida as Default Client
 - `vistas/modulos/crear-venta.php`: Selected "Venta Rápida" as default via DB lookup in `<select id="id_cliente">`
 - `vistas/js/ventas.js`: Verified default client logic
@@ -112,3 +121,40 @@ ALTER TABLE clientes ADD tipo_comprobante VARCHAR(1) NOT NULL DEFAULT 'B' AFTER 
 - Low stock CSS animations stop after 30s via `setTimeout`
 - Excel export via `ctrDescargarReporte()` through `descargar-reporte.php`
 - XML download handler code still exists at top of `ventas.php` but no UI trigger
+
+## Session 2026-05-20 - UI Redesign & Bugfixes
+
+### crear-venta.php
+- Redesigned layout with CSS Grid (2 columns on desktop, 1 on mobile)
+- Reordered fields: Vendedor+Código row, Cliente, Concepto extra toggle, payment+total
+- Product table uses `tablaProductosVenta` class with custom DataTable init loading from `datatable-productos.ajax.php`
+- "Agregar" buttons in table have 28px height (matches stock input height)
+- `.nuevoProducto` container hidden in DOM for JS product tracking
+- Removed product code text input (products added only from table)
+- Removed "Productos disponibles" mobile button
+
+### Concepto extra
+- Custom toggle UI with dashed border (orange when active)
+- Description input + price input side by side with 4px gap
+- Placeholder: "Ej: Ropa"
+
+### clientes.php
+- Replaced table with card layout using CSS Grid
+- `.clientes-grid` with `grid-template-columns: repeat(auto-fill, minmax(340px, 1fr))`
+- Removed dual desktop/mobile views
+
+### ventas.php
+- Fixed PHP Warning line 141: `$respuestaCliente["nombre"]` when client deleted → ternary fallback "Eliminado"
+- Same fix for `$respuestaUsuario["nombre"]`
+
+### Global CSS (estilos.css)
+- Added placeholder alignment: `text-align: left !important` for all inputs
+
+### Files changed this session:
+- `vistas/modulos/crear-venta.php` - Major layout restructure, DataTable init, style block
+- `vistas/modulos/clientes.php` - Card grid layout
+- `vistas/modulos/ventas.php` - Null safety for cliente/usuario names
+- `vistas/js/ventas.js` - Updated table selector to include `.tablaProductosVenta`
+- `vistas/dist/css/estilos.css` - Placeholder alignment
+- `vistas/dist/css/responsive.css` - Minor mobile layout tweaks
+

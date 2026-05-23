@@ -17,28 +17,19 @@ class TablaProductosVentas{
     	$orden = "id";
 
   		$productos = ControladorProductos::ctrMostrarProductos($item, $valor, $orden);
- 		
-  		if(count($productos) == 0){
 
-  			echo '{"data": []}';
+  		if(!is_array($productos) || count($productos) == 0){
+
+  			echo json_encode(array("data" => array()));
 
 		  	return;
-  		}	
-		
-  		$datosJson = '{
-		  "data": [';
+  		}
 
-		  for($i = 0; $i < count($productos); $i++){
+  		$data = array();
 
-		  	/*=============================================
- 	 		TRAEMOS LA IMAGEN
-  			=============================================*/ 
+  		for($i = 0; $i < count($productos); $i++){
 
 		  	$imagen = "<img src='".$productos[$i]["imagen"]."' width='40px'>";
-
-		  	/*=============================================
- 	 		STOCK
-  			=============================================*/ 
 
   			if($productos[$i]["stock"] <= 10){
 
@@ -54,31 +45,20 @@ class TablaProductosVentas{
 
   			}
 
-		  	/*=============================================
- 	 		TRAEMOS LAS ACCIONES
-  			=============================================*/ 
+		  	$botones =  "<div class='btn-group'><button class='btn btn-primary agregarProducto recuperarBoton' style='height:34px;' idProducto='".$productos[$i]["id"]."'>Agregar</button></div>";
 
-		  	$botones =  "<div class='btn-group'><button class='btn btn-primary agregarProducto recuperarBoton' idProducto='".$productos[$i]["id"]."'>Agregar</button></div>"; 
+			$data[] = array(
+				(string) ($i + 1),
+				$imagen,
+				(string) $productos[$i]["codigo"],
+				(string) $productos[$i]["descripcion"],
+				$stock,
+				$botones
+			);
 
-		  	$datosJson .='[
-			      "'.($i+1).'",
-			      "'.$imagen.'",
-			      "'.$productos[$i]["codigo"].'",
-			      "'.$productos[$i]["descripcion"].'",
-			      "'.$stock.'",
-			      "'.$botones.'"
-			    ],';
+  		}
 
-		  }
-
-		  $datosJson = substr($datosJson, 0, -1);
-
-		 $datosJson .=   '] 
-
-		 }';
-		
-		echo $datosJson;
-
+  		echo json_encode(array("data" => $data), JSON_UNESCAPED_UNICODE);
 
 	}
 

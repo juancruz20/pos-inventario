@@ -11,7 +11,7 @@ class ModeloVentas{
 	static public function mdlMostrarVentas($tabla, $item, $valor){
 
 		if($item != null){
-
+			Conexion::validarColumna($item, $tabla);
 			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY id ASC");
 
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);

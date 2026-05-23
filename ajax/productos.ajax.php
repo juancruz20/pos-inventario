@@ -124,6 +124,21 @@ if(isset($_POST["nombreProducto"])){
 
 }
 
+/*=============================================
+AGREGAR PRODUCTO POR CÓDIGO
+=============================================*/
+
+if(isset($_POST["codigoProducto"])){
+
+  $item = "codigo";
+  $valor = $_POST["codigoProducto"];
+  $orden = "id";
+
+  $respuesta = ControladorProductos::ctrMostrarProductos($item, $valor, $orden);
+
+  echo json_encode($respuesta);
+
+}
 
 
 

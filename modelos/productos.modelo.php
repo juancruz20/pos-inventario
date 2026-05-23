@@ -11,7 +11,7 @@ class ModeloProductos{
 	static public function mdlMostrarProductos($tabla, $item, $valor, $orden){
 
 		if($item != null){
-
+			Conexion::validarColumna($item, $tabla);
 			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY id DESC");
 
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
@@ -21,7 +21,7 @@ class ModeloProductos{
 			return $stmt -> fetch();
 
 		}else{
-
+			Conexion::validarColumna($orden, $tabla);
 			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY $orden DESC");
 
 			$stmt -> execute();
@@ -130,6 +130,7 @@ class ModeloProductos{
 
 	static public function mdlActualizarProducto($tabla, $item1, $valor1, $valor){
 
+		Conexion::validarColumna($item1, $tabla);
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE id = :id");
 
 		$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);

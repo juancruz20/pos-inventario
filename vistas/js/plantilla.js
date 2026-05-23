@@ -2,9 +2,11 @@ var url = window.location.href;
 var ruta = url.split("?ruta=");
 if (ruta.length > 1) {
   var menu = ruta[1].split("&");
-  $('.sidebar-menu li a[href="' + menu[0] + '"]')
-    .closest("li")
-    .addClass("active");
+  var $item = $('.sidebar-menu li a[href="' + menu[0] + '"]');
+  $item.closest("li").addClass("active");
+  // Activar el treeview padre para que el submenu se vea
+  $item.parents("li.treeview").addClass("active").addClass("menu-open");
+  $item.parents("li.treeview").children(".treeview-menu").show();
 }
 
 $(".abrirXML").on("click", function () {

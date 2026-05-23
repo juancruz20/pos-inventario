@@ -82,3 +82,466 @@
   font-size: 11px;
   font-weight: bold;
 }
+
+.ropa-predeterminada-card {
+  border: 1px solid #d6e4f0;
+  border-radius: 8px;
+  padding: 10px;
+  background: #f8fbff;
+  transition: all 0.2s ease;
+}
+
+.ropa-predeterminada-card.activo {
+  border-color: #3c8dbc;
+  box-shadow: 0 2px 10px rgba(60, 141, 188, 0.15);
+  background: #eff7ff;
+}
+
+.ropa-checkbox-wrap {
+  margin: 0 0 8px 0;
+}
+
+.ropa-checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  margin: 0;
+  gap: 8px;
+}
+
+.ropa-checkbox-label input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+}
+
+.ropa-check-indicator {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #3c8dbc;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  transition: all 0.2s ease;
+}
+
+.ropa-check-indicator i {
+  font-size: 11px;
+  color: #fff;
+  opacity: 0;
+}
+
+.ropa-checkbox-label input[type="checkbox"]:checked + .ropa-check-indicator {
+  background: #3c8dbc;
+}
+
+.ropa-checkbox-label input[type="checkbox"]:checked + .ropa-check-indicator i {
+  opacity: 1;
+}
+
+.ropa-check-text {
+  font-weight: 600;
+  color: #2c4b64;
+}
+
+.ropa-inputs-row {
+  margin-left: -5px;
+  margin-right: -5px;
+}
+
+.ropa-predeterminada-card .form-control:disabled {
+  background: #eef2f6;
+  color: #7a8794;
+}
+
+.fila-producto-venta {
+  padding: 10px;
+  margin: 0;
+  background: #f9fafc;
+  border-bottom: 1px solid #dde4ec;
+  transition: background-color 0.2s ease;
+}
+
+.fila-producto-venta:hover {
+  background: #f2f6fb;
+}
+
+.producto-info-col {
+  padding-right: 3px;
+}
+
+.producto-cantidad-col {
+  padding: 0 3px;
+}
+
+.producto-accion-col {
+  padding-left: 3px;
+}
+
+.producto-info-group {
+  width: 100%;
+}
+
+.producto-nombre-caja {
+  background: #eaf1f8 !important;
+  border-color: #ccd9e8 !important;
+  color: #2e4c68 !important;
+  font-weight: 600;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.producto-nombre-texto {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.precio-producto-caja {
+  background: #fff !important;
+  color: #2f3e4c;
+  font-weight: 600;
+  border-color: #ccd9e8;
+}
+
+.cantidad-producto-caja {
+  background: #fff;
+  border: 1px solid #ccd9e8;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.btn-quitar-producto {
+  min-width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.nueva-venta-modern .content {
+  background: #eef2f7;
+}
+
+.nueva-venta-modern .content-header > h1 {
+  font-weight: 700;
+  color: #1f3a56;
+}
+
+.nueva-venta-modern .content-header > h1 small {
+  display: block;
+  margin-top: 4px;
+  font-size: 16px;
+  color: #6d7f93;
+}
+
+.nueva-venta-modern .breadcrumb {
+  background: #dde4ef;
+  border-radius: 8px;
+}
+
+.nueva-venta-modern .nv-stat-card {
+  border-radius: 10px;
+  overflow: hidden;
+  color: #fff;
+  margin-bottom: 14px;
+  box-shadow: 0 6px 14px rgba(27, 46, 70, 0.2);
+}
+
+.nueva-venta-modern .nv-stat-value {
+  padding: 14px 12px 2px 12px;
+  font-size: 42px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.1;
+}
+
+.nueva-venta-modern .nv-stat-label {
+  text-align: center;
+  font-size: 28px;
+  padding-bottom: 12px;
+  font-weight: 600;
+}
+
+.nueva-venta-modern .nv-stat-foot {
+  text-align: center;
+  padding: 8px 10px;
+  background: rgba(0, 0, 0, 0.12);
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.nueva-venta-modern .nv-stat-blue {
+  background: linear-gradient(180deg, #1ec3f2 0%, #16a9de 100%);
+}
+
+.nueva-venta-modern .nv-stat-green {
+  background: linear-gradient(180deg, #09b361 0%, #049f56 100%);
+}
+
+.nueva-venta-modern .nv-stat-red {
+  background: linear-gradient(180deg, #f15549 0%, #e04338 100%);
+}
+
+.nueva-venta-modern .nv-stat-yellow {
+  background: linear-gradient(180deg, #ffb019 0%, #ef9e04 100%);
+}
+
+.nueva-venta-modern .nv-panel-card {
+  background: #fff;
+  border: 1px solid #dbe3ee;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(30, 50, 76, 0.08);
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.nueva-venta-modern .nv-panel-card .form-group > label {
+  color: #31465f;
+  font-weight: 700;
+}
+
+.nueva-venta-modern .nv-panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.nueva-venta-modern .nv-panel-head h3 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  color: #1f3954;
+}
+
+.nueva-venta-modern .nv-panel-head h3 i {
+  color: #2e7cc7;
+  margin-right: 6px;
+}
+
+.nueva-venta-modern .nv-panel-head-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nueva-venta-modern .nv-panel-head-actions #nuevoCodigo {
+  min-width: 120px;
+}
+
+.nueva-venta-modern .nv-check-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2d435d;
+}
+
+.nueva-venta-modern .nv-concepto-row {
+  margin-top: 4px;
+}
+
+.nueva-venta-modern #ropaPrecioGroup {
+  margin-top: 4px;
+}
+
+.nueva-venta-modern .nv-table-carrito {
+  margin-bottom: 0;
+}
+
+.nueva-venta-modern .nv-table-carrito thead th {
+  background: #f0f4f9;
+  color: #2f4259;
+  font-weight: 700;
+  border-bottom: 1px solid #dbe4ee;
+}
+
+.nueva-venta-modern .nv-table-carrito tbody td {
+  vertical-align: middle;
+  border-top: 1px solid #e4ebf3;
+}
+
+.nueva-venta-modern .producto-nombre-celda {
+  font-weight: 600;
+  color: #20364e;
+}
+
+.nueva-venta-modern .producto-codigo-celda {
+  color: #4f6174;
+  font-weight: 600;
+}
+
+.nueva-venta-modern .nv-cantidad-stepper {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px;
+  border: 1px solid #d6dfeb;
+  border-radius: 8px;
+  background: #f7f9fc;
+}
+
+.nueva-venta-modern .nv-cantidad-stepper .btn {
+  border-color: #d2dcea;
+  background: #fff;
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: #38516a;
+}
+
+.nueva-venta-modern .nv-cantidad-stepper .cantidad-input {
+  width: 48px;
+  text-align: center;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  font-weight: 700;
+  color: #1f3d57;
+}
+
+.nueva-venta-modern .precio-producto-caja {
+  text-align: right;
+  font-weight: 700;
+  color: #1e3b56;
+  background: #fff !important;
+}
+
+.nueva-venta-modern .subtotalProducto {
+  font-weight: 700;
+  color: #1a6a3f;
+}
+
+.nueva-venta-modern .btn-quitar-producto {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+}
+
+.nueva-venta-modern .nv-total-box {
+  display: flex;
+  align-items: center;
+  border: 2px solid #d9e4f1;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f6faff;
+}
+
+.nueva-venta-modern .nv-total-box-symbol {
+  min-width: 42px;
+  text-align: center;
+  font-weight: 700;
+  color: #2d6494;
+  background: #eaf3ff;
+  border-right: 1px solid #d9e4f1;
+  padding: 8px 0;
+}
+
+.nueva-venta-modern .nv-total-box #nuevoTotalVenta {
+  border: none;
+  box-shadow: none;
+  font-size: 42px;
+  font-weight: 700;
+  color: #0d9e52;
+  height: 52px;
+  background: transparent;
+}
+
+.nueva-venta-modern .nv-total-meta {
+  margin-top: 6px;
+  color: #2f7e4e;
+  font-weight: 600;
+}
+
+.nueva-venta-modern .nv-submit-card .checkbox label {
+  color: #2d435d;
+  font-weight: 600;
+}
+
+.nueva-venta-modern .nv-save-btn {
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.nueva-venta-modern .nv-stock-card .dataTables_filter input {
+  border-radius: 8px !important;
+  border-color: #d5dfeb !important;
+}
+
+.nueva-venta-modern .nv-stock-card .dataTables_length select {
+  border-radius: 8px !important;
+  border-color: #d5dfeb !important;
+}
+
+@media (max-width: 991px) {
+  .nueva-venta-modern .nv-stat-value {
+    font-size: 34px;
+  }
+
+  .nueva-venta-modern .nv-stat-label {
+    font-size: 24px;
+  }
+
+  .nueva-venta-modern .nv-stat-foot {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .nueva-venta-modern .nv-panel-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nueva-venta-modern .nv-panel-head h3 {
+    font-size: 26px;
+  }
+
+  .nueva-venta-modern .nv-panel-head-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nueva-venta-modern .nv-panel-head-actions #nuevoCodigo,
+  .nueva-venta-modern .nv-panel-head-actions .btn {
+    width: 100%;
+  }
+
+  .nueva-venta-modern .nv-total-box #nuevoTotalVenta {
+    font-size: 34px;
+  }
+}
+
+.form-control::placeholder,
+input::placeholder,
+textarea::placeholder {
+  text-align: left !important;
+  padding-left: 2px;
+}
+
+.form-control::-webkit-input-placeholder,
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  text-align: left !important;
+  padding-left: 2px;
+}
+
+.form-control:-ms-input-placeholder,
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  text-align: left !important;
+  padding-left: 2px;
+}

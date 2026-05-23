@@ -66,9 +66,9 @@ class ControladorVentas{
 
 			foreach ($listaProductos as $key => $value) {
 
-			   array_push($totalProductosComprados, $value["cantidad"]);
-
 			   if($value["id"] == 0) continue;
+
+			   array_push($totalProductosComprados, $value["cantidad"]);
 				
 			   $tablaProductos = "productos";
 
@@ -78,13 +78,21 @@ class ControladorVentas{
 
 			    $traerProducto = ModeloProductos::mdlMostrarProductos($tablaProductos, $item, $valor, $orden);
 
+				if(!$traerProducto){
+					throw new Exception("Producto no encontrado: id=" . $value["id"]);
+				}
+
 				$item1a = "ventas";
 				$valor1a = $value["cantidad"] + $traerProducto["ventas"];
 
 			    $nuevasVentas = ModeloProductos::mdlActualizarProducto($tablaProductos, $item1a, $valor1a, $valor);
 
 				$item1b = "stock";
-				$valor1b = $value["stock"];
+				$valor1b = $traerProducto["stock"] - $value["cantidad"];
+
+				if($valor1b < 0){
+					throw new Exception("Stock insuficiente para producto: " . $traerProducto["descripcion"] . " (disponible: " . $traerProducto["stock"] . ", solicitado: " . $value["cantidad"] . ")");
+				}
 
 				$nuevoStock = ModeloProductos::mdlActualizarProducto($tablaProductos, $item1b, $valor1b, $valor);
 
@@ -96,6 +104,10 @@ class ControladorVentas{
 			$valor = $_POST["seleccionarCliente"];
 
 			$traerCliente = ModeloClientes::mdlMostrarClientes($tablaClientes, $item, $valor);
+
+			if(!$traerCliente){
+				throw new Exception("Cliente no encontrado: id=" . $valor);
+			}
 
 			$item1a = "compras";
 				
@@ -240,6 +252,8 @@ class ControladorVentas{
 
 				</script>';
 
+			}else{
+				throw new Exception("Error al guardar la venta en la base de datos");
 			}
 
 		} catch (Exception $e) {
@@ -298,8 +312,9 @@ class ControladorVentas{
 
 				foreach ($productos as $key => $value) {
 
-					array_push($totalProductosComprados, $value["cantidad"]);
 					if($value["id"] == 0) continue;
+
+					array_push($totalProductosComprados, $value["cantidad"]);
 					
 					$tablaProductos = "productos";
 
@@ -308,6 +323,11 @@ class ControladorVentas{
 					$orden = "id";
 
 					$traerProducto = ModeloProductos::mdlMostrarProductos($tablaProductos, $item, $valor, $orden);
+
+					if(!$traerProducto){
+						throw new Exception("Producto no encontrado al revertir: id=" . $value["id"]);
+					}
+
 					$item1a = "ventas";
 					$valor1a = $traerProducto["ventas"] - $value["cantidad"];
 
@@ -327,6 +347,10 @@ class ControladorVentas{
 
 				$traerCliente = ModeloClientes::mdlMostrarClientes($tablaClientes, $itemCliente, $valorCliente);
 
+				if(!$traerCliente){
+					throw new Exception("Cliente no encontrado al revertir: id=" . $valorCliente);
+				}
+
 				$item1a = "compras";
 				$valor1a = $traerCliente["compras"] - array_sum($totalProductosComprados);		
 
@@ -342,8 +366,9 @@ class ControladorVentas{
 
 				foreach ($listaProductos_2 as $key => $value) {
 
-					array_push($totalProductosComprados_2, $value["cantidad"]);
 					if($value["id"] == 0) continue;
+
+					array_push($totalProductosComprados_2, $value["cantidad"]);
 					
 					$tablaProductos_2 = "productos";
 
@@ -353,6 +378,10 @@ class ControladorVentas{
 
 					$traerProducto_2 = ModeloProductos::mdlMostrarProductos($tablaProductos_2, $item_2, $valor_2, $orden);
 
+					if(!$traerProducto_2){
+						throw new Exception("Producto no encontrado al aplicar: id=" . $value["id"]);
+					}
+
 					$item1a_2 = "ventas";
 					$valor1a_2 = $value["cantidad"] + $traerProducto_2["ventas"];
 
@@ -360,6 +389,10 @@ class ControladorVentas{
 
 					$item1b_2 = "stock";
 					$valor1b_2 = $traerProducto_2["stock"] - $value["cantidad"];
+
+					if($valor1b_2 < 0){
+						throw new Exception("Stock insuficiente al editar para producto: " . $traerProducto_2["descripcion"] . " (disponible: " . $traerProducto_2["stock"] . ", solicitado: " . $value["cantidad"] . ")");
+					}
 
 					$nuevoStock_2 = ModeloProductos::mdlActualizarProducto($tablaProductos_2, $item1b_2, $valor1b_2, $valor_2);
 
@@ -371,6 +404,10 @@ class ControladorVentas{
 				$valor_2 = $_POST["seleccionarCliente"];
 
 				$traerCliente_2 = ModeloClientes::mdlMostrarClientes($tablaClientes_2, $item_2, $valor_2);
+
+				if(!$traerCliente_2){
+					throw new Exception("Cliente no encontrado al aplicar: id=" . $valor_2);
+				}
 
 				$item1a_2 = "compras";
 
@@ -429,6 +466,8 @@ class ControladorVentas{
 
 				</script>';
 
+			}else{
+				throw new Exception("Error al editar la venta en la base de datos");
 			}
 
 		} catch (Exception $e) {
@@ -525,8 +564,9 @@ class ControladorVentas{
 
 			foreach ($productos as $key => $value) {
 
-				array_push($totalProductosComprados, $value["cantidad"]);
 				if($value["id"] == 0) continue;
+
+				array_push($totalProductosComprados, $value["cantidad"]);
 				
 				$tablaProductos = "productos";
 
@@ -535,6 +575,10 @@ class ControladorVentas{
 				$orden = "id";
 
 				$traerProducto = ModeloProductos::mdlMostrarProductos($tablaProductos, $item, $valor, $orden);
+
+				if(!$traerProducto){
+					throw new Exception("Producto no encontrado al eliminar venta: id=" . $value["id"]);
+				}
 
 				$item1a = "ventas";
 				$valor1a = $traerProducto["ventas"] - $value["cantidad"];
@@ -554,6 +598,10 @@ class ControladorVentas{
 			$valorCliente = $traerVenta["id_cliente"];
 
 			$traerCliente = ModeloClientes::mdlMostrarClientes($tablaClientes, $itemCliente, $valorCliente);
+
+			if(!$traerCliente){
+				throw new Exception("Cliente no encontrado al eliminar venta: id=" . $valorCliente);
+			}
 
 			$item1a = "compras";
 			$valor1a = $traerCliente["compras"] - array_sum($totalProductosComprados);
@@ -587,6 +635,8 @@ class ControladorVentas{
 
 				</script>';
 
+			}else{
+				throw new Exception("Error al eliminar la venta en la base de datos");
 			}		
 		} catch (Exception $e) {
 				Conexion::revertirTransaccion();
