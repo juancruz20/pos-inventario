@@ -195,6 +195,9 @@ CUERPO DOCUMENTO
   ajustarSidebar();
   window.addEventListener("resize", ajustarSidebar);
 
+  // Eliminar handler por defecto de AdminLTE para evitar doble toggle en móvil
+  $(document).off("click", ".sidebar-menu li a");
+
   // En desktop: al hacer click en un treeview, expande el sidebar y abre el submenu
   // En mobile: toggle del submenu del treeview
   $(document).on("click", ".sidebar-menu li.treeview > a", function(e){

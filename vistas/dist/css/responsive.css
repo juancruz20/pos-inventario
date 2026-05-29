@@ -130,7 +130,9 @@
   text-overflow: ellipsis;
 }
 
-/* Small devices (phones, <768px) */
+/*=============================================
+  SMALL DEVICES (phones, <768px)
+  =============================================*/
 @media (max-width: 767px) {
 
   /* --- Login --- */
@@ -561,10 +563,18 @@
 
   /* --- Sidebar mobile fixes --- */
   .sidebar-collapse .main-sidebar {
-    transform: translateX(-230px);
+    width: 200px !important;
+    transform: translateX(-200px);
   }
   .sidebar-collapse.sidebar-open .main-sidebar {
     transform: translateX(0);
+  }
+  .sidebar-open .content-wrapper,
+  .sidebar-open .main-footer {
+    -webkit-transform: translate(200px, 0) !important;
+    -ms-transform: translate(200px, 0) !important;
+    -o-transform: translate(200px, 0) !important;
+    transform: translate(200px, 0) !important;
   }
 
   /* Fix treeview-menu on mobile when sidebar is open */
@@ -619,17 +629,22 @@
   /* --- Reports page --- */
   .report-filters .input-group {
     width: 100%;
+    max-width: 100% !important;
   }
   .report-filters .box-tools {
-    margin-top: 0;
+    margin-top: 6px;
+    float: none !important;
+    display: block;
+    width: 100%;
+  }
+  .report-filters .box-tools .btn {
+    width: 100%;
   }
 
   /* --- Prevent horizontal scroll on body --- */
   .wrapper {
     overflow-x: hidden;
   }
-
-
 
   /* --- SweetAlert2 --- */
   .swal2-popup {
@@ -704,9 +719,73 @@
   .box-header .btn {
     margin-bottom: 4px;
   }
+
+  /* --- Additional fixes --- */
+
+  /* Editar-venta: product rows stack on mobile */
+  .editar-venta-total-table {
+    width: 100% !important;
+  }
+
+  /* Stack product item rows in editar-venta */
+  .nuevoProducto > .row > .col-xs-6 {
+    width: 100% !important;
+    padding: 0 !important;
+    margin-bottom: 4px;
+  }
+  .nuevoProducto > .row > .col-xs-3 {
+    width: 100% !important;
+    padding: 0 !important;
+    margin-bottom: 4px;
+  }
+  .nuevoProducto > .row > .col-xs-3.ingresoPrecio {
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
+  /* Client tipo-comprobante stacking on very small screens */
+  .nuevo-tipo-comprobante .col-xs-4,
+  .editar-tipo-comprobante .col-xs-4 {
+    padding: 0 2px !important;
+  }
+
+  /* Better touch targets for action buttons in tables */
+  .table .btn-group .btn {
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Dashboard: ensure col-sm-6 stacks properly */
+  .content .row .col-sm-6 {
+    width: 100% !important;
+  }
+
+  /* Create sale: improve extra concept toggle area */
+  .extra-toggle-ui {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 14px !important;
+  }
+
+  /* Forms: better touch-friendly inputs */
+  select.form-control {
+    height: 44px;
+  }
+  textarea.form-control {
+    height: auto;
+  }
+
+  /* Reports: chart containers on mobile */
+  .reportes-grafico {
+    margin-bottom: 14px;
+  }
 }
 
-/* Medium devices (tablets, 768px-991px) */
+/*=============================================
+  MEDIUM DEVICES (tablets, 768px-991px)
+  =============================================*/
 @media (min-width: 768px) and (max-width: 991px) {
 
   .login-box {
@@ -733,9 +812,36 @@
   .dataTables_wrapper .dataTables_length {
     float: left !important;
   }
+
+  /* Dashboard: keep charts side by side on tablet */
+  .content .row .col-sm-6 {
+    width: 50% !important;
+  }
+
+  /* Create-venta grid on tablet: back to 2 cols */
+  .create-venta-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Reports: improve filter row on tablet */
+  .report-filters {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  /* Modal: better tablet sizing */
+  .modal .input-lg,
+  .modal .form-control.input-lg {
+    height: 38px;
+    font-size: 14px;
+  }
 }
 
-/* Fix for very small screens (<400px) */
+/*=============================================
+  VERY SMALL SCREENS (<400px)
+  =============================================*/
 @media (max-width: 400px) {
 
   .login-box {
@@ -777,5 +883,23 @@
   .nuevoProducto .col-xs-3 {
     width: 50% !important;
     padding: 0 2px !important;
+  }
+
+  /* Client tipo-comprobante stacking */
+  .nuevo-tipo-comprobante .col-xs-4,
+  .editar-tipo-comprobante .col-xs-4 {
+    width: 100% !important;
+    padding: 0 !important;
+    margin-bottom: 4px;
+  }
+
+  /* Editar-venta: stack total table on tiny screens */
+  .editar-venta-total-table {
+    width: 100% !important;
+  }
+
+  /* Smaller brand on tiny screens */
+  .mobile-brand {
+    font-size: 15px !important;
   }
 }

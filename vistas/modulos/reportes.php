@@ -37,9 +37,9 @@ if($_SESSION["perfil"] == "Especial" || $_SESSION["perfil"] == "Vendedor"){
 
     <div class="box">
 
-      <div class="box-header with-border">
+      <div class="box-header with-border report-filters">
 
-        <div class="input-group">
+        <div class="input-group" style="max-width:320px;">
 
           <button type="button" class="btn btn-default" id="daterange-btn2">
            
@@ -67,7 +67,7 @@ if($_SESSION["perfil"] == "Especial" || $_SESSION["perfil"] == "Vendedor"){
 
         </div>
 
-        <div class="box-tools pull-right">
+        <div class="box-tools">
 
         <?php
 

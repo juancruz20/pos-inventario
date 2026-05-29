@@ -483,14 +483,38 @@ MODAL AGREGAR CLIENTE
     margin: 0 0 10px 0;
     padding: 0;
   }
-  .nuevoProducto .producto-item-venta .input-group-addon.producto-descripcion-caja {
-    max-width: 160px;
+  .nuevoProducto .producto-item-venta .producto-descripcion-caja {
+    display: block;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     background: #f4f4f4;
     color: #555;
     border: 1px solid #d2d6de;
+    height: 34px;
+    line-height: 32px;
+    padding: 0 10px;
+    border-radius: 4px;
+    cursor: default;
+  }
+
+  .nuevoProducto .producto-item-venta .form-control {
+    background: #f9f9f9;
+    border-color: #d2d6de;
+  }
+
+  .nuevoProducto .producto-item-venta .quitarProducto {
+    margin-top: 0;
+    padding: 6px 10px;
+  }
+  .nuevoProducto .producto-item-venta .ingresoCantidad {
+    border-color: #3c8dbc;
+    color: #1f4e79;
+    background: #f7fbff;
+  }
+  .nuevoProducto .producto-item-venta .ingresoCantidad:focus {
+    border-color: #2b7cb8;
+    box-shadow: 0 0 0 2px rgba(60,141,188,0.16);
   }
   .nuevoProducto .producto-item-venta .form-control {
     background: #f9f9f9;
@@ -593,45 +617,51 @@ MODAL AGREGAR CLIENTE
       align-items: center;
       gap: 4px;
       margin-bottom: 8px !important;
+      padding: 0 2px;
     }
     .nuevoProducto .producto-item-venta [class*="col-xs-"] {
       float: none;
       margin-bottom: 0 !important;
       padding: 0 !important;
     }
-    .nuevoProducto .producto-item-venta .col-xs-7 {
+    .nuevoProducto .producto-item-venta .col-xs-4 {
       flex: 1 1 auto;
       min-width: 0;
     }
     .nuevoProducto .producto-item-venta .col-xs-3 {
-      flex: 0 0 78px;
-      max-width: 78px;
-      width: 78px !important;
+      flex: 0 0 65px;
+      max-width: 65px;
+      width: 65px !important;
     }
     .nuevoProducto .producto-item-venta .col-xs-2 {
       flex: 0 0 40px;
       max-width: 40px;
       width: 40px !important;
     }
-    .nuevoProducto .producto-item-venta .input-group {
-      width: 100%;
-      flex-wrap: nowrap !important;
-    }
-    .nuevoProducto .producto-item-venta .input-group .form-control {
-      margin-bottom: 0 !important;
-    }
-    .nuevoProducto .producto-item-venta .input-group-addon.producto-descripcion-caja {
-      max-width: 110px !important;
-      padding: 6px 8px;
-      font-size: 12px;
-      height: var(--venta-control-height);
-      display: inline-flex;
-      align-items: center;
-    }
     .nuevoProducto .producto-item-venta .form-control {
       height: var(--venta-control-height);
       padding: 6px 8px;
       font-size: 13px;
+      margin-bottom: 0 !important;
+    }
+    .nuevoProducto .producto-item-venta .producto-descripcion-caja {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      background: #f4f4f4;
+      color: #555;
+      border: 1px solid #d2d6de;
+      border-radius: 4px;
+      height: var(--venta-control-height);
+      line-height: calc(var(--venta-control-height) - 2px);
+      padding: 0 8px;
+      font-size: 12px;
+      cursor: default;
+    }
+    .nuevoProducto .producto-item-venta .ingresoPrecio {
+      text-align: right;
+      background: #f9f9f9;
     }
     .nuevoProducto .producto-item-venta .quitarProducto {
       width: 40px;
@@ -644,14 +674,25 @@ MODAL AGREGAR CLIENTE
   }
 
   @media (max-width: 400px) {
-    .nuevoProducto .producto-item-venta .col-xs-3 {
-      flex-basis: 72px;
-      max-width: 72px;
-      width: 72px !important;
+    .nuevoProducto .producto-item-venta {
+      gap: 2px;
+      padding: 0 1px;
     }
-    .nuevoProducto .producto-item-venta .input-group-addon.producto-descripcion-caja {
-      max-width: 95px !important;
+    .nuevoProducto .producto-item-venta .col-xs-3 {
+      flex-basis: 64px;
+      max-width: 64px;
+      width: 64px !important;
+    }
+    .nuevoProducto .producto-item-venta .col-xs-4 {
+      flex-shrink: 1;
+      min-width: 0;
+    }
+    .nuevoProducto .producto-item-venta .producto-descripcion-caja {
       font-size: 11px;
+      padding: 0 6px;
+    }
+    .nuevoProducto .producto-item-venta .ingresoPrecio {
+      font-size: 12px;
     }
   }
 

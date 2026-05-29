@@ -335,7 +335,7 @@
       LA TABLA DE PRODUCTOS
       ======================================-->
 
-      <div class="col-lg-7 product-table-mobile hidden-print">
+      <div class="col-lg-7 col-xs-12 product-table-mobile hidden-print">
         
         <div class="box box-warning">
 
