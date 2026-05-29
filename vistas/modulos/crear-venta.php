@@ -467,11 +467,41 @@ MODAL AGREGAR CLIENTE
   }
 
   .concepto-extra-inputs {
-    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    margin-top: 8px;
+  }
+
+  /* Box footer - print checkbox & save button */
+  .box-footer .accionesVentaDerecha {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .box-footer .checkbox {
+    margin: 0;
+    padding: 6px 12px;
+    background: #f9f9f9;
+    border: 1px solid #e0e3e5;
     border-radius: 4px;
-    padding: 8px;
-    background: #fcfcfc;
-    border: 1px solid #eee;
+    cursor: pointer;
+    user-select: none;
+  }
+  .box-footer .checkbox label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 24px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .box-footer .checkbox label input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+  }
+  .box-footer .checkbox:active {
+    background: #f0f0f0;
   }
 
   /* ============================================
@@ -702,6 +732,32 @@ MODAL AGREGAR CLIENTE
     }
     .nuevoProducto .producto-item-venta .ingresoPrecio {
       font-size: 12px;
+    }
+  }
+
+  /* Mobile: footer checkbox bigger */
+  @media (max-width: 767px) {
+    .box-footer .accionesVentaDerecha {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .box-footer .checkbox {
+      padding: 12px 16px;
+      text-align: center;
+    }
+    .box-footer .checkbox label {
+      font-size: 15px;
+      gap: 10px;
+      justify-content: center;
+    }
+    .box-footer .checkbox label input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+    }
+    .box-footer .btn {
+      width: 100%;
+      padding: 10px;
+      font-size: 15px;
     }
   }
 
