@@ -189,6 +189,7 @@ CUERPO DOCUMENTO
       document.body.classList.remove("sidebar-mini", "sidebar-collapse");
       return;
     }
+    document.body.classList.remove("sidebar-open");
     var params = new URLSearchParams(window.location.search);
     var ruta = params.get("ruta");
     var enSubPagina = ["ventas","crear-venta","editar-venta","reportes"].indexOf(ruta) !== -1;
@@ -198,29 +199,44 @@ CUERPO DOCUMENTO
   ajustarSidebar();
   window.addEventListener("resize", ajustarSidebar);
 
-  // Eliminar handler por defecto de AdminLTE para evitar doble toggle en móvil
-  $(document).off("click", ".sidebar-menu li a");
+  // Desactivar push-menu de AdminLTE (interfiere con el sidebar en mobile)
+  $(document).off(".pushMenu");
 
-  // En mobile: evitar que clicks dentro del sidebar cierren el menu
-  $(document).on("click", ".main-sidebar, .sidebar", function(e){
-    if (window.innerWidth < 768) e.stopPropagation();
+  // Sidebar toggle manual
+  $(document).on("click", ".sidebar-toggle", function(e) {
+    e.preventDefault();
+    if (window.innerWidth < 768) {
+      document.body.classList.toggle("sidebar-open");
+    } else {
+      document.body.classList.toggle("sidebar-collapse");
+    }
   });
 
-  // En desktop: al hacer click en un treeview, expande el sidebar y abre el submenu
-  // En mobile: toggle del submenu del treeview
+  // Eliminar handler treeview por defecto de AdminLTE
+  $(document).off("click.tree", ".sidebar-menu li a");
+  $(document).off("click", ".sidebar-menu li a");
+
+  // Treeview toggle manual
   $(document).on("click", ".sidebar-menu li.treeview > a", function(e){
-    e.stopPropagation();
+    e.preventDefault();
     var $li = $(this).parent();
     var $menu = $(this).next(".treeview-menu");
     if (window.innerWidth >= 768 && document.body.classList.contains("sidebar-collapse")) {
       document.body.classList.remove("sidebar-collapse");
       $li.addClass("active").addClass("menu-open");
       $menu.slideDown();
-      e.preventDefault();
-    } else if (window.innerWidth < 768) {
+    } else {
       $li.toggleClass("menu-open");
       $menu.slideToggle();
-      e.preventDefault();
+    }
+  });
+
+  // Cerrar sidebar al hacer click fuera (solo mobile)
+  $(document).on("click touchstart", function(e) {
+    if (window.innerWidth < 768 && document.body.classList.contains("sidebar-open")) {
+      if (!$(e.target).closest(".main-sidebar, .sidebar-toggle, .mobile-logo-icon").length) {
+        document.body.classList.remove("sidebar-open");
+      }
     }
   });
 </script>
