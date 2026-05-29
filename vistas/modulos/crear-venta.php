@@ -591,14 +591,25 @@ MODAL AGREGAR CLIENTE
     #ropaDescripcion { box-shadow: 0 1px 3px rgba(243,156,18,0.08); }
     .concepto-extra-price { width: 120px; }
 
-    /* Payment row: stack on mobile */
-    .payment-row .objetoMetodoPago,
-    .payment-row .objetoTotalVenta {
-      flex: 1 1 100%;
-      max-width: 100%;
+    /* Payment row: side by side on mobile */
+    .payment-row {
+      flex-wrap: nowrap;
+      gap: 8px;
+    }
+    .payment-row .objetoMetodoPago {
+      flex: 1 1 auto;
+      max-width: 55%;
       padding-left: 0;
       padding-right: 0;
     }
+    .payment-row .objetoTotalVenta {
+      flex: 0 0 auto;
+      max-width: 45%;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .payment-row label { font-size: 11px; margin-bottom: 2px; }
+    .payment-row .input-group { margin-bottom: 0; }
 
     /* Product items row */
     .nuevoProducto .producto-item-venta {
