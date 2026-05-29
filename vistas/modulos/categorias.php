@@ -1,6 +1,6 @@
 <?php
 
-if($_SESSION["perfil"] == ""){
+if(!isset($_SESSION["iniciarSesion"]) || $_SESSION["iniciarSesion"] != "ok"){
 
   echo '<script>
 

@@ -360,11 +360,7 @@ MODAL AGREGAR CLIENTE
               <input type="hidden" name="nuevoTipoComprobante" id="nuevoTipoComprobante" value="B">
 
             </div>
-  
-          </div>
 
-            </div>
-  
           </div>
 
         </div>

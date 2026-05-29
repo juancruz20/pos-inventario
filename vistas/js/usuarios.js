@@ -8,7 +8,7 @@ $(".btnEditarUsuario").on("click", function () {
     success: function (respuesta) {
       $("#editarNombre").val(respuesta["nombre"]);
       $("#editarUsuario").val(respuesta["usuario"]);
-      $("#editarPassword").val("").data("password-real", respuesta["password_real"]);
+      $("#editarPassword").val("");
       $("#passwordActual").val(respuesta["password"]);
       $("#editarPerfil").val(respuesta["perfil"]);
       $("#idUsuario").val(respuesta["id"]);
@@ -44,14 +44,6 @@ $(document).on("click", "#togglePassword", function () {
   var input = $("#editarPassword");
   var icon = $(this).find("i");
   var mostrarPassword = input.attr("type") === "password";
-
-  if (mostrarPassword && input.val() === "") {
-    var realPass = input.data("password-real");
-    if (realPass && realPass !== "") {
-      input.val(realPass);
-    }
-  }
-
   input.attr("type", mostrarPassword ? "text" : "password");
   icon.toggleClass("fa-eye", mostrarPassword);
   icon.toggleClass("fa-eye-slash", !mostrarPassword);

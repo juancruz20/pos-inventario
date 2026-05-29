@@ -10,7 +10,8 @@ $(".tablaProductos").on("click", ".btnEditarProducto", function () {
       $("#editarDescripcion").val(respuesta["descripcion"]);
       $("#editarStock").val(respuesta["stock"]);
       $("#editarPrecioVenta").val(respuesta["precio_venta"]);
-      $("#editarCategoria").html("<option value='" + respuesta["id_categoria"] + "'>" + respuesta["categoria"] + "</option>");
+      var categoriaNombre = respuesta["categoria"] || respuesta["id_categoria"];
+      $("#editarCategoria").html("<option value='" + respuesta["id_categoria"] + "'>" + categoriaNombre + "</option>");
       $("#imagenActual").val(respuesta["imagen"]);
       if (respuesta["imagen"] != "") {
         $(".previsualizar").attr("src", respuesta["imagen"]);

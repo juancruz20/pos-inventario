@@ -88,9 +88,6 @@ class ModeloVentas{
 		
 		}
 
-		$stmt->close();
-		$stmt = null;
-
 	}
 
 	/*=============================================
@@ -171,6 +168,21 @@ class ModeloVentas{
 
 		}
 
+	}
+
+	/*=============================================
+	TOTAL VENTAS POR CLIENTE
+	=============================================*/
+
+	static public function mdlTotalVentasCliente($tabla, $idCliente){
+
+		$stmt = Conexion::conectar()->prepare("SELECT COUNT(*) as total_ventas, COALESCE(SUM(total), 0) as total_gastado FROM $tabla WHERE id_cliente = :idCliente");
+
+		$stmt -> bindParam(":idCliente", $idCliente, PDO::PARAM_INT);
+
+		$stmt -> execute();
+
+		return $stmt -> fetch();
 	}
 
 	/*=============================================
