@@ -484,7 +484,8 @@ MODAL AGREGAR CLIENTE
     padding: 0;
   }
   .nuevoProducto .producto-item-venta .producto-descripcion-caja {
-    display: block;
+    display: flex;
+    align-items: center;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -494,7 +495,6 @@ MODAL AGREGAR CLIENTE
     border: 1px solid #c0c4c8;
     border-left: 3px solid #3c8dbc;
     height: 36px;
-    line-height: 34px;
     padding: 0 10px;
     border-radius: 3px;
     cursor: default;
@@ -640,7 +640,8 @@ MODAL AGREGAR CLIENTE
       border-color: #3c8dbc;
     }
     .nuevoProducto .producto-item-venta .producto-descripcion-caja {
-      display: block;
+      display: flex;
+      align-items: center;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -651,7 +652,6 @@ MODAL AGREGAR CLIENTE
       border-left: 3px solid #3c8dbc;
       border-radius: 3px;
       height: var(--venta-control-height);
-      line-height: calc(var(--venta-control-height) - 2px);
       padding: 0 8px;
       font-size: 13px;
       cursor: default;
