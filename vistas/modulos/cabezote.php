@@ -33,9 +33,9 @@
 		<div class="navbar-left-group">
 
 			<!-- icono inventario (móvil) -->
-			<div class="mobile-logo-icon">
+			<a href="inicio" class="mobile-logo-icon">
 				<img src="vistas/img/plantilla/icono-inventario.png" alt="Inventario">
-			</div>
+			</a>
 
 			<!-- Botón de navegación -->
 		 	<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">

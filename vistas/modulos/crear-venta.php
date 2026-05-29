@@ -62,8 +62,8 @@ if($_SESSION["perfil"] == "Especial"){
                     <label>Vendedor</label>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-user"></i></span> 
-                      <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $_SESSION["nombre"]; ?>" readonly>
-                      <input type="hidden" name="idVendedor" value="<?php echo $_SESSION["id"]; ?>">
+                      <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo htmlspecialchars($_SESSION["nombre"], ENT_QUOTES, 'UTF-8'); ?>" readonly>
+                      <input type="hidden" name="idVendedor" value="<?php echo htmlspecialchars($_SESSION["id"], ENT_QUOTES, 'UTF-8'); ?>">
                     </div>
                   </div>
                 </div>
@@ -81,7 +81,7 @@ if($_SESSION["perfil"] == "Especial"){
                       }else{
                         $value = end($ventas);
                         $codigo = $value["codigo"] + 1;
-                        echo '<input type="text" class="form-control" id="nuevaVenta" name="nuevaVenta" value="'.$codigo.'" readonly>';
+                        echo '<input type="text" class="form-control" id="nuevaVenta" name="nuevaVenta" value="'.htmlspecialchars($codigo, ENT_QUOTES, 'UTF-8').'" readonly>';
                       }
                       ?>
                     </div>
@@ -109,7 +109,7 @@ if($_SESSION["perfil"] == "Especial"){
                     }
                     foreach ($clientes as $key => $value) {
                       $selected = ($value["id"] == $idVentaRapida) ? ' selected' : '';
-                      echo '<option value="'.$value["id"].'"'.$selected.'>'.$value["nombre"].'</option>';
+                      echo '<option value="'.htmlspecialchars($value["id"], ENT_QUOTES, 'UTF-8').'"'.htmlspecialchars($selected, ENT_QUOTES, 'UTF-8').'>'.htmlspecialchars($value["nombre"], ENT_QUOTES, 'UTF-8').'</option>';
                     }
                   ?>
                   </select>

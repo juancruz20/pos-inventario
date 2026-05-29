@@ -79,47 +79,47 @@ if($_SESSION["perfil"] == "Especial" || $_SESSION["perfil"] == "Vendedor"){
 
        foreach ($usuarios as $key => $value){
           
-          echo '  <tr>
-                   <td data-label="#">'.($key+1).'</td>
-                   <td data-label="Nombre">'.$value["nombre"].'</td>
-                   <td data-label="Usuario">'.$value["usuario"].'</td>';
+           echo '  <tr>
+                    <td data-label="#">'.($key+1).'</td>
+                    <td data-label="Nombre">'.htmlspecialchars($value["nombre"], ENT_QUOTES, 'UTF-8').'</td>
+                    <td data-label="Usuario">'.htmlspecialchars($value["usuario"], ENT_QUOTES, 'UTF-8').'</td>';
 
-                  if($value["foto"] != ""){
+                   if($value["foto"] != ""){
 
-                    echo '<td data-label="Foto"><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
+                     echo '<td data-label="Foto"><img src="'.htmlspecialchars($value["foto"], ENT_QUOTES, 'UTF-8').'" class="img-thumbnail" width="40px"></td>';
 
-                  }else{
+                   }else{
 
-                    echo '<td data-label="Foto"><img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
+                     echo '<td data-label="Foto"><img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
 
-                  }
+                   }
 
-                  echo '<td data-label="Perfil">'.$value["perfil"].'</td>';
+                   echo '<td data-label="Perfil">'.htmlspecialchars($value["perfil"], ENT_QUOTES, 'UTF-8').'</td>';
 
-                  if($value["estado"] != 0){
+                   if($value["estado"] != 0){
 
-                    echo '<td data-label="Estado"><button class="btn btn-success btn-xs btnActivar" idUsuario="'.$value["id"].'" estadoUsuario="0">Activado</button></td>';
+                     echo '<td data-label="Estado"><button class="btn btn-success btn-xs btnActivar" idUsuario="'.htmlspecialchars($value["id"], ENT_QUOTES, 'UTF-8').'" estadoUsuario="0">Activado</button></td>';
 
-                  }else{
+                   }else{
 
-                    echo '<td data-label="Estado"><button class="btn btn-danger btn-xs btnActivar" idUsuario="'.$value["id"].'" estadoUsuario="1">Desactivado</button></td>';
+                     echo '<td data-label="Estado"><button class="btn btn-danger btn-xs btnActivar" idUsuario="'.htmlspecialchars($value["id"], ENT_QUOTES, 'UTF-8').'" estadoUsuario="1">Desactivado</button></td>';
 
-                  }             
+                   }             
 
-                  echo '<td data-label="Último login">'.$value["ultimo_login"].'</td>
-                   <td data-label="Acciones">
+                   echo '<td data-label="Último login">'.htmlspecialchars($value["ultimo_login"], ENT_QUOTES, 'UTF-8').'</td>
+                    <td data-label="Acciones">
 
-                    <div class="btn-group">
-                        
-                      <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa fa-pencil"></i></button>
+                     <div class="btn-group">
+                         
+                       <button class="btn btn-warning btnEditarUsuario" idUsuario="'.htmlspecialchars($value["id"], ENT_QUOTES, 'UTF-8').'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa fa-pencil"></i></button>
 
-                      <button class="btn btn-danger btnEliminarUsuario" idUsuario="'.$value["id"].'" fotoUsuario="'.$value["foto"].'" usuario="'.$value["usuario"].'"><i class="fa fa-times"></i></button>
+                       <button class="btn btn-danger btnEliminarUsuario" idUsuario="'.htmlspecialchars($value["id"], ENT_QUOTES, 'UTF-8').'" fotoUsuario="'.htmlspecialchars($value["foto"], ENT_QUOTES, 'UTF-8').'" usuario="'.htmlspecialchars($value["usuario"], ENT_QUOTES, 'UTF-8').'"><i class="fa fa-times"></i></button>
 
-                    </div>  
+                     </div>  
 
-                   </td>
+                    </td>
 
-                 </tr>';
+                  </tr>';
         }
 
 

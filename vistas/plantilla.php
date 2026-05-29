@@ -185,11 +185,14 @@ CUERPO DOCUMENTO
 <script>
   function ajustarSidebar() {
     var movil = window.innerWidth < 768;
+    if (movil) {
+      document.body.classList.remove("sidebar-mini", "sidebar-collapse");
+      return;
+    }
     var params = new URLSearchParams(window.location.search);
     var ruta = params.get("ruta");
-    // En desktop, no colapsar si estamos en una sub-pagina de treeview
-    var enSubPagina = !movil && ["ventas","crear-venta","editar-venta","reportes"].indexOf(ruta) !== -1;
-    document.body.classList.toggle("sidebar-mini", !movil);
+    var enSubPagina = ["ventas","crear-venta","editar-venta","reportes"].indexOf(ruta) !== -1;
+    document.body.classList.add("sidebar-mini");
     document.body.classList.toggle("sidebar-collapse", !enSubPagina);
   }
   ajustarSidebar();

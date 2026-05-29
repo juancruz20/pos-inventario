@@ -58,51 +58,51 @@ $badgeColor = $tc == "A" ? "#27ae60" : ($tc == "B" ? "#f39c12" : "#e74c3c");
         echo '<div class="cliente-card">
           <div class="cliente-card-header">
             <div class="cliente-card-nombre">
-              <i class="fa fa-user"></i> '.$value["nombre"].'
+              <i class="fa fa-user"></i> '.htmlspecialchars($value["nombre"], ENT_QUOTES, 'UTF-8').'
             </div>
             <div class="cliente-card-acciones">
-              <button class="btn btn-warning btn-xs btnEditarCliente" data-toggle="modal" data-target="#modalEditarCliente" idCliente="'.$value["id"].'"><i class="fa fa-pencil"></i></button>';
+              <button class="btn btn-warning btn-xs btnEditarCliente" data-toggle="modal" data-target="#modalEditarCliente" idCliente="'.htmlspecialchars($value["id"], ENT_QUOTES, 'UTF-8').'"><i class="fa fa-pencil"></i></button>';
               if($_SESSION["perfil"] == "Administrador"){
-                echo '<button class="btn btn-danger btn-xs btnEliminarCliente" idCliente="'.$value["id"].'"><i class="fa fa-times"></i></button>';
+                echo '<button class="btn btn-danger btn-xs btnEliminarCliente" idCliente="'.htmlspecialchars($value["id"], ENT_QUOTES, 'UTF-8').'"><i class="fa fa-times"></i></button>';
               }
             echo '</div>
           </div>
           <div class="cliente-card-body">
             <div class="cliente-card-row">
               <span class="cliente-card-label"><i class="fa fa-key"></i> Documento</span>
-              <span class="cliente-card-value">'.$value["documento"].'</span>
+              <span class="cliente-card-value">'.htmlspecialchars($value["documento"], ENT_QUOTES, 'UTF-8').'</span>
             </div>
             <div class="cliente-card-row">
               <span class="cliente-card-label"><i class="fa fa-envelope"></i> Email</span>
-              <span class="cliente-card-value">'.$value["email"].'</span>
+              <span class="cliente-card-value">'.htmlspecialchars($value["email"], ENT_QUOTES, 'UTF-8').'</span>
             </div>
             <div class="cliente-card-row">
               <span class="cliente-card-label"><i class="fa fa-phone"></i> Teléfono</span>
-              <span class="cliente-card-value">'.$value["telefono"].'</span>
+              <span class="cliente-card-value">'.htmlspecialchars($value["telefono"], ENT_QUOTES, 'UTF-8').'</span>
             </div>
             <div class="cliente-card-row">
               <span class="cliente-card-label"><i class="fa fa-map-marker"></i> Dirección</span>
-              <span class="cliente-card-value">'.$value["direccion"].'</span>
+              <span class="cliente-card-value">'.htmlspecialchars($value["direccion"], ENT_QUOTES, 'UTF-8').'</span>
             </div>
             <div class="cliente-card-row">
               <span class="cliente-card-label"><i class="fa fa-calendar"></i> Nacimiento</span>
-              <span class="cliente-card-value">'.$value["fecha_nacimiento"].'</span>
+              <span class="cliente-card-value">'.htmlspecialchars($value["fecha_nacimiento"], ENT_QUOTES, 'UTF-8').'</span>
             </div>
             <div class="cliente-card-row">
               <span class="cliente-card-label"><i class="fa fa-file-text"></i> Comprobante</span>
-              <span class="cliente-card-value"><span class="badge-tipo" style="background:'.$badgeColor.'">'.$tc.'</span></span>
+              <span class="cliente-card-value"><span class="badge-tipo" style="background:'.$badgeColor.'">'.htmlspecialchars($tc, ENT_QUOTES, 'UTF-8').'</span></span>
             </div>
             <div class="cliente-card-row">
               <span class="cliente-card-label"><i class="fa fa-shopping-cart"></i> Compras</span>
-              <span class="cliente-card-value">'.$value["compras"].'</span>
+              <span class="cliente-card-value">'.htmlspecialchars($value["compras"], ENT_QUOTES, 'UTF-8').'</span>
             </div>
             <div class="cliente-card-row">
               <span class="cliente-card-label"><i class="fa fa-clock-o"></i> Última compra</span>
-              <span class="cliente-card-value">'.$value["ultima_compra"].'</span>
+              <span class="cliente-card-value">'.htmlspecialchars($value["ultima_compra"], ENT_QUOTES, 'UTF-8').'</span>
             </div>
             <div class="cliente-card-row">
               <span class="cliente-card-label"><i class="fa fa-sign-in"></i> Ingreso</span>
-              <span class="cliente-card-value">'.$value["fecha"].'</span>
+              <span class="cliente-card-value">'.htmlspecialchars($value["fecha"], ENT_QUOTES, 'UTF-8').'</span>
             </div>
           </div>
         </div>';

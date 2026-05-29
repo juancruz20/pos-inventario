@@ -79,17 +79,17 @@ if(!isset($_SESSION["iniciarSesion"]) || $_SESSION["iniciarSesion"] != "ok"){
 
                     <td>'.($key+1).'</td>
 
-                    <td class="text-uppercase">'.$value["categoria"].'</td>
+                    <td class="text-uppercase">'.htmlspecialchars($value["categoria"], ENT_QUOTES, 'UTF-8').'</td>
 
                     <td>
 
                       <div class="btn-group">
                           
-                        <button class="btn btn-warning btnEditarCategoria" idCategoria="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarCategoria"><i class="fa fa-pencil"></i></button>';
+                        <button class="btn btn-warning btnEditarCategoria" idCategoria="'.htmlspecialchars($value["id"], ENT_QUOTES, 'UTF-8').'" data-toggle="modal" data-target="#modalEditarCategoria"><i class="fa fa-pencil"></i></button>';
 
                         if($_SESSION["perfil"] == "Administrador"){
 
-                          echo '<button class="btn btn-danger btnEliminarCategoria" idCategoria="'.$value["id"].'"><i class="fa fa-times"></i></button>';
+                          echo '<button class="btn btn-danger btnEliminarCategoria" idCategoria="'.htmlspecialchars($value["id"], ENT_QUOTES, 'UTF-8').'"><i class="fa fa-times"></i></button>';
 
                         }
 

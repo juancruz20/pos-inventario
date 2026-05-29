@@ -64,11 +64,11 @@ baseVentas.listarProductos = function (producto) {
 
   var fila = `
     <div class="row producto-item-venta" data-id="${idProducto}">
-      <div class="col-xs-7" style="padding-right:4px;">
-        <div class="input-group">
-          <span class="input-group-addon producto-descripcion-caja" title="${descripcion}">${descripcion}</span>
-          <input type="text" class="form-control ingresoPrecio" value="${precioVisual}" data-id="${idProducto}" data-stock="${stock}" data-descripcion="${descripcion}" readonly>
-        </div>
+      <div class="col-xs-4" style="padding-right:4px;">
+        <span class="form-control producto-descripcion-caja" title="${descripcion}">${descripcion}</span>
+      </div>
+      <div class="col-xs-3" style="padding:0 4px;">
+        <input type="text" class="form-control ingresoPrecio" value="${precioVisual}" data-id="${idProducto}" data-stock="${stock}" data-descripcion="${descripcion}" readonly>
       </div>
       <div class="col-xs-3" style="padding:0 4px;">
         <input type="number" class="form-control ingresoCantidad" value="1" min="1" data-stock="${stock}">

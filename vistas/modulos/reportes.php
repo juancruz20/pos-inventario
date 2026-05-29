@@ -50,7 +50,7 @@ if($_SESSION["perfil"] == "Especial" || $_SESSION["perfil"] == "Vendedor"){
 
                 if(isset($_GET["fechaInicial"])){
 
-                  echo $_GET["fechaInicial"]." - ".$_GET["fechaFinal"];
+                  echo htmlspecialchars($_GET["fechaInicial"], ENT_QUOTES, 'UTF-8')." - ".htmlspecialchars($_GET["fechaFinal"], ENT_QUOTES, 'UTF-8');
                 
                 }else{
                  
@@ -73,7 +73,7 @@ if($_SESSION["perfil"] == "Especial" || $_SESSION["perfil"] == "Vendedor"){
 
         if(isset($_GET["fechaInicial"])){
 
-          echo '<a href="vistas/modulos/descargar-reporte.php?reporte=reporte&fechaInicial='.$_GET["fechaInicial"].'&fechaFinal='.$_GET["fechaFinal"].'">';
+          echo '<a href="vistas/modulos/descargar-reporte.php?reporte=reporte&fechaInicial='.urlencode($_GET["fechaInicial"]).'&fechaFinal='.urlencode($_GET["fechaFinal"]).'">';
 
         }else{
 

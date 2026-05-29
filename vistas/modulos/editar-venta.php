@@ -80,9 +80,9 @@
                     
                     <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                    <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $vendedor["nombre"]; ?>" readonly>
+                    <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo htmlspecialchars($vendedor["nombre"], ENT_QUOTES, 'UTF-8'); ?>" readonly>
 
-                    <input type="hidden" name="idVendedor" value="<?php echo $vendedor["id"]; ?>">
+                    <input type="hidden" name="idVendedor" value="<?php echo htmlspecialchars($vendedor["id"], ENT_QUOTES, 'UTF-8'); ?>">
 
                   </div>
 
@@ -98,7 +98,7 @@
                     
                     <span class="input-group-addon"><i class="fa fa-key"></i></span>
 
-                   <input type="text" class="form-control" id="nuevaVenta" name="editarVenta" value="<?php echo $venta["codigo"]; ?>" readonly>
+                   <input type="text" class="form-control" id="nuevaVenta" name="editarVenta" value="<?php echo htmlspecialchars($venta["codigo"], ENT_QUOTES, 'UTF-8'); ?>" readonly>
                
                   </div>
                 
@@ -116,7 +116,7 @@
                     
                     <select class="form-control" id="seleccionarCliente" name="seleccionarCliente" required>
 
-                    <option value="<?php echo $cliente["id"]; ?>"><?php echo $cliente["nombre"]; ?></option>
+                    <option value="<?php echo htmlspecialchars($cliente["id"], ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($cliente["nombre"], ENT_QUOTES, 'UTF-8'); ?></option>
 
                     <?php
 
@@ -127,7 +127,7 @@
 
                        foreach ($categorias as $key => $value) {
 
-                         echo '<option value="'.$value["id"].'">'.$value["nombre"].'</option>';
+                         echo '<option value="'.htmlspecialchars($value["id"], ENT_QUOTES, 'UTF-8').'">'.htmlspecialchars($value["nombre"], ENT_QUOTES, 'UTF-8').'</option>';
 
                        }
 
@@ -240,11 +240,11 @@
                             
                             <div class="input-group">
                            
-                              <input type="number" class="form-control input-lg" min="0" id="nuevoImpuestoVenta" name="nuevoImpuestoVenta" value="<?php echo $porcentajeImpuesto; ?>" required>
+                              <input type="number" class="form-control input-lg" min="0" id="nuevoImpuestoVenta" name="nuevoImpuestoVenta" value="<?php echo htmlspecialchars($porcentajeImpuesto, ENT_QUOTES, 'UTF-8'); ?>" required>
 
-                               <input type="hidden" name="nuevoPrecioImpuesto" id="nuevoPrecioImpuesto" value="<?php echo $venta["impuesto"]; ?>" required>
+                               <input type="hidden" name="nuevoPrecioImpuesto" id="nuevoPrecioImpuesto" value="<?php echo htmlspecialchars($venta["impuesto"], ENT_QUOTES, 'UTF-8'); ?>" required>
 
-                               <input type="hidden" name="nuevoPrecioNeto" id="nuevoPrecioNeto" value="<?php echo $venta["neto"]; ?>" required>
+                               <input type="hidden" name="nuevoPrecioNeto" id="nuevoPrecioNeto" value="<?php echo htmlspecialchars($venta["neto"], ENT_QUOTES, 'UTF-8'); ?>" required>
 
                               <span class="input-group-addon"><i class="fa fa-percent"></i></span>
                         
@@ -258,9 +258,9 @@
                            
                               <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
 
-                              <input type="text" class="form-control input-lg" id="nuevoTotalVenta" name="nuevoTotalVenta" total="<?php echo $venta["neto"]; ?>"  value="<?php echo $venta["total"]; ?>" readonly required>
+                              <input type="text" class="form-control input-lg" id="nuevoTotalVenta" name="nuevoTotalVenta" total="<?php echo htmlspecialchars($venta["neto"], ENT_QUOTES, 'UTF-8'); ?>"  value="<?php echo htmlspecialchars($venta["total"], ENT_QUOTES, 'UTF-8'); ?>" readonly required>
 
-                              <input type="hidden" name="totalVenta" value="<?php echo $venta["total"]; ?>" id="totalVenta">
+                              <input type="hidden" name="totalVenta" value="<?php echo htmlspecialchars($venta["total"], ENT_QUOTES, 'UTF-8'); ?>" id="totalVenta">
                               
                         
                             </div>

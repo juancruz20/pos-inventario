@@ -73,7 +73,7 @@ if(!isset($_SESSION["iniciarSesion"]) || $_SESSION["iniciarSesion"] != "ok"){
 
        </table>
 
-       <input type="hidden" value="<?php echo $_SESSION['perfil']; ?>" id="perfilOculto">
+        <input type="hidden" value="<?php echo htmlspecialchars($_SESSION['perfil'], ENT_QUOTES, 'UTF-8'); ?>" id="perfilOculto">
 
       </div>
 
@@ -137,7 +137,7 @@ MODAL AGREGAR PRODUCTO
 
                   foreach ($categorias as $key => $value) {
                     
-                    echo '<option value="'.$value["id"].'">'.$value["categoria"].'</option>';
+                    echo '<option value="'.htmlspecialchars($value["id"], ENT_QUOTES, 'UTF-8').'">'.htmlspecialchars($value["categoria"], ENT_QUOTES, 'UTF-8').'</option>';
                   }
 
                   ?>

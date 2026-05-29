@@ -68,7 +68,7 @@ if($xml){
 
                 if(isset($_GET["fechaInicial"])){
 
-                  echo $_GET["fechaInicial"]." - ".$_GET["fechaFinal"];
+                  echo htmlspecialchars($_GET["fechaInicial"], ENT_QUOTES, 'UTF-8')." - ".htmlspecialchars($_GET["fechaFinal"], ENT_QUOTES, 'UTF-8');
                 
                 }else{
                  
@@ -131,27 +131,27 @@ if($xml){
 
                   <td>'.($key+1).'</td>
 
-                  <td>'.$value["codigo"].'</td>';
+                  <td>'.htmlspecialchars($value["codigo"], ENT_QUOTES, 'UTF-8').'</td>';
 
                   $itemCliente = "id";
                   $valorCliente = $value["id_cliente"];
 
                   $respuestaCliente = ControladorClientes::ctrMostrarClientes($itemCliente, $valorCliente);
 
-                  echo '<td>'.($respuestaCliente ? $respuestaCliente["nombre"] : "Eliminado").'</td>';
+                  echo '<td>'.htmlspecialchars(($respuestaCliente ? $respuestaCliente["nombre"] : "Eliminado"), ENT_QUOTES, 'UTF-8').'</td>';
 
                   $itemUsuario = "id";
                   $valorUsuario = $value["id_vendedor"];
 
                   $respuestaUsuario = ControladorUsuarios::ctrMostrarUsuarios($itemUsuario, $valorUsuario);
 
-                  echo '<td>'.($respuestaUsuario ? $respuestaUsuario["nombre"] : "Eliminado").'</td>
+                  echo '<td>'.htmlspecialchars(($respuestaUsuario ? $respuestaUsuario["nombre"] : "Eliminado"), ENT_QUOTES, 'UTF-8').'</td>
 
-                  <td>'.$value["metodo_pago"].'</td>
+                  <td>'.htmlspecialchars($value["metodo_pago"], ENT_QUOTES, 'UTF-8').'</td>
 
                   <td>$ '.number_format($value["total"],2).'</td>
 
-                  <td>'.$value["fecha"].'</td>
+                  <td>'.htmlspecialchars($value["fecha"], ENT_QUOTES, 'UTF-8').'</td>
 
                   <td style="font-size:12px;">';
 
@@ -159,7 +159,7 @@ if($xml){
 
                     if(is_array($productosVenta)){
                       foreach ($productosVenta as $p) {
-                        echo $p["descripcion"]." (x".$p["cantidad"].")<br>";
+                        echo htmlspecialchars($p["descripcion"], ENT_QUOTES, 'UTF-8')." (x".htmlspecialchars($p["cantidad"], ENT_QUOTES, 'UTF-8').")<br>";
                       }
                     }
 
