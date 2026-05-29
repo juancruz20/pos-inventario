@@ -131,7 +131,7 @@ if($_SESSION["perfil"] == "Especial"){
                 </div>
                 <div class="concepto-extra-inputs" id="ropaPrecioGroup" style="display:none;">
                   <div class="concepto-extra-row">
-                    <input type="text" class="form-control" id="ropaDescripcion" placeholder="Ej: Ropa" maxlength="60">
+                    <input type="text" class="form-control" id="ropaDescripcion" placeholder="" maxlength="60">
                     <div class="input-group concepto-extra-price">
                       <span class="input-group-addon" style="background:#f4f4f4;color:#999;font-weight:600;">$</span>
                       <input type="number" class="form-control" id="ropaPrecio" placeholder="0" step="any" min="0">
