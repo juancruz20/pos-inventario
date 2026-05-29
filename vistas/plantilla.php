@@ -201,9 +201,15 @@ CUERPO DOCUMENTO
   // Eliminar handler por defecto de AdminLTE para evitar doble toggle en móvil
   $(document).off("click", ".sidebar-menu li a");
 
+  // En mobile: evitar que clicks dentro del sidebar cierren el menu
+  $(document).on("click", ".main-sidebar, .sidebar", function(e){
+    if (window.innerWidth < 768) e.stopPropagation();
+  });
+
   // En desktop: al hacer click en un treeview, expande el sidebar y abre el submenu
   // En mobile: toggle del submenu del treeview
   $(document).on("click", ".sidebar-menu li.treeview > a", function(e){
+    e.stopPropagation();
     var $li = $(this).parent();
     var $menu = $(this).next(".treeview-menu");
     if (window.innerWidth >= 768 && document.body.classList.contains("sidebar-collapse")) {
