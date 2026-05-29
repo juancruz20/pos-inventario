@@ -199,45 +199,15 @@ CUERPO DOCUMENTO
   ajustarSidebar();
   window.addEventListener("resize", ajustarSidebar);
 
-  // Desactivar push-menu de AdminLTE (interfiere con el sidebar en mobile)
-  $(document).off(".pushMenu");
-
-  // Sidebar toggle manual
-  $(document).on("click", ".sidebar-toggle", function(e) {
-    e.preventDefault();
-    if (window.innerWidth < 768) {
-      document.body.classList.toggle("sidebar-open");
-    } else {
-      document.body.classList.toggle("sidebar-collapse");
-    }
-  });
-
-  // Eliminar handler treeview por defecto de AdminLTE
-  $(document).off("click.tree", ".sidebar-menu li a");
+  // Treeview: evitar doble toggle del handler por defecto de AdminLTE
   $(document).off("click", ".sidebar-menu li a");
 
-  // Treeview toggle manual
   $(document).on("click", ".sidebar-menu li.treeview > a", function(e){
     e.preventDefault();
     var $li = $(this).parent();
     var $menu = $(this).next(".treeview-menu");
-    if (window.innerWidth >= 768 && document.body.classList.contains("sidebar-collapse")) {
-      document.body.classList.remove("sidebar-collapse");
-      $li.addClass("active").addClass("menu-open");
-      $menu.slideDown();
-    } else {
-      $li.toggleClass("menu-open");
-      $menu.slideToggle();
-    }
-  });
-
-  // Cerrar sidebar al hacer click fuera (solo mobile)
-  $(document).on("click touchstart", function(e) {
-    if (window.innerWidth < 768 && document.body.classList.contains("sidebar-open")) {
-      if (!$(e.target).closest(".main-sidebar, .sidebar-toggle, .mobile-logo-icon").length) {
-        document.body.classList.remove("sidebar-open");
-      }
-    }
+    $li.toggleClass("menu-open");
+    $menu.slideToggle();
   });
 </script>
 <script src="vistas/js/plantilla.js"></script>
