@@ -189,7 +189,6 @@ CUERPO DOCUMENTO
       document.body.classList.remove("sidebar-mini", "sidebar-collapse");
       return;
     }
-    document.body.classList.remove("sidebar-open");
     var params = new URLSearchParams(window.location.search);
     var ruta = params.get("ruta");
     var enSubPagina = ["ventas","crear-venta","editar-venta","reportes"].indexOf(ruta) !== -1;
@@ -198,17 +197,6 @@ CUERPO DOCUMENTO
   }
   ajustarSidebar();
   window.addEventListener("resize", ajustarSidebar);
-
-  // Treeview: evitar doble toggle del handler por defecto de AdminLTE
-  $(document).off("click", ".sidebar-menu li a");
-
-  $(document).on("click", ".sidebar-menu li.treeview > a", function(e){
-    e.preventDefault();
-    var $li = $(this).parent();
-    var $menu = $(this).next(".treeview-menu");
-    $li.toggleClass("menu-open");
-    $menu.slideToggle();
-  });
 </script>
 <script src="vistas/js/plantilla.js"></script>
 <script src="vistas/js/usuarios.js"></script>
