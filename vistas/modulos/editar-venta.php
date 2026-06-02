@@ -1,3 +1,190 @@
+<style>
+:root {
+  --ev-bg: #f8fafc;
+  --ev-card: #ffffff;
+  --ev-border: #e2e8f0;
+  --ev-text: #0f172a;
+  --ev-muted: #64748b;
+  --ev-accent: #3b82f6;
+  --ev-radius: 12px;
+  --ev-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.ev-card {
+  background: var(--ev-card);
+  border: 1px solid var(--ev-border);
+  border-radius: var(--ev-radius);
+  box-shadow: var(--ev-shadow);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.ev-card-header {
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--ev-border);
+  background: #f8fafc;
+}
+
+.ev-card-body {
+  padding: 20px;
+}
+
+.ev-card-footer {
+  padding: 12px 20px;
+  border-top: 1px solid var(--ev-border);
+  background: #f8fafc;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.ev-card-body .form-group {
+  margin-bottom: 14px;
+}
+
+.ev-card-body .form-control {
+  border: 1px solid var(--ev-border);
+  border-radius: 8px;
+  font-size: 13px;
+  padding: 8px 12px;
+  height: auto;
+  line-height: 1.5;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: none;
+}
+
+.ev-card-body .form-control:focus {
+  border-color: var(--ev-accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.ev-card-body .input-group-addon {
+  background: #f1f5f9;
+  border: 1px solid var(--ev-border);
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  color: var(--ev-muted);
+  font-size: 13px;
+  padding: 8px 12px;
+  min-width: 36px;
+  text-align: center;
+}
+
+.ev-card-body .input-group .form-control:not(:first-child) {
+  border-left: none;
+  border-radius: 0 8px 8px 0;
+}
+
+.ev-card-body .input-group .input-group-addon:last-child {
+  border-left: none;
+  border-right: 1px solid var(--ev-border);
+  border-radius: 0 8px 8px 0;
+  background: #f1f5f9;
+}
+
+.ev-card-body .input-group-addon .btn {
+  margin: -6px -8px;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 6px;
+}
+
+.ev-card-body .btn,
+.ev-card-footer .btn {
+  border-radius: 8px;
+  font-size: 13px;
+  padding: 8px 16px;
+  transition: all 0.15s ease;
+  font-weight: 500;
+}
+
+.ev-card-body .btn-primary,
+.ev-card-footer .btn-primary {
+  background: var(--ev-accent);
+  border: 1px solid var(--ev-accent);
+  color: #fff;
+}
+
+.ev-card-body .btn-primary:hover,
+.ev-card-footer .btn-primary:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.ev-card-body .btn-danger {
+  background: #ef4444;
+  border: 1px solid #ef4444;
+  color: #fff;
+}
+
+.ev-card-body .btn-danger:hover {
+  background: #dc2626;
+  border-color: #dc2626;
+}
+
+.ev-card-body .btn-block {
+  display: block;
+  width: 100%;
+}
+
+.ev-card-body select.form-control {
+  appearance: auto;
+  padding: 8px 12px;
+}
+
+.ev-card-body .table {
+  font-size: 13px;
+  margin-bottom: 0;
+}
+
+.ev-card-body .table th {
+  padding: 10px 12px;
+  border-bottom: 2px solid var(--ev-border);
+  font-weight: 600;
+  color: var(--ev-text);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: transparent;
+}
+
+.ev-card-body .table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--ev-border);
+  vertical-align: middle;
+}
+
+.ev-card-body .input-lg {
+  font-size: 14px;
+  padding: 10px 14px;
+}
+
+.ev-card-body .input-group .input-lg {
+  font-size: 14px;
+  padding: 10px 14px;
+}
+
+.ev-card-body hr {
+  margin: 16px 0;
+  border: 0;
+  border-top: 1px solid var(--ev-border);
+}
+
+@media (max-width: 767px) {
+  .ev-card-body {
+    padding: 14px;
+  }
+
+  .ev-card-header {
+    padding: 10px 14px;
+  }
+
+  .ev-card-footer {
+    padding: 10px 14px;
+  }
+}
+</style>
+
 <div class="content-wrapper">
 
   <section class="content-header">
@@ -28,15 +215,15 @@
       
       <div class="col-lg-5 col-xs-12">
         
-        <div class="box box-success">
+        <div class="ev-card">
           
-          <div class="box-header with-border"></div>
+          <div class="ev-card-header"></div>
 
           <form role="form" method="post" class="formularioVenta">
 
-            <div class="box-body">
+            <div class="ev-card-body">
   
-              <div class="box">
+              <div class="ev-form-section">
 
                 <?php
 
@@ -99,7 +286,7 @@
                     <span class="input-group-addon"><i class="fa fa-key"></i></span>
 
                    <input type="text" class="form-control" id="nuevaVenta" name="editarVenta" value="<?php echo htmlspecialchars($venta["codigo"], ENT_QUOTES, 'UTF-8'); ?>" readonly>
-               
+                
                   </div>
                 
                 </div>
@@ -190,9 +377,9 @@
                             <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
                    
                             <input type="text" class="form-control nuevoPrecioProducto" precioReal="'.$respuesta["precio_venta"].'" name="nuevoPrecioProducto" value="'.$value["total"].'" readonly required>
-   
+    
                           </div>
-               
+                
                         </div>
 
                       </div>';
@@ -312,7 +499,7 @@
 
           </div>
 
-          <div class="box-footer">
+          <div class="ev-card-footer">
 
             <button type="submit" class="btn btn-primary pull-right">Guardar cambios</button>
 
@@ -337,18 +524,18 @@
 
       <div class="col-lg-7 col-xs-12 product-table-mobile hidden-print">
         
-        <div class="box box-warning">
+        <div class="ev-card">
 
-          <div class="box-header with-border">
+          <div class="ev-card-header">
             <button type="button" class="btn btn-primary btn-block visible-xs" data-toggle="collapse" data-target="#productTableCollapse">
               <i class="fa fa-table"></i> Productos disponibles
             </button>
           </div>
 
-          <div class="box-body collapse in" id="productTableCollapse">
+          <div class="ev-card-body collapse in" id="productTableCollapse">
             
             <table class="table table-bordered table-striped dt-responsive tablaVentas">
-              
+               
                <thead>
 
                  <tr>
@@ -407,7 +594,7 @@ MODAL AGREGAR CLIENTE
 
         <div class="modal-body">
 
-          <div class="box-body">
+          <div>
 
             <!-- ENTRADA PARA EL NOMBRE -->
             

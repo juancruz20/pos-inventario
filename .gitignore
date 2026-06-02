@@ -15,18 +15,18 @@ php_error_log
 .env
 .DS_Store
 
-# Directorios de respaldo/lecciones (no son parte del proyecto activo)
-/01.AdminLTE-MVC/
-/02.Gestor-Usuarios/
-/03.Gestor-Categorias/
-/04.Gestor-Productos/
-/05.Gestor-Clientes/
-/06.Gestor-Ventas/
-/07.Facturas-Reportes/
-/08.Hardware-y-Factura-Electronica/
+# Backup files
+*.bak
+*~
 
-# Printer (copia extra de escpos-php)
-pos/printer/extensions/vendor/
+# Vendor y dependencias de terceros (se regeneran con composer / descarga directa)
+extensiones/vendor/
+extensiones/tcpdf/
 
-# Pruebas
-/pruebas/
+# Dist y plugins de AdminLTE (se descargan de CDN o se incluyen al instalar)
+vistas/dist/
+vistas/plugins/
+
+# Imagenes de productos y usuarios (contenido generado por el usuario)
+vistas/img/productos/
+vistas/img/usuarios/

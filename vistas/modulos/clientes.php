@@ -14,6 +14,214 @@ if($_SESSION["perfil"] == "Especial"){
 
 ?>
 
+<style>
+  .clientes-toolbar {
+    margin-bottom: 20px;
+  }
+
+  .clientes-toolbar .btn-primary {
+    background: linear-gradient(135deg, #3c8dbc, #2c6f95);
+    border: none;
+    border-radius: 6px;
+    padding: 10px 22px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 2px 6px rgba(60,141,188,0.25);
+    transition: all 0.2s ease;
+  }
+
+  .clientes-toolbar .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(60,141,188,0.35);
+  }
+
+  .clientes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 16px;
+  }
+
+  .cliente-card {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .cliente-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+
+  .cliente-card-header {
+    background: linear-gradient(135deg, #3c8dbc, #2c6f95);
+    color: #fff;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cliente-card-nombre {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .cliente-card-nombre i {
+    margin-right: 8px;
+    opacity: 0.85;
+  }
+
+  .cliente-card-acciones .btn {
+    margin-left: 4px;
+    border-radius: 4px;
+    border: none;
+    padding: 3px 8px;
+    font-size: 12px;
+  }
+
+  .cliente-card-body {
+    padding: 4px 0;
+  }
+
+  .cliente-card-row {
+    display: flex;
+    padding: 9px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 13px;
+    align-items: center;
+  }
+
+  .cliente-card-row:last-child {
+    border-bottom: none;
+  }
+
+  .cliente-card-label {
+    flex: 0 0 120px;
+    color: #888;
+    font-weight: 500;
+  }
+
+  .cliente-card-label i {
+    width: 16px;
+    text-align: center;
+    margin-right: 6px;
+    color: #bbb;
+  }
+
+  .cliente-card-value {
+    flex: 1;
+    color: #333;
+    word-break: break-word;
+  }
+
+  .badge-tipo {
+    display: inline-block;
+    color: #fff;
+    padding: 3px 12px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 12px;
+    min-width: 28px;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+
+  /* Modal refinements */
+  .modal-header {
+    border-radius: 6px 6px 0 0;
+    padding: 14px 20px;
+  }
+
+  .modal-header .modal-title {
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  .modal-header .close {
+    color: #fff;
+    opacity: 0.8;
+    text-shadow: none;
+  }
+
+  .modal-header .close:hover {
+    opacity: 1;
+  }
+
+  .modal-body .form-group {
+    margin-bottom: 14px;
+  }
+
+  .modal-body .input-group-addon {
+    border: none;
+    background: #f4f4f4;
+    color: #777;
+    font-size: 14px;
+    min-width: 40px;
+    text-align: center;
+  }
+
+  .modal-body .form-control {
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-shadow: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    font-size: 14px;
+    height: 42px;
+  }
+
+  .modal-body .form-control:focus {
+    border-color: #3c8dbc;
+    box-shadow: 0 0 0 3px rgba(60,141,188,0.12);
+  }
+
+  .modal-footer .btn-default {
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 13px;
+  }
+
+  .modal-footer .btn-primary {
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 13px;
+    background: linear-gradient(135deg, #3c8dbc, #2c6f95);
+    border: none;
+    box-shadow: 0 2px 6px rgba(60,141,188,0.25);
+  }
+
+  .modal-footer .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(60,141,188,0.35);
+  }
+
+  /* Tipo comprobante cleaner */
+  .tipo-comprobante.seleccionar-tipo {
+    transition: all 0.2s ease;
+    border-radius: 6px !important;
+    font-size: 16px !important;
+    padding: 10px 0 !important;
+  }
+
+  .tipo-comprobante.seleccionar-tipo:hover {
+    transform: translateY(-1px);
+    opacity: 0.9;
+  }
+
+  .tipo-comprobante.seleccionar-tipo.seleccionado {
+    border-color: #fff !important;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.5), 0 2px 8px rgba(0,0,0,0.15);
+    transform: scale(1.04);
+  }
+
+  @media (max-width: 767px) {
+    .clientes-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
 <div class="content-wrapper">
 
   <section class="content-header">
@@ -116,102 +324,6 @@ $badgeColor = $tc == "A" ? "#27ae60" : ($tc == "B" ? "#f39c12" : "#e74c3c");
   </section>
 
 </div>
-
-<style>
-  .clientes-toolbar {
-    margin-bottom: 16px;
-  }
-
-  .clientes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 14px;
-  }
-
-  .cliente-card {
-    background: #fff;
-    border: 1px solid #e8e8e8;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-    overflow: hidden;
-  }
-
-  .cliente-card-header {
-    background: #3c8dbc;
-    color: #fff;
-    padding: 10px 14px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .cliente-card-nombre {
-    font-size: 15px;
-    font-weight: 600;
-  }
-
-  .cliente-card-nombre i {
-    margin-right: 6px;
-    opacity: 0.8;
-  }
-
-  .cliente-card-acciones .btn {
-    margin-left: 4px;
-    border-radius: 4px;
-  }
-
-  .cliente-card-body {
-    padding: 6px 0;
-  }
-
-  .cliente-card-row {
-    display: flex;
-    padding: 7px 14px;
-    border-bottom: 1px solid #f0f0f0;
-    font-size: 13px;
-    align-items: center;
-  }
-
-  .cliente-card-row:last-child {
-    border-bottom: none;
-  }
-
-  .cliente-card-label {
-    flex: 0 0 120px;
-    color: #888;
-    font-weight: 500;
-  }
-
-  .cliente-card-label i {
-    width: 16px;
-    text-align: center;
-    margin-right: 4px;
-    color: #aaa;
-  }
-
-  .cliente-card-value {
-    flex: 1;
-    color: #333;
-    word-break: break-word;
-  }
-
-  .badge-tipo {
-    display: inline-block;
-    color: #fff;
-    padding: 2px 10px;
-    border-radius: 4px;
-    font-weight: 700;
-    font-size: 13px;
-    min-width: 28px;
-    text-align: center;
-  }
-
-  @media (max-width: 767px) {
-    .clientes-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>
 
 <!--=====================================
 MODAL AGREGAR CLIENTE
@@ -579,5 +691,3 @@ MODAL EDITAR CLIENTE
   $eliminarCliente -> ctrEliminarCliente();
 
 ?>
-
-

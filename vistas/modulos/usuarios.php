@@ -13,6 +13,274 @@ if($_SESSION["perfil"] == "Especial" || $_SESSION["perfil"] == "Vendedor"){
 }
 
 ?>
+<style>
+:root {
+  --us-bg: #f4f6f9;
+  --us-card: #ffffff;
+  --us-border: #e8eaed;
+  --us-text: #202124;
+  --us-muted: #5f6368;
+  --us-accent: #3b82f6;
+  --us-radius: 8px;
+  --us-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.usuarios-panel {
+  background: var(--us-card);
+  border-radius: var(--us-radius);
+  box-shadow: var(--us-shadow);
+  overflow: hidden;
+}
+
+.usuarios-panel .box-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--us-border);
+  display: flex;
+  align-items: center;
+}
+
+.usuarios-panel .box-body {
+  padding: 0;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 14px;
+}
+
+.user-table thead th {
+  background: #f8f9fa;
+  color: var(--us-muted);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--us-border);
+  text-align: left;
+}
+
+.user-table thead th:first-child {
+  border-radius: var(--us-radius) 0 0 0;
+}
+
+.user-table thead th:last-child {
+  border-radius: 0 var(--us-radius) 0 0;
+}
+
+.user-table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.user-table tbody tr:hover {
+  background: #f1f5f9;
+}
+
+.user-table tbody tr:not(:last-child) td {
+  border-bottom: 1px solid var(--us-border);
+}
+
+.user-table td {
+  padding: 10px 16px;
+  color: var(--us-text);
+  vertical-align: middle;
+}
+
+.user-table td[data-label="Foto"] {
+  text-align: center;
+}
+
+.user-table th:last-child,
+.user-table td:last-child {
+  white-space: nowrap;
+}
+
+.user-table .btn-group {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.btnActivar.btn-success {
+  background: #22c55e;
+  border: none;
+  color: #fff;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btnActivar.btn-success:hover {
+  background: #16a34a;
+}
+
+.btnActivar.btn-danger {
+  background: #ef4444;
+  border: none;
+  color: #fff;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btnActivar.btn-danger:hover {
+  background: #dc2626;
+}
+
+.btnEditarUsuario {
+  background: #f59e0b;
+  border: none;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  line-height: 1;
+}
+
+.btnEditarUsuario:hover {
+  background: #d97706;
+}
+
+.btnEliminarUsuario {
+  background: #ef4444;
+  border: none;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  line-height: 1;
+}
+
+.btnEliminarUsuario:hover {
+  background: #dc2626;
+}
+
+.modal-content {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.modal-header {
+  border-radius: 12px 12px 0 0;
+  padding: 16px 20px;
+}
+
+.modal-header .close {
+  color: #fff;
+  opacity: 0.8;
+}
+
+.modal-header .close:hover {
+  opacity: 1;
+}
+
+.modal-title {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.modal-body {
+  padding: 24px;
+}
+
+.modal-footer {
+  border-top: 1px solid var(--us-border);
+  padding: 16px 20px;
+}
+
+.btn-primary {
+  background: var(--us-accent);
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn-primary:hover {
+  background: #2563eb;
+}
+
+@media (max-width: 767px) {
+  .user-table thead {
+    display: none;
+  }
+  .user-table,
+  .user-table tbody,
+  .user-table tr,
+  .user-table td {
+    display: block;
+    width: 100%;
+  }
+  .user-table tr {
+    background: var(--us-card);
+    border-radius: var(--us-radius);
+    margin-bottom: 10px;
+    padding: 12px 16px;
+    border: 1px solid var(--us-border);
+    box-shadow: var(--us-shadow);
+  }
+  .user-table tr:nth-child(even) {
+    background: #fafafa;
+  }
+  .user-table td {
+    border: none !important;
+    padding: 6px 0 6px 120px !important;
+    position: relative;
+    font-size: 14px;
+    min-height: 28px;
+  }
+  .user-table td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    top: 6px;
+    font-weight: 600;
+    font-size: 11px;
+    color: var(--us-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .user-table td[data-label="Foto"] {
+    padding-left: 0 !important;
+    text-align: left;
+  }
+  .user-table td[data-label="Foto"]:before {
+    display: none;
+  }
+  .user-table td[data-label="Acciones"] {
+    padding-left: 0 !important;
+    margin-top: 8px;
+  }
+  .user-table td[data-label="Acciones"]:before {
+    display: none;
+  }
+  .user-table td[data-label="#"] {
+    display: none;
+  }
+  .user-table .btn-group {
+    display: flex;
+    gap: 8px;
+  }
+  .user-table .btn-group .btn {
+    flex: 1;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+}
+</style>
 <div class="content-wrapper">
 
   <section class="content-header">
@@ -35,7 +303,7 @@ if($_SESSION["perfil"] == "Especial" || $_SESSION["perfil"] == "Vendedor"){
 
   <section class="content">
 
-    <div class="box">
+    <div class="usuarios-panel">
 
       <div class="box-header with-border">
   
@@ -49,7 +317,7 @@ if($_SESSION["perfil"] == "Especial" || $_SESSION["perfil"] == "Vendedor"){
 
       <div class="box-body">
         
-       <table class="table table-bordered table-striped tablas usuarios-table" width="100%">
+       <table class="user-table tablas usuarios-table" width="100%">
           
         <thead>
           
@@ -79,10 +347,10 @@ if($_SESSION["perfil"] == "Especial" || $_SESSION["perfil"] == "Vendedor"){
 
        foreach ($usuarios as $key => $value){
           
-           echo '  <tr>
-                    <td data-label="#">'.($key+1).'</td>
-                    <td data-label="Nombre">'.htmlspecialchars($value["nombre"], ENT_QUOTES, 'UTF-8').'</td>
-                    <td data-label="Usuario">'.htmlspecialchars($value["usuario"], ENT_QUOTES, 'UTF-8').'</td>';
+            echo '  <tr>
+                     <td data-label="#">'.($key+1).'</td>
+                     <td data-label="Nombre">'.htmlspecialchars($value["nombre"], ENT_QUOTES, 'UTF-8').'</td>
+                     <td data-label="Usuario">'.htmlspecialchars($value["usuario"], ENT_QUOTES, 'UTF-8').'</td>';
 
                    if($value["foto"] != ""){
 
@@ -426,85 +694,6 @@ MODAL EDITAR USUARIO (SIN ESPECIAL)
   </div>
 
 </div>
-
-<style>
-  .usuarios-table th:last-child,
-  .usuarios-table td:last-child {
-    white-space: nowrap;
-  }
-  .usuarios-table td[data-label="Foto"] {
-    text-align: center;
-  }
-
-  @media (max-width: 767px) {
-    .usuarios-table thead {
-      display: none;
-    }
-    .usuarios-table,
-    .usuarios-table tbody,
-    .usuarios-table tr,
-    .usuarios-table td {
-      display: block;
-      width: 100%;
-    }
-    .usuarios-table tr {
-      background: #fff;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      padding: 10px 12px;
-      border: 1px solid #d2d6de;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-      position: relative;
-    }
-    .usuarios-table tr:nth-child(even) {
-      background: #f9f9f9;
-    }
-    .usuarios-table td {
-      border: none !important;
-      padding: 5px 0 5px 110px !important;
-      position: relative;
-      font-size: 14px;
-      min-height: 28px;
-    }
-    .usuarios-table td:before {
-      content: attr(data-label);
-      position: absolute;
-      left: 0;
-      top: 5px;
-      font-weight: 600;
-      font-size: 12px;
-      color: #666;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-    }
-    .usuarios-table td[data-label="Foto"] {
-      padding-left: 0 !important;
-      text-align: left;
-    }
-    .usuarios-table td[data-label="Foto"]:before {
-      display: none;
-    }
-    .usuarios-table td[data-label="Acciones"] {
-      padding-left: 0 !important;
-      margin-top: 6px;
-    }
-    .usuarios-table td[data-label="Acciones"]:before {
-      display: none;
-    }
-    .usuarios-table td[data-label="#"] {
-      display: none;
-    }
-    .usuarios-table .btn-group {
-      display: flex;
-      gap: 6px;
-    }
-    .usuarios-table .btn-group .btn {
-      flex: 1;
-      padding: 8px 12px;
-      font-size: 13px;
-    }
-  }
-</style>
 
 <?php
 

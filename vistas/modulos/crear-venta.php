@@ -131,7 +131,7 @@ if($_SESSION["perfil"] == "Especial"){
                 </div>
                 <div class="concepto-extra-inputs" id="ropaPrecioGroup" style="display:none;">
                   <div class="concepto-extra-row">
-                    <input type="text" class="form-control" id="ropaDescripcion" placeholder="" maxlength="60">
+                    <input type="text" class="form-control" id="ropaDescripcion" placeholder="Ej: Ropa" maxlength="60">
                     <div class="input-group concepto-extra-price">
                       <span class="input-group-addon" style="background:#f4f4f4;color:#999;font-weight:600;">$</span>
                       <input type="number" class="form-control" id="ropaPrecio" placeholder="0" step="any" min="0">
@@ -460,6 +460,7 @@ MODAL AGREGAR CLIENTE
     align-items: center;
   }
   .concepto-extra-row .form-control { flex: 1; min-width: 0; }
+  .concepto-extra-row #ropaDescripcion { flex: 0 0 220px; max-width: 220px; }
 
   .concepto-extra-price {
     width: 140px;
@@ -558,7 +559,7 @@ MODAL AGREGAR CLIENTE
      ============================================ */
   .payment-row {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: flex-start;
     gap: 10px;
     flex-wrap: wrap;
@@ -569,7 +570,7 @@ MODAL AGREGAR CLIENTE
   }
   .payment-row .objetoTotalVenta {
     flex: 1 1 160px;
-    max-width: var(--ancho-objeto-derecha, 220px);
+    max-width: 200px;
   }
   .payment-row .objetoTotalVenta .input-group { width: 100%; }
 

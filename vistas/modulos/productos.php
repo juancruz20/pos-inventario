@@ -1,3 +1,226 @@
+<style>
+  :root {
+    --pr-bg: #f8fafc;
+    --pr-card: #ffffff;
+    --pr-border: #e2e8f0;
+    --pr-text: #1e293b;
+    --pr-muted: #94a3b8;
+    --pr-accent: #3b82f6;
+    --pr-radius: 8px;
+    --pr-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+
+  .productos-panel {
+    background: var(--pr-card);
+    border-radius: var(--pr-radius);
+    box-shadow: var(--pr-shadow);
+    border: 1px solid var(--pr-border);
+    overflow: hidden;
+  }
+
+  .productos-panel .panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--pr-border);
+    background: var(--pr-card);
+  }
+
+  .productos-panel .panel-body {
+    padding: 20px;
+  }
+
+  .prod-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    background: var(--pr-card);
+  }
+
+  .prod-table thead {
+    background: #f1f5f9;
+  }
+
+  .prod-table th {
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--pr-text);
+    border-bottom: 2px solid var(--pr-border);
+    white-space: nowrap;
+  }
+
+  .prod-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--pr-border);
+    vertical-align: middle;
+    color: var(--pr-text);
+  }
+
+  .prod-table tbody tr:hover {
+    background: #f8fafc;
+  }
+
+  .btn-moderno {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: .15s ease;
+    text-decoration: none;
+    background: var(--pr-accent);
+    color: #fff;
+  }
+
+  .btn-moderno:hover {
+    background: #2563eb;
+    color: #fff;
+  }
+
+  .btn-moderno-sm {
+    padding: 5px 12px;
+    font-size: 12px;
+  }
+
+  .btn-moderno-outline {
+    background: transparent;
+    color: var(--pr-text);
+    border: 1px solid var(--pr-border);
+  }
+
+  .btn-moderno-outline:hover {
+    background: #f1f5f9;
+    color: var(--pr-text);
+    border-color: #cbd5e1;
+  }
+
+  .btn-moderno-danger {
+    background: #ef4444;
+  }
+
+  .btn-moderno-danger:hover {
+    background: #dc2626;
+  }
+
+  .modal-moderno .modal-content {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.15);
+  }
+
+  .modal-moderno .modal-header {
+    border-radius: 12px 12px 0 0;
+    background: var(--pr-accent);
+    color: #fff;
+    padding: 16px 20px;
+    border-bottom: none;
+  }
+
+  .modal-moderno .modal-header .close {
+    color: #fff;
+    opacity: .75;
+  }
+
+  .modal-moderno .modal-header .close:hover {
+    opacity: 1;
+  }
+
+  .modal-moderno .modal-body {
+    padding: 24px 20px;
+  }
+
+  .modal-moderno .modal-footer {
+    border-top: 1px solid var(--pr-border);
+    padding: 14px 20px;
+  }
+
+  .modal-moderno .form-control {
+    border-radius: 6px;
+    border: 1px solid var(--pr-border);
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .modal-moderno .form-control:focus {
+    border-color: var(--pr-accent);
+    box-shadow: 0 0 0 3px rgba(59,130,246,.15);
+  }
+
+  .modal-moderno .input-group-addon {
+    background: #f1f5f9;
+    border: 1px solid var(--pr-border);
+    border-radius: 6px 0 0 6px;
+    color: var(--pr-muted);
+  }
+
+  .modal-moderno .input-group .form-control {
+    border-radius: 0 6px 6px 0;
+  }
+
+  .img-thumbnail.previsualizar {
+    border-radius: 6px;
+    border: 1px solid var(--pr-border);
+    padding: 4px;
+  }
+
+  @media (max-width: 768px) {
+    .prod-table {
+      display: block;
+    }
+
+    .prod-table thead {
+      display: none;
+    }
+
+    .prod-table tbody,
+    .prod-table tr,
+    .prod-table td {
+      display: block;
+    }
+
+    .prod-table tr {
+      margin-bottom: 12px;
+      padding: 14px;
+      border: 1px solid var(--pr-border);
+      border-radius: 8px;
+      background: var(--pr-card);
+      box-shadow: var(--pr-shadow);
+    }
+
+    .prod-table td {
+      padding: 6px 0;
+      border-bottom: none;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .prod-table td::before {
+      content: attr(data-label);
+      font-weight: 600;
+      color: var(--pr-muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .productos-panel .panel-header {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>
+
 <?php
 
 if(!isset($_SESSION["iniciarSesion"]) || $_SESSION["iniciarSesion"] != "ok"){
@@ -35,22 +258,22 @@ if(!isset($_SESSION["iniciarSesion"]) || $_SESSION["iniciarSesion"] != "ok"){
 
   <section class="content">
 
-    <div class="box">
+    <div class="productos-panel">
 
-      <div class="box-header with-border">
+      <div class="panel-header">
   
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProducto">
+        <button class="btn-moderno" data-toggle="modal" data-target="#modalAgregarProducto">
           
-          Agregar producto
+          <i class="fa fa-plus"></i> Agregar producto
 
         </button>
 
       </div>
 
-      <div class="box-body">
+      <div class="panel-body">
         
-       <table class="table table-bordered table-striped dt-responsive tablaProductos" width="100%">
-         
+       <table class="prod-table table table-bordered table-striped dt-responsive tablaProductos" width="100%">
+        
         <thead>
          
           <tr>
@@ -87,7 +310,7 @@ if(!isset($_SESSION["iniciarSesion"]) || $_SESSION["iniciarSesion"] != "ok"){
 MODAL AGREGAR PRODUCTO
 ======================================-->
 
-<div id="modalAgregarProducto" class="modal fade" role="dialog">
+<div id="modalAgregarProducto" class="modal fade modal-moderno" role="dialog">
   
   <div class="modal-dialog">
 
@@ -99,7 +322,7 @@ MODAL AGREGAR PRODUCTO
         CABEZA DEL MODAL
         ======================================-->
 
-        <div class="modal-header" style="background:#3c8dbc; color:white">
+        <div class="modal-header">
 
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
@@ -230,9 +453,9 @@ MODAL AGREGAR PRODUCTO
 
         <div class="modal-footer">
 
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn-moderno btn-moderno-outline" data-dismiss="modal">Salir</button>
 
-          <button type="submit" class="btn btn-primary">Guardar producto</button>
+          <button type="submit" class="btn-moderno">Guardar producto</button>
 
         </div>
 
@@ -255,7 +478,7 @@ MODAL AGREGAR PRODUCTO
 MODAL EDITAR PRODUCTO
 ======================================-->
 
-<div id="modalEditarProducto" class="modal fade" role="dialog">
+<div id="modalEditarProducto" class="modal fade modal-moderno" role="dialog">
   
   <div class="modal-dialog">
 
@@ -267,7 +490,7 @@ MODAL EDITAR PRODUCTO
         CABEZA DEL MODAL
         ======================================-->
 
-        <div class="modal-header" style="background:#3c8dbc; color:white">
+        <div class="modal-header">
 
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
@@ -386,9 +609,9 @@ MODAL EDITAR PRODUCTO
 
         <div class="modal-footer">
 
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn-moderno btn-moderno-outline" data-dismiss="modal">Salir</button>
 
-          <button type="submit" class="btn btn-primary">Guardar cambios</button>
+          <button type="submit" class="btn-moderno">Guardar cambios</button>
 
         </div>
 

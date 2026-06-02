@@ -1,0 +1,48 @@
+================================================================
+POS INVENTARIO - GUIA RAPIDA DE INSTALACION
+================================================================
+
+REQUISITOS
+----------
+- XAMPP (o cualquier servidor con PHP 7.4+ y MySQL/MariaDB)
+- El proyecto copiado en C:\xampp\htdocs\pos\
+
+PASOS
+-----
+
+1. INICIAR XAMPP
+   Abrir el panel de XAMPP y arrancar Apache + MySQL.
+
+2. IMPORTAR LA BASE DE DATOS
+   Opcion A - Desde phpMyAdmin (recomendado):
+     a) Ir a http://localhost/phpmyadmin
+     b) Click en la pestaña "Importar"
+     c) Seleccionar el archivo pos.sql
+     d) Click "Continuar"
+
+   Opcion B - Desde consola:
+     C:\xampp\mysql\bin\mysql.exe -u root < C:\xampp\htdocs\pos\pos.sql
+
+3. VERIFICAR CONEXION
+   La base de datos "pos" se crea automaticamente con:
+     - 1 administrador  (admin / admin)
+     - 1 vendedor       (vendedor / vendedor)
+     - 1 cliente "Venta Rapida" (cliente por defecto)
+     - 1 categoria "General"
+
+4. ACCEDER AL SISTEMA
+   Abrir en el navegador:  http://localhost/pos
+
+CREDENCIALES POR DEFECTO
+------------------------
+   Administrador:  admin       /  admin
+   Vendedor:       vendedor    /  vendedor
+
+NOTAS
+-----
+- El archivo pos.sql BORRA y RECREA la base de datos cada vez que se importa.
+  Si tenes datos importantes, hace un backup antes.
+- El archivo bd-indices.sql ya no es necesario: los indices de rendimiento
+  estan incluidos dentro de pos.sql.
+- Para que el sistema funcione en otra PC, solo hay que copiar la carpeta
+  pos/ completa y volver a importar pos.sql.

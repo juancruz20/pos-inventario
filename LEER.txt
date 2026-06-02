@@ -1,4 +1,22 @@
-Ingreso al sistema:
+POS Inventario - Sistema Punto de Venta
+========================================
 
-Usuario: admin
-Contraseña: admin
+USUARIOS POR DEFECTO
+--------------------
+  Administrador: admin     / admin
+  Vendedor:      vendedor  / vendedor
+
+INSTALACION
+-----------
+  Ver INSTALAR.txt para los pasos detallados.
+
+ESTRUCTURA
+----------
+  ajax/            Endpoints AJAX (DataTables, CRUD, stock)
+  controladores/   Logica de negocio (MVC)
+  extensiones/     TCPDF (PDF) y dependencias Composer
+  helpers/         Funciones auxiliares
+  modelos/         Acceso a datos (MVC)
+  vistas/          UI: plantilla, modulos, plugins, dist
+
+Para mas informacion ver README.md.

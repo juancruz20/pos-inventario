@@ -19,12 +19,16 @@ Sistema POS/Inventario con AdminLTE, PHP y MySQL.
 
 3. Importar la base de datos:
    - Abrir phpMyAdmin: `http://localhost/phpmyadmin`
-   - Crear base de datos `pos`
-   - Importar `pos.sql` (incluido en el proyecto)
+   - Click en la pestaña **Importar**
+   - Seleccionar el archivo `pos.sql` (incluido en el proyecto)
+   - Click en **Continuar**
+   - El script crea automáticamente la base `pos`, todas las tablas, índices y datos iniciales
 
-4. Configurar conexión: editar `config.php` con los datos de tu base de datos
+4. (Opcional) Configurar conexión: editar `config.php` con los datos de tu base de datos. Por defecto usa `root` sin contraseña en `localhost`.
 
 5. Acceder: `http://localhost/pos`
+
+> Ver `INSTALAR.txt` para instrucciones detalladas.
 
 ## Despliegue en InfinityFree
 

@@ -114,7 +114,7 @@ baseVentas.obtenerDescripcionRopa = function () {
   var $descripcionRopa = $("#ropaDescripcion");
   if ($descripcionRopa.length) {
     var descripcion = $.trim($descripcionRopa.val());
-    return descripcion !== "" ? descripcion : "ropa";
+    return descripcion;
   }
 
   return "Concepto extra";
@@ -133,7 +133,7 @@ baseVentas.actualizarEstadoRopa = function () {
 
   if (!activo) {
     if ($descripcionRopa.length) {
-      $descripcionRopa.val("ropa");
+      $descripcionRopa.val("");
     }
     $("#ropaPrecio").val(0);
   }
