@@ -1,14 +1,22 @@
 <?php
 
+if(!defined('DEBUG')){
+    require_once __DIR__ . "/config.php";
+}
+
+if(DEBUG){
+    ini_set('display_errors', 1);
+    ini_set("log_errors", 1);
+    ini_set("error_log", __DIR__ . "/php_error_log");
+    error_reporting(E_ALL);
+}else{
+    ini_set('display_errors', 0);
+    ini_set("log_errors", 1);
+    ini_set("error_log", __DIR__ . "/php_error_log");
+    error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_WARNING);
+}
+
 session_start();
-
-/*=============================================
-Mostrar errores
-=============================================*/
-
-ini_set('display_errors', 1);
-ini_set("log_errors", 1);
-ini_set("error_log",  __DIR__ . "/php_error_log");
 
 require_once "controladores/plantilla.controlador.php";
 require_once "controladores/usuarios.controlador.php";

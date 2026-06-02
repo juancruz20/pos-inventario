@@ -2,7 +2,6 @@
 -- POS Inventario - Base de datos limpia
 -- Listo para importar en cualquier PC / XAMPP
 -- ============================================================
-
 DROP DATABASE IF EXISTS `pos`;
 CREATE DATABASE `pos` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
 USE `pos`;

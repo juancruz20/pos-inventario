@@ -10,39 +10,51 @@ REQUISITOS
 PASOS
 -----
 
-1. INICIAR XAMPP
-   Abrir el panel de XAMPP y arrancar Apache + MySQL.
+OPCION A - INSTALADOR AUTOMATICO (recomendado)
+   1. Iniciar XAMPP y arrancar Apache + MySQL.
+   2. Abrir en el navegador:  http://localhost/pos/install.php
+   3. Click en "Instalar base de datos".
+   4. Listo. Abre http://localhost/pos para entrar.
+   5. (Opcional) Borrar install.php por seguridad.
 
-2. IMPORTAR LA BASE DE DATOS
-   Opcion A - Desde phpMyAdmin (recomendado):
-     a) Ir a http://localhost/phpmyadmin
-     b) Click en la pestaña "Importar"
-     c) Seleccionar el archivo pos.sql
-     d) Click "Continuar"
+OPCION B - MANUAL
+   1. Iniciar XAMPP y arrancar Apache + MySQL.
+   2. Importar pos.sql desde phpMyAdmin o consola:
+        phpmyadmin -> Importar -> seleccionar pos.sql -> Continuar
+        o bien: C:\xampp\mysql\bin\mysql.exe -u root < pos.sql
+   3. Si el host de MySQL no es 127.0.0.1:3306 con root sin password,
+      editar config.php antes de usar el sistema.
 
-   Opcion B - Desde consola:
-     C:\xampp\mysql\bin\mysql.exe -u root < C:\xampp\htdocs\pos\pos.sql
-
-3. VERIFICAR CONEXION
-   La base de datos "pos" se crea automaticamente con:
-     - 1 administrador  (admin / admin)
-     - 1 vendedor       (vendedor / vendedor)
-     - 1 cliente "Venta Rapida" (cliente por defecto)
-     - 1 categoria "General"
-
-4. ACCEDER AL SISTEMA
-   Abrir en el navegador:  http://localhost/pos
+DESPUES DE INSTALAR
+-------------------
+   Abrir:  http://localhost/pos
 
 CREDENCIALES POR DEFECTO
 ------------------------
    Administrador:  admin       /  admin
    Vendedor:       vendedor    /  vendedor
 
+REQUISITOS DE PHP
+-----------------
+   - PHP 7.4 o superior (probado en 8.2)
+   - Extensiones habilitadas en php.ini:
+       extension=pdo_mysql
+       extension=openssl
+       extension=gd
+   - En XAMPP ya vienen habilitadas por defecto.
+
+PARA OTRA PC
+------------
+   1. Copiar toda la carpeta pos/ (sin el directorio .git si se prefiere)
+   2. Pegarla en C:\xampp\htdocs\ de la otra PC
+   3. Iniciar XAMPP (Apache + MySQL)
+   4. Ejecutar install.php
+   5. Entrar al sistema
+
 NOTAS
 -----
-- El archivo pos.sql BORRA y RECREA la base de datos cada vez que se importa.
-  Si tenes datos importantes, hace un backup antes.
-- El archivo bd-indices.sql ya no es necesario: los indices de rendimiento
-  estan incluidos dentro de pos.sql.
-- Para que el sistema funcione en otra PC, solo hay que copiar la carpeta
-  pos/ completa y volver a importar pos.sql.
+- La carpeta del proyecto debe tener permisos de escritura para
+  Apache (necesario para subir imagenes de productos y usuarios).
+- Si MySQL usa un puerto distinto de 3306, editar DB_PORT en config.php.
+- Si el usuario MySQL tiene password, editar DB_PASS en config.php.
+- bd-indices.sql ya no es necesario: los indices estan en pos.sql.

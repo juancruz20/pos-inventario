@@ -8,12 +8,28 @@ class Conexion{
 
         if(self::$link === null){
             require_once __DIR__ . "/../config.php";
-            self::$link = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME,
-                                  DB_USER,
-                                  DB_PASS);
 
-            self::$link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            self::$link->exec("set names utf8");
+            $dsn = "mysql:host=" . DB_HOST
+                 . ";port=" . DB_PORT
+                 . ";dbname=" . DB_NAME
+                 . ";charset=utf8";
+
+            try {
+                self::$link = new PDO($dsn, DB_USER, DB_PASS);
+                self::$link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                self::$link->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+                self::$link->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            } catch (PDOException $e) {
+                throw new Exception(
+                    "No se pudo conectar a la base de datos.\n\n"
+                    . "Verifica que:\n"
+                    . "  1. MySQL este corriendo en " . DB_HOST . ":" . DB_PORT . "\n"
+                    . "  2. La base de datos '" . DB_NAME . "' exista (importar pos.sql)\n"
+                    . "  3. El usuario '" . DB_USER . "' tenga permisos\n"
+                    . "  4. Los datos en config.php sean correctos\n\n"
+                    . "Detalle tecnico: " . $e->getMessage()
+                );
+            }
         }
 
         return self::$link;
