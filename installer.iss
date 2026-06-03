@@ -1,20 +1,16 @@
-; ============================================================
-; POS Inventario - Script de Inno Setup
-; Crea un instalador .exe que incluye XAMPP portable + el sistema
-; y configura Apache/MySQL para arrancar automaticamente con Windows
-; ============================================================
-; Compilacion: descargar Inno Setup de https://jrsoftware.org/isdl.php
-;   y abrir este archivo con Inno Setup Compiler -> Build -> Compile
-; ============================================================
+; POS Inventario - Instalador completo con XAMPP portable
+; Compila con Inno Setup 6.x
 
 #define MyAppName "POS Inventario"
-#define MyAppVersion "2.0"
-#define MyAppPublisher "POS Inventario"
+#define MyAppVersion "1.0.0"
+#define MyAppPublisher "juancruz20"
 #define MyAppURL "https://github.com/juancruz20/pos-inventario"
-#define MyAppExeName "pos_installer.exe"
+#define MyAppExeName "xampp_start.exe"
+#define SourceXampp "C:\Users\ManuF\AppData\Local\Temp\opencode\pos_installer_build\xampp_portable\xampp"
+#define SourceProject "C:\Users\ManuF\AppData\Local\Temp\opencode\pos_installer_build\project\pos"
 
 [Setup]
-AppId={{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}
+AppId={{A1B2C3D4-E5F6-4A5B-8C9D-0E1F2A3B4C5D}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
@@ -22,86 +18,94 @@ AppPublisherURL={#MyAppURL}
 DefaultDirName={autopf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
-OutputDir=installer_output
-OutputBaseFilename={#MyAppExeName}
-Compression=lzma2
-SolidCompression=yes
-WizardStyle=modern
 PrivilegesRequired=admin
-UninstallDisplayIcon={app}\xampp\apache\bin\httpd.exe
-ArchitecturesInstallIn64BitMode=x64compatible
+PrivilegesRequiredOverridesAllowed=dialog
+OutputDir=C:\xampp\htdocs\pos\dist
+OutputBaseFilename=pos_installer_full_setup
+SetupIconFile=
+Compression=lzma2/normal
+SolidCompression=yes
+InternalCompressLevel=ultra
+DiskSpanning=no
+UninstallDisplayIcon={app}\xampp\xampp-control.exe
+UninstallDisplayName={#MyAppName}
+VersionInfoVersion={#MyAppVersion}
+VersionInfoCompany={#MyAppPublisher}
+WizardSizePercent=120
+WindowVisible=no
 
 [Languages]
 Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 
 [Tasks]
-Name: "desktopicon"; Description: "Crear acceso directo en el escritorio"; GroupDescription: "Accesos directos:";
-Name: "startmenuicon"; Description: "Crear acceso directo en el menu inicio"; GroupDescription: "Accesos directos:";
-Name: "autostartservices"; Description: "Iniciar Apache y MySQL automaticamente al encender la PC (recomendado)"; GroupDescription: "Servicios:";
+Name: "autostart"; Description: "Iniciar Apache y MySQL automaticamente al arrancar Windows"; GroupDescription: "Servicios:"; Flags: checkedonce
+Name: "desktopicon"; Description: "Crear acceso directo en el escritorio"; GroupDescription: "Accesos directos:"; Flags: checkedonce
 
 [Files]
-; Copiar XAMPP portable
-Source: "C:\xampp\*"; DestDir: "{app}\xampp"; Flags: ignoreversion recursesubdirs createallsubdirs; Check: XamppNotInstalled
-; Copiar el sistema POS
-Source: "C:\xampp\htdocs\pos\*"; DestDir: "{app}\xampp\htdocs\pos"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#SourceXampp}\*"; DestDir: "{app}\xampp"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#SourceProject}\*"; DestDir: "{app}\xampp\htdocs\pos"; Flags: ignoreversion recursesubdirs createallsubdirs
+
+[Dirs]
+Name: "{app}\xampp\tmp"
 
 [Icons]
-Name: "{commondesktop}\{#MyAppName}"; Filename: "http://localhost/pos"; Tasks: desktopicon
-Name: "{group}\{#MyAppName}"; Filename: "http://localhost/pos"; Tasks: startmenuicon
-Name: "{group}\Panel de Control XAMPP"; Filename: "{app}\xampp\xampp-control.exe"
-Name: "{group}\Instalar Base de Datos"; Filename: "http://localhost/pos/install.php"
-Name: "{group}\Desinstalar {#MyAppName}"; Filename: "{uninstallexe}"
+Name: "{group}\{#MyAppName}"; Filename: "{app}\xampp\xampp-control.exe"
+Name: "{group}\Abrir POS en el navegador"; Filename: "http://localhost/pos"
+Name: "{group}\Ver archivos del proyecto"; Filename: "{app}\xampp\htdocs\pos"
+Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\xampp\xampp-control.exe"; Tasks: desktopicon
 
 [Run]
-; Registrar Apache como servicio de Windows (inicio automatico)
-Filename: "{app}\xampp\apache\bin\httpd.exe"; Parameters: "-k install -n ""ApachePOS"""; Flags: runhidden; Tasks: autostartservices; Check: ServiceNotInstalled('ApachePOS')
-Filename: "sc"; Parameters: "config ApachePOS start= auto"; Flags: runhidden; Tasks: autostartservices
-Filename: "net"; Parameters: "start ApachePOS"; Flags: runhidden; Tasks: autostartservices
-
-; Registrar MySQL como servicio de Windows (inicio automatico)
-Filename: "{app}\xampp\mysql\bin\mysqld.exe"; Parameters: "--install MySQLPOS --defaults-file=""{app}\xampp\mysql\bin\my.ini"""; Flags: runhidden; Tasks: autostartservices; Check: ServiceNotInstalled('MySQLPOS')
-Filename: "sc"; Parameters: "config MySQLPOS start= auto"; Flags: runhidden; Tasks: autostartservices
-Filename: "net"; Parameters: "start MySQLPOS"; Flags: runhidden; Tasks: autostartservices
-
-; Abrir el instalador del sistema en el navegador (ultimo paso)
-Filename: "http://localhost/pos/install.php"; Description: "Abrir el instalador del sistema en el navegador"; Flags: nowait postinstall skipifsilent
-
-[UninstallDelete]
-Type: filesandordirs; Name: "{app}\xampp\htdocs\pos"
+Filename: "{app}\xampp\php\php.exe"; Parameters: "install.php --auto"; WorkingDir: "{app}\xampp\htdocs\pos"; Flags: runhidden waituntilterminated; Tasks: autostart
+Filename: "http://localhost/pos"; Description: "Abrir el sistema en el navegador"; Flags: postinstall shellexec skipifsilent
 
 [UninstallRun]
-; Detener y desregistrar los servicios al desinstalar
-Filename: "net"; Parameters: "stop ApachePOS"; Flags: runhidden
-Filename: "{app}\xampp\apache\bin\httpd.exe"; Parameters: "-k uninstall -n ""ApachePOS"""; Flags: runhidden
-Filename: "net"; Parameters: "stop MySQLPOS"; Flags: runhidden
-Filename: "{app}\xampp\mysql\bin\mysqld.exe"; Parameters: "--remove MySQLPOS"; Flags: runhidden
+Filename: "{cmd}"; Parameters: "/c taskkill /F /IM mysqld.exe & taskkill /F /IM httpd.exe & exit 0"; Flags: runhidden
+Filename: "{app}\xampp\uninstall.exe"; Flags: runhidden; RunOnceId: "UninstallXampp"
+
+[UninstallDelete]
+Type: filesandordirs; Name: "{app}\xampp\mysql\data\*"
+Type: filesandordirs; Name: "{app}\xampp\php\tmp"
+Type: filesandordirs; Name: "{app}\xampp\tmp"
+
+[Messages]
+BeveledLabel={#MyAppName} v{#MyAppVersion} - Sistema de Punto de Venta
+SetupWindowTitle=Instalador de {#MyAppName}
 
 [Code]
-function XamppNotInstalled: Boolean;
-begin
-  Result := not DirExists(ExpandConstant('{app}\xampp'));
-end;
-
-function ServiceNotInstalled(ServiceName: string): Boolean;
+function NeedsAddPath(Param: string): boolean;
 var
-  ResultCode: Integer;
+  OrigPath: string;
 begin
-  // Devuelve True si el servicio NO esta instalado
-  Result := not Exec('sc', 'query "' + ServiceName + '"', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
-            or (ResultCode <> 0);
+  if not RegQueryStringValue(HKEY_LOCAL_MACHINE, 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment', 'Path', OrigPath) then
+    Result := True
+  else
+    Result := Pos(';' + LowerCase(Param) + ';', ';' + LowerCase(OrigPath) + ';') = 0;
 end;
 
-function InitializeSetup: Boolean;
+procedure AddToPath(Path: string);
+var
+  Paths: string;
 begin
-  MsgBox('Este instalador va a configurar POS Inventario en esta PC.' + #13#10 + #13#10 +
-         'Incluye XAMPP (Apache + MySQL) si no esta instalado.' + #13#10 +
-         'Si activas la opcion recomendada, los servicios arrancaran solos al encender la PC.' + #13#10 +
-         'Se creara un acceso directo en el escritorio.',
-         mbInformation, MB_OK);
+  if NeedsAddPath(Path) then
+  begin
+    if RegQueryStringValue(HKEY_LOCAL_MACHINE, 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment', 'Path', Paths) then
+    begin
+      Paths := Paths + ';' + Path;
+      RegWriteStringValue(HKEY_LOCAL_MACHINE, 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment', 'Path', Paths);
+    end;
+  end;
+end;
+
+function InitializeSetup(): Boolean;
+begin
   Result := True;
 end;
 
 procedure CurStepChanged(CurStep: TSetupStep);
 begin
-  // Hook para pasos personalizados (dejado vacio para futuras extensiones)
+  if CurStep = ssPostInstall then
+  begin
+    AddToPath(ExpandConstant('{app}\xampp\php'));
+    AddToPath(ExpandConstant('{app}\xampp\mysql\bin'));
+  end;
 end;
