@@ -30,3 +30,6 @@ vistas/plugins/
 # Imagenes de productos y usuarios (contenido generado por el usuario)
 vistas/img/productos/
 vistas/img/usuarios/
+
+# Artefactos de build (binarios > 100MB que GitHub rechaza)
+dist/
