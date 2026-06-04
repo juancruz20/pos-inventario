@@ -4,6 +4,7 @@ session_destroy();
 
 echo '<script>
 
-	window.location = "ingreso";
+	localStorage.removeItem("rango");
+	window.location = "inicio";
 
 </script>';

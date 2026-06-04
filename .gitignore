@@ -33,3 +33,4 @@ vistas/img/usuarios/
 
 # Artefactos de build (binarios > 100MB que GitHub rechaza)
 dist/
+output/

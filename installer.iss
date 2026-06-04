@@ -1,111 +1,93 @@
-; POS Inventario - Instalador completo con XAMPP portable
-; Compila con Inno Setup 6.x
+; ============================================
+; Script Inno Setup - Sistema POS
+; ============================================
+; Empaqueta el proyecto POS para distribuirlo a otra PC.
+;
+; Requisitos en la PC destino:
+;   - XAMPP instalado en C:\xampp\ (Apache + MySQL)
+;
+; Lo que hace este instalador:
+;   1. Copia todos los archivos del proyecto a C:\xampp\htdocs\pos\
+;   2. Crea acceso directo en el escritorio
+;   3. (Opcional) Crea acceso directo en el menú inicio
+;
+; Para compilar: instalar Inno Setup (https://jrsoftware.org/isinfo.php)
+;   y abrir este archivo con Inno Setup Compiler, o ejecutar ISCC.exe.
+; ============================================
 
-#define MyAppName "POS Inventario"
+#define MyAppName "Sistema POS"
 #define MyAppVersion "1.0.0"
-#define MyAppPublisher "juancruz20"
+#define MyAppPublisher "Inventario POS"
 #define MyAppURL "https://github.com/juancruz20/pos-inventario"
-#define MyAppExeName "xampp_start.exe"
-#define SourceXampp "C:\Users\ManuF\AppData\Local\Temp\opencode\pos_installer_build\xampp_portable\xampp"
-#define SourceProject "C:\Users\ManuF\AppData\Local\Temp\opencode\pos_installer_build\project\pos"
+#define MyAppExeName "POS.url"
 
 [Setup]
-AppId={{A1B2C3D4-E5F6-4A5B-8C9D-0E1F2A3B4C5D}
+AppId={{B5F8E4A1-9C2D-4D3E-B6F1-7A8C9E0D2B3F}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
-DefaultDirName={autopf}\{#MyAppName}
+AppSupportURL={#MyAppURL}
+DefaultDirName=C:\xampp\htdocs\pos
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
-PrivilegesRequired=admin
-PrivilegesRequiredOverridesAllowed=dialog
-OutputDir=C:\xampp\htdocs\pos\dist
-OutputBaseFilename=pos_installer_full_setup
-SetupIconFile=
-Compression=lzma2/normal
+DisableWelcomePage=no
+OutputDir=output
+OutputBaseFilename=pos_installer
+Compression=lzma
 SolidCompression=yes
-InternalCompressLevel=ultra
-DiskSpanning=no
-UninstallDisplayIcon={app}\xampp\xampp-control.exe
-UninstallDisplayName={#MyAppName}
-VersionInfoVersion={#MyAppVersion}
-VersionInfoCompany={#MyAppPublisher}
-WizardSizePercent=120
-WindowVisible=no
+WizardStyle=modern
+PrivilegesRequired=lowest
+UninstallDisplayIcon={app}\dist\img\plantilla\icono.png
+ArchitecturesInstallIn64BitMode=x64compatible
 
 [Languages]
 Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 
 [Tasks]
-Name: "autostart"; Description: "Iniciar Apache y MySQL automaticamente al arrancar Windows"; GroupDescription: "Servicios:"; Flags: checkedonce
-Name: "desktopicon"; Description: "Crear acceso directo en el escritorio"; GroupDescription: "Accesos directos:"; Flags: checkedonce
+Name: "desktopicon"; Description: "Crear acceso directo en el escritorio"; GroupDescription: "Accesos directos:"
 
 [Files]
-Source: "{#SourceXampp}\*"; DestDir: "{app}\xampp"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "{#SourceProject}\*"; DestDir: "{app}\xampp\htdocs\pos"; Flags: ignoreversion recursesubdirs createallsubdirs
-
-[Dirs]
-Name: "{app}\xampp\tmp"
+; Copia TODO el contenido del proyecto (carpeta pos actual) al destino
+; Excluye archivos innecesarios de git, pruebas, builds y scripts de dev
+Source: "*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: ".git\*,*.git,*.gitignore,*.gitkeep,output\*,*.ps1,*.tmp,*.log,installer.iss,backup.bat,restaurar.bat,_*"
+; NOTA: "ignoreversion" es importante para que reinstale sobre versiones nuevas
 
 [Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\xampp\xampp-control.exe"
-Name: "{group}\Abrir POS en el navegador"; Filename: "http://localhost/pos"
-Name: "{group}\Ver archivos del proyecto"; Filename: "{app}\xampp\htdocs\pos"
-Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\xampp\xampp-control.exe"; Tasks: desktopicon
+; Acceso directo que abre el instalador web (que crea la BD y la deja lista)
+Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\abrir-pos.bat"; Tasks: desktopicon
+Name: "{group}\Abrir Sistema POS"; Filename: "{app}\abrir-pos.bat"
+Name: "{group}\Instalar Base de Datos"; Filename: "{app}\instalar-pos.bat"
+Name: "{group}\Desinstalar"; Filename: "{uninstallexe}"
 
 [Run]
-Filename: "{app}\xampp\php\php.exe"; Parameters: "install.php --auto"; WorkingDir: "{app}\xampp\htdocs\pos"; Flags: runhidden waituntilterminated; Tasks: autostart
-Filename: "http://localhost/pos"; Description: "Abrir el sistema en el navegador"; Flags: postinstall shellexec skipifsilent
-
-[UninstallRun]
-Filename: "{cmd}"; Parameters: "/c taskkill /F /IM mysqld.exe & taskkill /F /IM httpd.exe & exit 0"; Flags: runhidden
-Filename: "{app}\xampp\uninstall.exe"; Flags: runhidden; RunOnceId: "UninstallXampp"
+; Opcional: lanzar el instalador web al terminar
+Filename: "{app}\instalar-pos.bat"; Description: "Ejecutar instalador web ahora"; Flags: nowait postinstall skipifsilent
 
 [UninstallDelete]
-Type: filesandordirs; Name: "{app}\xampp\mysql\data\*"
-Type: filesandordirs; Name: "{app}\xampp\php\tmp"
-Type: filesandordirs; Name: "{app}\xampp\tmp"
-
-[Messages]
-BeveledLabel={#MyAppName} v{#MyAppVersion} - Sistema de Punto de Venta
-SetupWindowTitle=Instalador de {#MyAppName}
+; Limpia archivos de cache al desinstalar
+Type: filesandordirs; Name: "{app}\vistas\img\productos\*"
+Type: filesandordirs; Name: "{app}\vistas\img\usuarios\*"
+Type: filesandordirs; Name: "{app}\vistas\img\comprobantes\*"
 
 [Code]
-function NeedsAddPath(Param: string): boolean;
-var
-  OrigPath: string;
-begin
-  if not RegQueryStringValue(HKEY_LOCAL_MACHINE, 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment', 'Path', OrigPath) then
-    Result := True
-  else
-    Result := Pos(';' + LowerCase(Param) + ';', ';' + LowerCase(OrigPath) + ';') = 0;
-end;
-
-procedure AddToPath(Path: string);
-var
-  Paths: string;
-begin
-  if NeedsAddPath(Path) then
-  begin
-    if RegQueryStringValue(HKEY_LOCAL_MACHINE, 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment', 'Path', Paths) then
-    begin
-      Paths := Paths + ';' + Path;
-      RegWriteStringValue(HKEY_LOCAL_MACHINE, 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment', 'Path', Paths);
-    end;
-  end;
-end;
-
+// Verifica que XAMPP este instalado antes de continuar
 function InitializeSetup(): Boolean;
+var
+  XamppPath: String;
 begin
   Result := True;
-end;
+  XamppPath := 'C:\xampp\';
 
-procedure CurStepChanged(CurStep: TSetupStep);
-begin
-  if CurStep = ssPostInstall then
+  if not DirExists(XamppPath) then
   begin
-    AddToPath(ExpandConstant('{app}\xampp\php'));
-    AddToPath(ExpandConstant('{app}\xampp\mysql\bin'));
+    if MsgBox('No se detecto XAMPP en ' + XamppPath + '.' + #13#10 +
+              'Este sistema requiere XAMPP con Apache y MySQL.' + #13#10 +
+              'Descarga gratis desde: https://www.apachefriends.org/' + #13#10#13#10 +
+              'Deseas continuar de todos modos?',
+              mbConfirmation, MB_YESNO) = IDNO then
+    begin
+      Result := False;
+    end;
   end;
 end;

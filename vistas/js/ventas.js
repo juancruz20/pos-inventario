@@ -265,27 +265,6 @@ $(".btnImprimirFactura").on("click", function () {
   window.open("extensiones/tcpdf/pdf/factura.php?codigo=" + codigo, "_blank");
 });
 
-$(".btnVerVenta").on("click", function () {
-  var idVenta = $(this).attr("idVenta");
-  $.ajax({
-    url: "ajax/ventas.ajax.php",
-    type: "POST",
-    data: { idVenta: idVenta, verVenta: true },
-    dataType: "json",
-    success: function (respuesta) {
-      $("#modalVerVenta .modal-body").html("");
-      var html = "<table class='table table-bordered'>";
-      html += "<tr><th>Producto</th><th>Cant</th><th>Precio</th><th>Total</th></tr>";
-      var productos = JSON.parse(respuesta["productos"]);
-      $.each(productos, function (i, p) {
-        html += "<tr><td>" + p.descripcion + "</td><td>" + p.cantidad + "</td><td>$ " + parseFloat(p.precio).toFixed(2) + "</td><td>$ " + parseFloat(p.total).toFixed(2) + "</td></tr>";
-      });
-      html += "</table>";
-      $("#modalVerVenta .modal-body").html(html);
-    },
-  });
-});
-
 $("#nuevoTotalVenta").on("input", function () {
   var total = parseFloat($(this).val()) || 0;
   var iva = total * 0.19;

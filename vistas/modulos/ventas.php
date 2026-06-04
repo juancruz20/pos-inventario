@@ -200,16 +200,6 @@ if($_SESSION["perfil"] == "Especial"){
 
 }
 
-$xml = ControladorVentas::ctrDescargarXML();
-
-if($xml){
-
-  rename($_GET["xml"].".xml", "xml/".$_GET["xml"].".xml");
-
-  echo '<a class="btn btn-block btn-success abrirXML" archivo="xml/'.$_GET["xml"].'.xml" href="ventas">Se ha creado correctamente el archivo XML <span class="fa fa-times pull-right"></span></a>';
-
-}
-
 ?>
 <div class="content-wrapper ventas-panel">
 
