@@ -14,6 +14,43 @@ $(".abrirXML").on("click", function () {
   window.open(archivo, "_blank");
 });
 
+// =====================================================================
+// DataTables: idioma español por defecto (global, sin dependencia de CDN)
+// Aplica a TODAS las tablas DataTable actuales y futuras.
+// =====================================================================
+if (window.jQuery && jQuery.fn && jQuery.fn.dataTable) {
+  jQuery.extend(true, jQuery.fn.dataTable.defaults, {
+    language: {
+      processing:     "Procesando...",
+      lengthMenu:     "Mostrar _MENU_ registros",
+      zeroRecords:    "No se encontraron resultados",
+      emptyTable:     "Ningún dato disponible en esta tabla",
+      info:           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+      infoEmpty:      "Mostrando registros del 0 al 0 de un total de 0 registros",
+      infoFiltered:   "(filtrado de un total de _MAX_ registros)",
+      infoPostFix:    "",
+      search:         "Buscar:",
+      url:            "",
+      infoThousands:  ",",
+      loadingRecords: "Cargando...",
+      paginate: {
+        first:    "Primero",
+        last:     "Último",
+        next:     "Siguiente",
+        previous: "Anterior",
+      },
+      aria: {
+        sortAscending:  ": Activar para ordenar la columna de manera ascendente",
+        sortDescending: ": Activar para ordenar la columna de manera descendente",
+      },
+      buttons: {
+        copy:   "Copiar",
+        colvis: "Visibilidad de columnas",
+      },
+    },
+  });
+}
+
 if ($(".tablaProductos").length) {
   $(".tablaProductos").DataTable({
     processing: true,
@@ -34,14 +71,28 @@ if ($(".tablaProductos").length) {
       { data: 7 },
       { data: 8 },
       { data: 9 },
-      { data: 10 },
     ],
     order: [[0, "asc"]],
     responsive: true,
     autoWidth: false,
-    language: {
-      url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
-    },
+  });
+}
+
+if ($(".tablaEans").length) {
+  $(".tablaEans").DataTable({
+    processing: true,
+    ajax: "ajax/datatable-eans.ajax.php",
+    columns: [
+      { data: 0 },
+      { data: 1 },
+      { data: 2 },
+      { data: 3 },
+      { data: 4 },
+      { data: 5 },
+    ],
+    order: [[0, "asc"]],
+    responsive: true,
+    autoWidth: false,
   });
 }
 
@@ -60,8 +111,5 @@ if ($(".tablaVentas").length) {
     order: [[0, "asc"]],
     responsive: true,
     autoWidth: false,
-    language: {
-      url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
-    },
   });
 }

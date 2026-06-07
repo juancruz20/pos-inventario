@@ -543,7 +543,7 @@
                   <th>Imagen</th>
                   <th>Código</th>
                   <th>Descripcion</th>
-                  <th>Stock</th>
+                  <th>Existencias</th>
                   <th>Acciones</th>
                 </tr>
 

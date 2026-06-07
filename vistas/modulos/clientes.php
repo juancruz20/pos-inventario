@@ -281,7 +281,7 @@ $badgeColor = $tc == "A" ? "#27ae60" : ($tc == "B" ? "#f39c12" : "#e74c3c");
               <span class="cliente-card-value">'.htmlspecialchars($value["documento"], ENT_QUOTES, 'UTF-8').'</span>
             </div>
             <div class="cliente-card-row">
-              <span class="cliente-card-label"><i class="fa fa-envelope"></i> Email</span>
+              <span class="cliente-card-label"><i class="fa fa-envelope"></i> Correo</span>
               <span class="cliente-card-value">'.htmlspecialchars($value["email"], ENT_QUOTES, 'UTF-8').'</span>
             </div>
             <div class="cliente-card-row">

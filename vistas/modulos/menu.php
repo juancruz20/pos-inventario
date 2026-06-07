@@ -108,6 +108,17 @@
 
 				</a>
 
+			</li>
+
+			<li>
+
+				<a href="eans">
+
+					<i class="fa fa-barcode"></i>
+					<span>EAN</span>
+
+				</a>
+
 			</li>';
 
 		}

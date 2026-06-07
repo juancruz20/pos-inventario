@@ -221,7 +221,7 @@ if($_SESSION["perfil"] == "Especial"){
                   <th>Imagen</th>
                   <th>Código</th>
                   <th>Descripcion</th>
-                  <th>Stock</th>
+                  <th>Existencias</th>
                   <th>Acciones</th>
                 </tr>
 
@@ -772,6 +772,17 @@ MODAL AGREGAR CLIENTE
 if ($(".tablaProductosVenta").length) {
   $(".tablaProductosVenta").DataTable({
     processing: true,
+    language: {
+      lengthMenu: "Mostrar _MENU_ registros",
+      search: "Buscar:",
+      emptyTable: "Ningún dato disponible en esta tabla",
+      info: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+      infoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+      paginate: {
+        next: "Siguiente",
+        previous: "Anterior"
+      }
+    },
     ajax: "ajax/datatable-productos.ajax.php",
     columns: [
       { data: 0 },
@@ -798,9 +809,6 @@ if ($(".tablaProductosVenta").length) {
     order: [[0, "asc"]],
     responsive: true,
     autoWidth: false,
-    language: {
-      url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
-    },
   });
 }
 </script>

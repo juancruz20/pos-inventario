@@ -283,9 +283,8 @@ if(!isset($_SESSION["iniciarSesion"]) || $_SESSION["iniciarSesion"] != "ok"){
             <th>Código</th>
             <th>Descripción</th>
             <th>Categoría</th>
-            <th>Stock</th>
-            <th>Actualizar stock</th>
-            <th>Precio de lista</th>
+            <th>Existencias</th>
+            <th>Actualizar existencias</th>
             <th>Precio de venta</th>
             <th>Agregado</th>
             <th>Acciones</th>
@@ -407,9 +406,41 @@ MODAL AGREGAR PRODUCTO
               
                 <span class="input-group-addon"><i class="fa fa-check"></i></span> 
 
-                <input type="number" class="form-control input-lg" name="nuevoStock" placeholder="Stock" required>
+                <input type="number" class="form-control input-lg" name="nuevoStock" placeholder="Existencias" required>
 
               </div>
+
+            </div>
+
+             <!-- ENTRADAS PARA ALERTAS DE STOCK -->
+
+             <div class="form-group">
+
+              <label class="control-label" style="font-weight:500;font-size:13px;color:#475569;display:block;margin-bottom:8px;">
+                <i class="fa fa-bell"></i> Alertas de existencias por producto
+              </label>
+
+              <div class="row">
+
+                <div class="col-xs-6">
+                  <div class="input-group" title="Cuando las existencias estén en este valor o menos, se muestra en ROJO">
+                    <span class="input-group-addon" style="background:#fee2e2;color:#dc2626;"><i class="fa fa-exclamation-triangle"></i></span>
+                    <input type="number" class="form-control input-lg" id="nuevoStockMinimo" name="nuevoStockMinimo" min="0" step="1" placeholder="Mínimo (rojo)" value="10" required>
+                  </div>
+                </div>
+
+                <div class="col-xs-6">
+                  <div class="input-group" title="Cuando las existencias estén en este valor o menos (y mayor al mínimo), se muestra en AMARILLO">
+                    <span class="input-group-addon" style="background:#fef3c7;color:#d97706;"><i class="fa fa-exclamation"></i></span>
+                    <input type="number" class="form-control input-lg" id="nuevoStockMedio" name="nuevoStockMedio" min="0" step="1" placeholder="Medio (amarillo)" value="15" required>
+                  </div>
+                </div>
+
+              </div>
+
+              <p class="help-block" style="margin-top:6px;font-size:11px;color:#94a3b8;">
+                Existencias por encima del valor medio se mostrarán en verde.
+              </p>
 
             </div>
 
@@ -426,8 +457,6 @@ MODAL AGREGAR PRODUCTO
                 </div>
 
             </div>
-
-            <!-- ENTRADA PARA DETALLE COMPRA -->
 
             <!-- ENTRADA PARA SUBIR FOTO -->
 
@@ -564,6 +593,38 @@ MODAL EDITAR PRODUCTO
                 <input type="number" class="form-control input-lg" id="editarStock" name="editarStock" required>
 
               </div>
+
+            </div>
+
+             <!-- ENTRADAS PARA ALERTAS DE STOCK -->
+
+             <div class="form-group">
+
+              <label class="control-label" style="font-weight:500;font-size:13px;color:#475569;display:block;margin-bottom:8px;">
+                <i class="fa fa-bell"></i> Alertas de existencias por producto
+              </label>
+
+              <div class="row">
+
+                <div class="col-xs-6">
+                  <div class="input-group" title="Cuando las existencias estén en este valor o menos, se muestra en ROJO">
+                    <span class="input-group-addon" style="background:#fee2e2;color:#dc2626;"><i class="fa fa-exclamation-triangle"></i></span>
+                    <input type="number" class="form-control input-lg" id="editarStockMinimo" name="editarStockMinimo" min="0" step="1" placeholder="Mínimo (rojo)" required>
+                  </div>
+                </div>
+
+                <div class="col-xs-6">
+                  <div class="input-group" title="Cuando las existencias estén en este valor o menos (y mayor al mínimo), se muestra en AMARILLO">
+                    <span class="input-group-addon" style="background:#fef3c7;color:#d97706;"><i class="fa fa-exclamation"></i></span>
+                    <input type="number" class="form-control input-lg" id="editarStockMedio" name="editarStockMedio" min="0" step="1" placeholder="Medio (amarillo)" required>
+                  </div>
+                </div>
+
+              </div>
+
+              <p class="help-block" style="margin-top:6px;font-size:11px;color:#94a3b8;">
+                Existencias por encima del valor medio se mostrarán en verde.
+              </p>
 
             </div>
 

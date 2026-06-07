@@ -54,17 +54,21 @@ class TablaProductos{
  	 		STOCK
   			=============================================*/ 
 
-  			if($productos[$i]["stock"] <= 10){
+  			$stockActual = (int) $productos[$i]["stock"];
+  			$stockMinimo = isset($productos[$i]["stock_minimo"]) ? (int) $productos[$i]["stock_minimo"] : 10;
+  			$stockMedio  = isset($productos[$i]["stock_medio"])  ? (int) $productos[$i]["stock_medio"]  : 15;
 
-  				$stock = "<button class='btn btn-danger'>".$productos[$i]["stock"]."</button>";
+  			if($stockActual <= $stockMinimo){
 
-  			}else if($productos[$i]["stock"] > 10 && $productos[$i]["stock"] <= 15){
+  				$stock = "<button class='btn btn-danger'>".$stockActual."</button>";
 
-  				$stock = "<button class='btn btn-warning'>".$productos[$i]["stock"]."</button>";
+  			}else if($stockActual <= $stockMedio){
+
+  				$stock = "<button class='btn btn-warning'>".$stockActual."</button>";
 
   			}else{
 
-  				$stock = "<button class='btn btn-success'>".$productos[$i]["stock"]."</button>";
+  				$stock = "<button class='btn btn-success'>".$stockActual."</button>";
 
   			}
 
@@ -92,7 +96,6 @@ class TablaProductos{
 				(string) $nombreCategoria,
 				$stock,
 				$controlStock,
-				(string) $productos[$i]["precio_compra"],
 				(string) $productos[$i]["precio_venta"],
 				(string) $productos[$i]["fecha"],
 				$botones

@@ -59,11 +59,12 @@ class Conexion{
 
     static public function validarColumna($columna, $tabla){
         $columnasPermitidas = [
-            "productos" => ["id", "id_categoria", "codigo", "descripcion", "imagen", "stock", "precio_compra", "precio_venta", "detalle_compra", "ventas", "fecha"],
+            "productos" => ["id", "id_categoria", "codigo", "descripcion", "imagen", "stock", "stock_minimo", "stock_medio", "precio_compra", "precio_venta", "detalle_compra", "ventas", "fecha"],
             "categorias" => ["id", "categoria", "fecha"],
             "clientes" => ["id", "nombre", "documento", "email", "telefono", "direccion", "fecha_nacimiento", "tipo_comprobante", "compras", "ultima_compra", "fecha"],
             "usuarios" => ["id", "nombre", "usuario", "password", "perfil", "foto", "estado", "ultimo_login", "fecha"],
             "ventas" => ["id", "codigo", "id_cliente", "id_vendedor", "productos", "impuesto", "neto", "total", "metodo_pago", "fecha"],
+            "eans" => ["id", "codigo_ean", "descripcion", "id_producto", "fecha"],
         ];
         if(!isset($columnasPermitidas[$tabla])){
             throw new Exception("Tabla no permitida: " . $tabla);

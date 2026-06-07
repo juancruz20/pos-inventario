@@ -9,6 +9,8 @@ $(".tablaProductos").on("click", ".btnEditarProducto", function () {
       $("#editarCodigo").val(respuesta["codigo"]);
       $("#editarDescripcion").val(respuesta["descripcion"]);
       $("#editarStock").val(respuesta["stock"]);
+      $("#editarStockMinimo").val(respuesta["stock_minimo"] != null ? respuesta["stock_minimo"] : 10);
+      $("#editarStockMedio").val(respuesta["stock_medio"] != null ? respuesta["stock_medio"] : 15);
       $("#editarPrecioVenta").val(respuesta["precio_venta"]);
       var categoriaNombre = respuesta["categoria"] || respuesta["id_categoria"];
       $("#editarCategoria").html("<option value='" + respuesta["id_categoria"] + "'>" + categoriaNombre + "</option>");
@@ -73,13 +75,13 @@ $(".tablaProductos").on("click", ".btn-actualizar-stock", function () {
     dataType: "json",
     success: function (r) {
       if (r == "ok") {
-        swal({ type: "success", title: "Stock actualizado", showConfirmButton: true }).then(function () {
+        swal({ type: "success", title: "Existencias actualizadas", showConfirmButton: true }).then(function () {
           location.reload();
         });
       } else if (r == "stock_negativo") {
         swal({ type: "error", title: "El stock no puede ser negativo", showConfirmButton: true });
       } else {
-        swal({ type: "error", title: "Error al actualizar stock", showConfirmButton: true });
+        swal({ type: "error", title: "Error al actualizar existencias", showConfirmButton: true });
       }
     },
   });

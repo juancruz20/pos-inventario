@@ -30,3 +30,16 @@ define('METODO_CIFRADO', 'aes-256-cbc');
  * Una vez el sistema este en produccion, dejar DEBUG en false.
  */
 define('DEBUG', false);
+
+/**
+ * Nombre de la impresora de tickets en Windows.
+ * Para encontrar el nombre correcto ir a Panel de Control > Dispositivos e impresoras.
+ * Si no se quiere imprimir, dejar en "" (vacio) y la venta se guarda igual.
+ */
+define('IMPRESORA_NOMBRE', 'epson20');
+
+/**
+ * Impuesto al valor agregado (IVA) aplicado a las ventas.
+ * 0.19 = 19% (Colombia 2026). Cambiar segun la legislacion local.
+ */
+define('IVA_PORCENTAJE', 0.19);

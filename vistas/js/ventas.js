@@ -56,7 +56,7 @@ baseVentas.listarProductos = function (producto) {
     var nuevaCantidad = (parseInt($cantidadExistente.val(), 10) || 1) + 1;
     if (stock > 0 && nuevaCantidad > stock) {
       nuevaCantidad = stock;
-      swal({ type: "error", title: "Stock insuficiente. Disponible: " + stock, showConfirmButton: true, confirmButtonText: "Cerrar" });
+      swal({ type: "error", title: "Existencias insuficientes. Disponible: " + stock, showConfirmButton: true, confirmButtonText: "Cerrar" });
     }
     $cantidadExistente.val(nuevaCantidad).trigger("change");
     return;
@@ -168,6 +168,23 @@ $("#nuevoCodigo").on("keydown", function (e) {
   }
 });
 
+// Evitar que la tecla Enter envíe el formulario "Crear Venta".
+// Por defecto, al presionar Enter dentro de cualquier input se dispara
+// el submit del form. Aquí se bloquea esa acción; el único Enter que
+// debe seguir funcionando es el del campo de código (#nuevoCodigo),
+// que ya tiene su propio handler arriba y se ejecuta antes de burbujear.
+$(document).on("keydown", ".formularioVenta", function (e) {
+  if (e.key === "Enter" || e.keyCode === 13) {
+    var target = e.target;
+    var tag = (target && target.tagName ? target.tagName : "").toLowerCase();
+    if (tag === "textarea") {
+      return true;
+    }
+    e.preventDefault();
+    return false;
+  }
+});
+
 $(document).on("change", ".ingresoCantidad", function () {
   var cantidad = parseInt($(this).val(), 10) || 1;
   var stock = parseInt($(this).data("stock"), 10) || 0;
@@ -177,7 +194,7 @@ $(document).on("change", ".ingresoCantidad", function () {
   }
 
   if (stock > 0 && cantidad > stock) {
-    swal({ type: "error", title: "Stock insuficiente. Disponible: " + stock, showConfirmButton: true, confirmButtonText: "Cerrar" });
+    swal({ type: "error", title: "Existencias insuficientes. Disponible: " + stock, showConfirmButton: true, confirmButtonText: "Cerrar" });
     cantidad = stock;
   }
 
@@ -263,27 +280,6 @@ $("#ropaDescripcion").on("input", function () {
 $(".btnImprimirFactura").on("click", function () {
   var codigo = $(this).attr("codigoVenta");
   window.open("extensiones/tcpdf/pdf/factura.php?codigo=" + codigo, "_blank");
-});
-
-$(".btnVerVenta").on("click", function () {
-  var idVenta = $(this).attr("idVenta");
-  $.ajax({
-    url: "ajax/ventas.ajax.php",
-    type: "POST",
-    data: { idVenta: idVenta, verVenta: true },
-    dataType: "json",
-    success: function (respuesta) {
-      $("#modalVerVenta .modal-body").html("");
-      var html = "<table class='table table-bordered'>";
-      html += "<tr><th>Producto</th><th>Cant</th><th>Precio</th><th>Total</th></tr>";
-      var productos = JSON.parse(respuesta["productos"]);
-      $.each(productos, function (i, p) {
-        html += "<tr><td>" + p.descripcion + "</td><td>" + p.cantidad + "</td><td>$ " + parseFloat(p.precio).toFixed(2) + "</td><td>$ " + parseFloat(p.total).toFixed(2) + "</td></tr>";
-      });
-      html += "</table>";
-      $("#modalVerVenta .modal-body").html(html);
-    },
-  });
 });
 
 $("#nuevoTotalVenta").on("input", function () {

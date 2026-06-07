@@ -137,7 +137,7 @@ if($auto){
         <tr><td>Host</td><td><?= htmlspecialchars(DB_HOST) ?>:<?= htmlspecialchars(DB_PORT) ?></td></tr>
         <tr><td>Base de datos</td><td><?= htmlspecialchars(DB_NAME) ?></td></tr>
         <tr><td>Usuario</td><td><?= htmlspecialchars(DB_USER) ?></td></tr>
-        <tr><td>Password</td><td><?= DB_PASS === '' ? '(vacio)' : '********' ?></td></tr>
+        <tr><td>Contraseña</td><td><?= DB_PASS === '' ? '(vacio)' : '********' ?></td></tr>
       </table>
     </div>
 
