@@ -185,9 +185,8 @@ CUERPO DOCUMENTO
 
 <script>
   function ajustarSidebar() {
-    var movil = window.innerWidth < 768;
-    if (movil) {
-      document.body.classList.remove("sidebar-mini", "sidebar-collapse");
+    if (window.innerWidth < 768) {
+      document.body.classList.add("sidebar-mini", "sidebar-collapse");
       return;
     }
     var params = new URLSearchParams(window.location.search);
@@ -199,6 +198,8 @@ CUERPO DOCUMENTO
   ajustarSidebar();
   window.addEventListener("resize", ajustarSidebar);
 </script>
+<script src="https://unpkg.com/html5-qrcode"></script>
+<script src="vistas/js/scanner.js"></script>
 <script src="vistas/js/plantilla.js"></script>
 <script src="vistas/js/usuarios.js"></script>
 <script src="vistas/js/categorias.js"></script>

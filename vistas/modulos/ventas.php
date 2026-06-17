@@ -152,7 +152,7 @@
     padding: 0 24px;
     padding-top: 20px;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     .ventas-panel .vt-header { flex-direction: column; align-items: stretch; padding: 16px 16px 0; }
     .ventas-panel .vt-card { margin: 12px 16px 16px; }
     .ventas-panel .vt-title { padding: 16px 16px 0; font-size: 18px; }

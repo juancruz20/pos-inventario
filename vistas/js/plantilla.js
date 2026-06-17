@@ -61,20 +61,26 @@ if ($(".tablaProductos").length) {
       },
     },
     columns: [
-      { data: 0 },
-      { data: 1 },
-      { data: 2 },
-      { data: 3 },
-      { data: 4 },
-      { data: 5 },
-      { data: 6 },
-      { data: 7 },
-      { data: 8 },
-      { data: 9 },
+      { data: 0, title: "#" },
+      { data: 1, title: "Imagen" },
+      { data: 2, title: "C\u00f3digo" },
+      { data: 3, title: "Descripci\u00f3n" },
+      { data: 4, title: "Categor\u00eda" },
+      { data: 5, title: "Stock" },
+      { data: 6, title: "Control Stock" },
+      { data: 7, title: "Precio Venta" },
+      { data: 8, title: "Fecha" },
+      { data: 9, title: "Acciones" },
     ],
     order: [[0, "asc"]],
     responsive: true,
     autoWidth: false,
+    rowCallback: function (row, data) {
+      var labels = ["#", "Imagen", "C\u00f3digo", "Descripci\u00f3n", "Categor\u00eda", "Stock", "Control Stock", "Precio Venta", "Fecha", "Acciones"];
+      $(row).children("td").each(function (i) {
+        if (labels[i]) $(this).attr("data-label", labels[i]);
+      });
+    }
   });
 }
 
@@ -83,16 +89,22 @@ if ($(".tablaEans").length) {
     processing: true,
     ajax: "ajax/datatable-eans.ajax.php",
     columns: [
-      { data: 0 },
-      { data: 1 },
-      { data: 2 },
-      { data: 3 },
-      { data: 4 },
-      { data: 5 },
+      { data: 0, title: "#" },
+      { data: 1, title: "C\u00f3digo EAN" },
+      { data: 2, title: "Descripci\u00f3n" },
+      { data: 3, title: "Producto asociado" },
+      { data: 4, title: "Fecha" },
+      { data: 5, title: "Acciones" },
     ],
     order: [[0, "asc"]],
     responsive: true,
     autoWidth: false,
+    rowCallback: function (row, data) {
+      var labels = ["#", "C\u00f3digo EAN", "Descripci\u00f3n", "Producto asociado", "Fecha", "Acciones"];
+      $(row).children("td").each(function (i) {
+        if (labels[i]) $(this).attr("data-label", labels[i]);
+      });
+    }
   });
 }
 

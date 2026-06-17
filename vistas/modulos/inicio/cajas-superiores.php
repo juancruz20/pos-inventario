@@ -37,7 +37,7 @@ $totalProductos = count($productos);
 
     </div>
 
-    <a href="ventas" class="small-box-footer">
+    <a href="crear-venta" class="small-box-footer">
 
       Más info <i class="fa fa-arrow-circle-right"></i>
 

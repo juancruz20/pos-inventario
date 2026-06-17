@@ -179,7 +179,7 @@
     border-radius: 0 6px 6px 0;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     .ean-table {
       display: block;
     }
@@ -211,6 +211,15 @@
       justify-content: space-between;
       align-items: center;
       gap: 8px;
+    }
+
+    .ean-table td::before {
+      content: attr(data-label);
+      font-weight: 600;
+      color: var(--ean-muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
     }
 
     .eans-panel .panel-header {
@@ -319,7 +328,13 @@ MODAL AGREGAR EAN
 
                 <span class="input-group-addon"><i class="fa fa-barcode"></i></span>
 
-                <input type="text" class="form-control input-lg" name="nuevoCodigoEan" placeholder="Código EAN (solo números)" pattern="[0-9]+" required>
+                <input type="text" class="form-control input-lg" name="nuevoCodigoEan" id="nuevoCodigoEan" placeholder="Código EAN (solo números)" pattern="[0-9]+" required>
+
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-primary btn-flat btn-lg btn-scanner-codigo" data-target-input="#nuevoCodigoEan" title="Escanear con la cámara">
+                    <i class="fa fa-camera"></i>
+                  </button>
+                </span>
 
               </div>
 
@@ -439,6 +454,12 @@ MODAL EDITAR EAN
                 <span class="input-group-addon"><i class="fa fa-barcode"></i></span>
 
                 <input type="text" class="form-control input-lg" id="editarCodigoEan" name="editarCodigoEan" pattern="[0-9]+" required>
+
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-primary btn-flat btn-lg btn-scanner-codigo" data-target-input="#editarCodigoEan" title="Escanear con la cámara">
+                    <i class="fa fa-camera"></i>
+                  </button>
+                </span>
 
               </div>
 

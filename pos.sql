@@ -57,6 +57,8 @@ CREATE TABLE `productos` (
   `descripcion` text COLLATE utf8_spanish_ci NOT NULL,
   `imagen` text COLLATE utf8_spanish_ci NOT NULL,
   `stock` int(11) NOT NULL DEFAULT 0,
+  `stock_minimo` int(11) NOT NULL DEFAULT 10,
+  `stock_medio` int(11) NOT NULL DEFAULT 15,
   `precio_compra` float NOT NULL DEFAULT 0,
   `precio_venta` float NOT NULL DEFAULT 0,
   `detalle_compra` text COLLATE utf8_spanish_ci NOT NULL,
@@ -104,6 +106,20 @@ CREATE TABLE `ventas` (
   KEY `idx_ventas_id_cliente` (`id_cliente`),
   KEY `idx_ventas_id_vendedor` (`id_vendedor`),
   KEY `idx_ventas_fecha` (`fecha`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ============================================================
+-- TABLA: eans
+-- ============================================================
+CREATE TABLE `eans` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo_ean` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` text COLLATE utf8_spanish_ci NOT NULL,
+  `id_producto` int(11) DEFAULT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uniq_eans_codigo` (`codigo_ean`),
+  KEY `idx_eans_id_producto` (`id_producto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ============================================================

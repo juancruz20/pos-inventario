@@ -171,7 +171,7 @@
     padding: 4px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     .prod-table {
       display: block;
     }
@@ -379,6 +379,12 @@ MODAL AGREGAR PRODUCTO
                 <span class="input-group-addon"><i class="fa fa-code"></i></span> 
 
                 <input type="text" class="form-control input-lg" id="nuevoCodigo" name="nuevoCodigo" placeholder="Ingresar código" required>
+
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-primary btn-flat btn-lg btn-scanner-codigo" data-target-input="#nuevoCodigo" title="Escanear con la cámara">
+                    <i class="fa fa-camera"></i>
+                  </button>
+                </span>
 
               </div>
 

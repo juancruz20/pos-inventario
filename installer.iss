@@ -37,7 +37,7 @@ OutputBaseFilename=pos_installer
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
-PrivilegesRequired=admin
+PrivilegesRequired=lowest
 UninstallDisplayIcon={app}\dist\img\plantilla\icono.png
 ArchitecturesInstallIn64BitMode=x64compatible
 
@@ -49,8 +49,8 @@ Name: "desktopicon"; Description: "Crear acceso directo en el escritorio"; Group
 
 [Files]
 ; Copia TODO el contenido del proyecto (carpeta pos actual) al destino
-; Excluye archivos innecesarios de git, pruebas y builds anteriores
-Source: "*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: ".git\*,*.git,*.gitignore,*.gitkeep,output\*,*.ps1,*.tmp,*.log"
+; Excluye archivos innecesarios de git, pruebas, builds y scripts de dev
+Source: "*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: ".git\*,*.git,*.gitignore,*.gitkeep,output\*,*.ps1,*.tmp,*.log,installer.iss,backup.bat,restaurar.bat,_*"
 ; NOTA: "ignoreversion" es importante para que reinstale sobre versiones nuevas
 
 [Icons]

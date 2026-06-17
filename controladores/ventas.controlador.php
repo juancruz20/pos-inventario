@@ -49,7 +49,7 @@ class ControladorVentas{
 					  }).then(function(result){
 								if (result.value) {
 
-								window.location = "ventas";
+								window.location = "crear-venta";
 
 								}
 							})
@@ -218,7 +218,7 @@ class ControladorVentas{
 					confirmButtonText: "Cerrar"
 				}).then(function(result){
 					if (result.value) {
-						window.location = "ventas";
+						window.location = "crear-venta";
 					}
 				})
 				</script>';
@@ -230,7 +230,7 @@ class ControladorVentas{
 		} catch (Exception $e) {
 				Conexion::revertirTransaccion();
 				error_log("Error en ctrCrearVenta: " . $e->getMessage());
-				echo '<script>swal({type:"error",title:"Error al crear la venta",showConfirmButton:true,confirmButtonText:"Cerrar"}).then(function(r){if(r.value){window.location="ventas";}})</script>';
+				echo '<script>swal({type:"error",title:"Error al crear la venta",showConfirmButton:true,confirmButtonText:"Cerrar"}).then(function(r){if(r.value){window.location="crear-venta";}})</script>';
 			}
 
 		}
