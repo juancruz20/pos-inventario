@@ -120,6 +120,28 @@ baseVentas.sumarTotalPrecios = function () {
 baseVentas.filaConceptoVacia = function () {
   var existentes = $(".concepto-extra-list .concepto-extra-row").length;
   var nuevoIndex = existentes + 1;
+  var isMobile = window.innerWidth <= 767;
+
+  if (isMobile) {
+    return (
+      '<div class="concepto-extra-row" data-row="' + nuevoIndex + '">' +
+        '<input type="text" class="form-control concepto-extra-desc" placeholder="Descripción (Ej: Ropa)" maxlength="60">' +
+        '<div class="input-group concepto-extra-price">' +
+          '<span class="input-group-addon">$</span>' +
+          '<input type="number" class="form-control concepto-extra-precio" placeholder="0" step="any" min="0">' +
+        '</div>' +
+        '<div class="concepto-extra-btns">' +
+          '<button type="button" class="btn concepto-extra-agregar" title="Agregar a la venta">' +
+            '<i class="fa fa-plus"></i> Agregar' +
+          '</button>' +
+          '<button type="button" class="btn concepto-extra-quitar" title="Quitar esta fila">' +
+            '<i class="fa fa-times"></i>' +
+          '</button>' +
+        '</div>' +
+      '</div>'
+    );
+  }
+
   return (
     '<div class="concepto-extra-row" data-row="' + nuevoIndex + '">' +
       '<input type="text" class="form-control concepto-extra-desc" placeholder="Descripción (Ej: Ropa)" maxlength="60">' +
