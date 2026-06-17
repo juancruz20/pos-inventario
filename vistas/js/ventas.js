@@ -359,6 +359,23 @@ $(document).on("click", ".btn-scanner-codigo", function () {
   });
 });
 
+$("#productosCardsContainer").on("click", ".agregarProducto", function () {
+  var idProducto = $(this).attr("idProducto");
+  $.ajax({
+    url: "ajax/productos.ajax.php",
+    type: "POST",
+    data: { idProducto: idProducto },
+    dataType: "json",
+    success: function (respuesta) {
+      if (respuesta) {
+        baseVentas.listarProductos(respuesta);
+      } else {
+        swal({ type: "error", title: "Producto no encontrado", showConfirmButton: true, confirmButtonText: "Cerrar" });
+      }
+    },
+  });
+});
+
 $(".tablaVentas, .tablaProductosVenta").on("click", ".agregarProducto", function () {
   var idProducto = $(this).attr("idProducto");
 
