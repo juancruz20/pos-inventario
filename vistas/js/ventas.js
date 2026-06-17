@@ -291,7 +291,7 @@ baseVentas.cargarProductosCards = function () {
         var stock = parseInt(row[5], 10) || 0;
         var stockClass = stock > 10 ? 'alto' : 'bajo';
         var idMatch = '';
-        var actionHtml = row[10] || '';
+        var actionHtml = row[9] || '';
         var idArr = actionHtml.match(/idProducto=['"](\d+)['"]/);
         if (idArr) idMatch = idArr[1];
         if (!idMatch) continue;
