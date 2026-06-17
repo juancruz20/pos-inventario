@@ -891,6 +891,8 @@ MODAL AGREGAR CLIENTE
     .payment-row { display: flex; flex-direction: column; gap: 8px; }
     .payment-row .objetoMetodoPago,
     .payment-row .objetoTotalVenta { max-width: 100%; }
+    .payment-row .objetoTotalVenta { order: -1; }
+    .payment-row .objetoMetodoPago { order: 0; }
     .payment-row label { font-size: 12px; color: #6B7280; margin-bottom: 3px; }
     #nuevoMetodoPago { height: 42px; }
     #nuevoTotalVenta {
